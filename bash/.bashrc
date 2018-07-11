@@ -1,5 +1,3 @@
-source ~/Scripts/bash_env/prompt.sh
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export CLICOLOR=1
@@ -10,7 +8,6 @@ export VIM_APP_DIR=/Applications
 export GOPATH=/usr/local/opt/golang
 export GOROOT=/usr/local/opt/go/libexec
 export APPLICATION_ENV=development
-
 
 PATH=$PATH:\
 ./vendor/bin:\
@@ -29,8 +26,9 @@ $HOME/.rvm/bin
 
 complete -o default -F _g g
 
+source ~/Scripts/bash_env/prompt.sh
 source ~/Scripts/bash_env/ssh_keys.sh
 source ~/Scripts/bash_env/aliases.sh
+source ~/Scripts/bash_env/aliases_sensitive.sh
 
-# added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
