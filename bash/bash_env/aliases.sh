@@ -3,6 +3,7 @@ alias src='. ~/.bashrc'
 alias composer='composer.phar'
 alias ..="cd .."
 alias ...="cd ../.."
+alias a="atom ."
 
 # Capistrano
 alias csd='cap staging deploy'
