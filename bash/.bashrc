@@ -29,7 +29,9 @@ complete -o default -F _g g
 
 source ~/Scripts/bash_env/prompt.sh
 source ~/Scripts/bash_env/ssh_keys.sh
+source ~/Scripts/bash_env/ssh_connect_multiplexer.sh
 source ~/Scripts/bash_env/aliases.sh
 source ~/Scripts/bash_env/aliases_sensitive.sh
 
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
