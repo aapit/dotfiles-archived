@@ -19,7 +19,7 @@ PATH=$PATH:\
 /bin:\
 /usr/sbin/:\
 /sbin:\
-$GEM_HOME:\
+$GEM_HOME/bin:\
 $HOME/.composer/vendor/bin:\
 $GOPATH/bin:\
 $GOROOT/bin:\

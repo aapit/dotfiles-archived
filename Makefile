@@ -15,4 +15,6 @@ build:
 	@echo 'Copying iterm2 config...'
 	defaults read com.googlecode.iterm2 | tee iterm2/iterm2.config 1> /dev/null
 	@#--- tmux / byobu
-	cp ~/.tmux.conf .
+	cp ~/.tmux.conf ./tmux
+	@#--- tmuxinator
+	cp -r ~/.config/tmuxinator/ ./tmux/tmuxinator
