@@ -20,13 +20,17 @@ set noet ci pi sts=0 sw=4 ts=4
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 set backspace=2
 
-" a combination of spaces and tabs are used to simulate tab stops at a width
-" other than the (hard)tabstop
+" a combination of spaces and tabs are used to simulate tab stops at
+" a width other than the (hard)tabstop
 set softtabstop=4
 set scrolloff=3
 
-" Limit code to a width of 100 chars.
+" Line wrapping and max width
+set wrap
+set linebreak
+set nolist  " list disables linebreak
 set textwidth=100
+set formatoptions-=t
 set colorcolumn=+1
 augroup textwidth
     autocmd!
