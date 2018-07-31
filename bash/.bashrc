@@ -1,18 +1,27 @@
+# Lang
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# Appearance
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxhgedabagacad
-export TERM=xterm-256color
+
+# Editor
 export EDITOR=/usr/bin/vim
 export VIM_APP_DIR=/Applications
+
+# Platform
 export GOPATH=/usr/local/opt/golang
 export GOROOT=/usr/local/opt/go/libexec
 export APPLICATION_ENV=development
 export GEM_HOME=$HOME/.gem
 
+[ -z "$TMUX" ] && export TERM=xterm-256color
+
 PATH=$PATH:\
 ./vendor/bin:\
 ./node_modules/.bin:\
+/usr/local/opt/coreutils/libexec/gnubin/:\
 /usr/local/sbin:\
 /usr/local/bin:\
 /usr/bin:\
@@ -24,14 +33,4 @@ $HOME/.composer/vendor/bin:\
 $GOPATH/bin:\
 $GOROOT/bin:\
 $HOME/.rvm/bin
-
-complete -o default -F _g g
-
-source ~/Scripts/bash_env/prompt.sh
-source ~/Scripts/bash_env/ssh_keys.sh
-source ~/Scripts/bash_env/ssh_connect_multiplexer.sh
-source ~/Scripts/bash_env/aliases.sh
-source ~/Scripts/bash_env/aliases_sensitive.sh
-
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
