@@ -1,5 +1,5 @@
 alias ls='/bin/ls -Ahl'
-alias src='. ~/.bashrc'
+alias src='. ~/.bash_profile'
 #alias composer='composer.phar'
 alias ..="cd .."
 alias ...="cd ../.."
@@ -21,10 +21,9 @@ alias dev='git co develop'
 alias master='git co master'
 alias git-push-upstream='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 
-# iTerm profile switching
-alias light='echo -e "\033]50;SetProfile=aapit-light\a"'
-alias dark='echo -e "\033]50;SetProfile=aapit-dark\a"'
-alias darkish='echo -e "\033]50;SetProfile=aapit-darkish\a"'
+# iTerm profile switching, tmux proof
+alias light='osascript ~/Scripts/switch-to-light.applescript'
+alias dark='osascript ~/Scripts/switch-to-dark.applescript'
 
 # Docker
 alias dss='docker-sync-stack start'
