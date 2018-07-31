@@ -28,3 +28,6 @@ alias darkish='echo -e "\033]50;SetProfile=aapit-darkish\a"'
 
 # Docker
 alias dss='docker-sync-stack start'
+
+# tmux
+alias tmux='TERM=screen-256color tmux'
