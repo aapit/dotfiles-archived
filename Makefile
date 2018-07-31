@@ -9,6 +9,7 @@ build:
 	cp ~/.bashrc ./bash
 	cp ~/.bash_profile ./bash
 	cp -R ~/Scripts/bash_env ./bash/
+	cp -R ~/Scripts/interface ./bash/
 	cp ~/.inputrc .
 	@#--- iterm2
 	cp ~/Library/Application\ Support/iTerm2/DynamicProfiles/* iterm2/
