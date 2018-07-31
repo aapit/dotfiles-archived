@@ -9,12 +9,12 @@ build:
 	cp ~/.bashrc ./bash
 	cp ~/.bash_profile ./bash
 	cp -R ~/Scripts/bash_env ./bash/
+	cp ~/.inputrc .
 	@#--- iterm2
-	@echo 'Copying iterm2 plist...'
-	cp ~/Library/Preferences/com.googlecode.iterm2.plist iterm2
-	@echo 'Copying iterm2 config...'
-	defaults read com.googlecode.iterm2 | tee iterm2/iterm2.config 1> /dev/null
-	@#--- tmux / byobu
+	cp ~/Library/Application\ Support/iTerm2/DynamicProfiles/* iterm2/
+	@#--- tmux
 	cp ~/.tmux.conf ./tmux
 	@#--- tmuxinator
 	cp -r ~/.config/tmuxinator/ ./tmux/tmuxinator
+	@#--- Powerline
+	cp -r ~/.config/powerline/ ./powerline
