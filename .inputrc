@@ -1,0 +1,6 @@
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+# Prevent 'display all xxx possibilities?'
+set completion-query-items 0
+set page-completions off
