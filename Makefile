@@ -4,10 +4,12 @@ build:
 	@#--- Homebrew
 	brew bundle dump -f
 	@#--- Python packages
-	python3 -m pip list --format=freeze > python/python3-packages.txt
-	python2 -m pip list --format=freeze > python/python2-packages.txt
+	python3 -m pip list --format=freeze > ./python/python3-packages.txt
+	python2 -m pip list --format=freeze > ./python/python2-packages.txt
 	@#--- Vim 
-	cp ~/.vimrc .
+	cp ~/.vimrc ./vim/
+	cp -R ~/.config/nvim ./vim/.config/
+	cp -R ~/.config/vim/config ./vim/.config/vim/
 	@#--- Bash
 	cp ~/.bashrc ./bash
 	cp ~/.bash_profile ./bash
