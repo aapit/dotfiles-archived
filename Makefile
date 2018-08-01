@@ -6,6 +6,8 @@ build:
 	@#--- Python packages
 	python3 -m pip list --format=freeze > ./python/python3-packages.txt
 	python2 -m pip list --format=freeze > ./python/python2-packages.txt
+	@#--- RubyGems
+	gem list > ./ruby/gem-list.txt
 	@#--- Vim 
 	cp ~/.vimrc ./vim/
 	cp -R ~/.config/nvim ./vim/.config/
