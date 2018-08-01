@@ -1,0 +1,9 @@
+cffi==1.11.5
+pip==18.0
+powerline-gitstatus==1.2.1
+powerline-status==2.6
+psutil==5.4.6
+pycparser==2.18
+setuptools==39.2.0
+six==1.11.0
+wheel==0.31.1
