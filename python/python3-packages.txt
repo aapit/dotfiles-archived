@@ -1,4 +1,7 @@
 cffi==1.11.5
+greenlet==0.4.14
+msgpack==0.5.6
+neovim==0.2.6
 pip==18.0
 powerline-gitstatus==1.2.1
 powerline-status==2.6
