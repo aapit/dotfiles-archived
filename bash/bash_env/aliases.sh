@@ -40,6 +40,7 @@ alias fn-on='osascript ~/Scripts/interface/function-keys-on.applescript'
 alias fn-toggle='osascript ~/Scripts/interface/function-keys-on.applescript'
 
 # Docker
+alias dco='docker-compose'
 alias dss='docker-sync-stack start'
 
 # tmux
