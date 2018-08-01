@@ -5,7 +5,7 @@
 BASE_PATH=$HOME/Sites
 
 if [ "$1" = "" ]; then
-    echo 'Which site dir?'
+    echo 'Change to which site dir?'
 else
     BEGINS_WITH="$1*"
     CONTAINS="*$1*"
