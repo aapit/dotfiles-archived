@@ -46,6 +46,7 @@ brew "macvim"
 brew "mongodb"
 brew "moreutils"
 brew "mysql"
+brew "neovim"
 brew "nmap"
 brew "node@8", link: true
 brew "nvm"
