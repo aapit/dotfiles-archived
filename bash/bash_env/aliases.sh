@@ -1,11 +1,13 @@
 # Using GNU ls with dirs on top and elaborate coloring
-alias ls='LS_COLORS="no=00:fi=00:di=00;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;35:*.cmd=00;32:*.exe=00;32:*.sh=00;32:*.gz=00;31:*.bz2=00;31:*.bz=00;31:*.tz=00;31:*.rpm=00;31:*.cpio=00;31:*.t=93:*.pm=00;36:*.pod=00;96:*.conf=00;33:*.off=00;9:*.jpg=00;94:*.png=00;94:*.xcf=00;94:*.JPG=00;94:*.gif=00;94:*.pdf=00;91" /usr/local/opt/coreutils/libexec/gnubin/ls --group-directories-first -Ahl --color=tty'
+alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --group-directories-first -Ahl --color=tty'
 
 # Sourcing
 alias src='. ~/.bash_profile'
 alias alias-edit="vim ~/Scripts/bash_env/aliases.sh && . ~/Scripts/bash_env/aliases.sh"
 
 # Editing
+alias v="nvim"
+alias vim="nvim"
 alias a="atom ."
 
 # Dirs
