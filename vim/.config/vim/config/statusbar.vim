@@ -10,3 +10,8 @@ set cmdheight=1
 set showmode
 set showcmd
 "set statusline=%f\ %y\ %m\ %r\ Line:\ %l/%L\ Col:\ %c\ Buf:\ #%n
+
+" Enable vim-airline support for Powerline fonts
+let g:airline_powerline_fonts = 1
+" Set theme for vim-airline
+let g:airline_theme='deus'

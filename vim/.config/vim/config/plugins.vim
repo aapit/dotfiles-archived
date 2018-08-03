@@ -45,5 +45,7 @@ Plug 'trevordmiller/nova-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'whatyouhide/vim-lengthmatters'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
