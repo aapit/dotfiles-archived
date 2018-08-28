@@ -1,3 +1,8 @@
+# Tasks
+alias t='task'
+alias tl='task list'
+alias ta='task add'
+
 # Using GNU ls with dirs on top and elaborate coloring
 alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --group-directories-first -Ahl --color=tty'
 
@@ -15,6 +20,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias desk="cd ~/Desktop"
 alias s=". ~/Scripts/bash_env/site-dir-change.sh"
+alias ~="cd ~"
 
 # Capistrano
 alias csd='cap staging deploy'
@@ -48,3 +54,7 @@ alias dss='docker-sync-stack start'
 
 # tmux
 alias tmux='TERM=screen-256color tmux'
+
+# icons
+alias icons-replace='sudo sh ~/Scripts/replace-custom-icons.sh'
+alias icons-edit="$EDITOR ~/Scripts/replace-custom-icons.sh"
