@@ -10,10 +10,11 @@ alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --group-directories-first -
 alias src='. ~/.bash_profile'
 alias alias-edit="vim ~/Scripts/bash_env/aliases.sh && . ~/Scripts/bash_env/aliases.sh"
 
-# Editing
+# Editing and reading
 alias v="nvim"
 alias vim="nvim"
 alias a="atom ."
+alias cat='bat'
 
 # Dirs
 alias ..="cd .."
