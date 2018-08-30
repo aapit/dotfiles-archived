@@ -1,3 +1,6 @@
+# Various
+alias top='sudo htop'
+
 # Tasks
 alias t='task'
 alias tl='task list'
