@@ -6,8 +6,9 @@ alias t='task'
 alias tl='task list'
 alias ta='task add'
 
-# Using GNU ls with dirs on top and elaborate coloring
-alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --group-directories-first -Ahl --color=tty'
+# Using exa (in Rust) instead of ls
+alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
+alias lsl='exa --long --tree --level=2 --all --group-directories-first --group --modified --git --header'
 
 # Sourcing
 alias src='. ~/.bash_profile'
