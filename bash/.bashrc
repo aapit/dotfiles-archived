@@ -34,5 +34,6 @@ $GEM_HOME/bin:\
 $HOME/.composer/vendor/bin:\
 $GOPATH/bin:\
 $GOROOT/bin:\
+$HOME/Library/Python/3.7/bin:\
 $HOME/.rvm/bin
 
