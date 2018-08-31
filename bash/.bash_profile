@@ -15,6 +15,7 @@ source ~/Scripts/bash_env/ssh_connect_multiplexer.sh
 source ~/Scripts/bash_env/aliases.sh
 source ~/Scripts/bash_env/tokens.sh
 source ~/Scripts/bash_env/hstr_configuration.sh
+source ~/Scripts/bash_env/autojump.sh
 
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
