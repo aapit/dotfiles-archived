@@ -14,3 +14,6 @@ set backspace=2
 " a width other than the (hard)tabstop
 set softtabstop=4
 set scrolloff=3
+
+" don't replace tabs in Makefiles, because they are required there.
+autocmd FileType make setlocal noexpandtab
