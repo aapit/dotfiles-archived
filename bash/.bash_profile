@@ -13,7 +13,7 @@ complete -o default -F _g g
 source ~/Scripts/bash_env/ssh_keys.sh
 source ~/Scripts/bash_env/ssh_connect_multiplexer.sh
 source ~/Scripts/bash_env/aliases.sh
-source ~/Scripts/bash_env/tokens.sh
+[ -f ~Scripts/bash_env/tokens.sh ] && source ~/Scripts/bash_env/tokens.sh
 source ~/Scripts/bash_env/hstr_configuration.sh
 source ~/Scripts/bash_env/autojump.sh
 
