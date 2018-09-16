@@ -1,13 +1,14 @@
+# @author David Spreekmeester <david@spreekmeester.nl>
 .PHONY: all
 OS_FLAG:=$(shell uname -s)
 SCRIPTS_DIR=~/Scripts
 TIMESTAMP:=$(shell date "+%Y%m%d%H%M%S")
 
 # Builds a 'snapshot' of the local configuration'
-build: build_mac
+build: upgrade_package_managers build_mac
 	@#--- Python packages
-	python3 -m pip list --format=freeze > ./python/python3-packages.txt
-	python2 -m pip list --format=freeze > ./python/python2-packages.txt
+	pip3 list --format=freeze > ./python/python3-packages.txt
+	pip2 list --format=freeze > ./python/python2-packages.txt
 	@#--- RubyGems
 	gem list > ./ruby/gem-list.txt
 	@#--- Vim 
@@ -37,7 +38,7 @@ endif
 
 # Installs the dotfiles setup on the local instance
 # Note! Potentially destructive
-install: install_mac
+install: upgrade_package_managers install_mac
 	@#--- Bash
 	test -f ~/.bashrc && cp ~/.bashrc ~/.bashrc_${TIMESTAMP} || true
 	cp ./bash/.bashrc ~
@@ -47,8 +48,11 @@ install: install_mac
 	cp -R ./bash/scripts/* ${SCRIPTS_DIR}
 	test -f ~/.inputrc && cp ~/.inputrc ~/.inputrc_${TIMESTAMP} || true
 	cp ./.inputrc ~
-	@#--todo: Python
-	@#--todo: Ruby
+	@#--- Python
+	pip3 install --trusted-host=pypi.python.org -r ./python/python3-packages.txt
+	pip2 install --trusted-host=pypi.python.org -r ./python/python2-packages.txt
+	@#--- Ruby
+	while read gem; do gem install `echo $$gem | sed 's/.(.*)//g'`; done < ./ruby/gem-list.txt
 	@#--- Vim 
 	test -f ~/.vimrc && cp ~/.vimrc ~/.vimrc_${TIMESTAMP} || true
 	cp ./vim/.vimrc ~
@@ -61,9 +65,15 @@ install: install_mac
 	@#--- Powerline
 	cp -r ./powerline ~/.config/
 
-install_mac:
+install_mac: 
 ifeq ($(OS_FLAG),Darwin)
-	brew update && brew upgrade
 	-brew bundle
 endif
 
+upgrade_package_managers:
+ifeq ($(OS_FLAG),Darwin)
+	brew update && brew upgrade
+endif
+	# Upgrade pip for TLS issues, without pip
+	curl https://bootstrap.pypa.io/get-pip.py | python2
+	curl https://bootstrap.pypa.io/get-pip.py | python3
