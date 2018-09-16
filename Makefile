@@ -33,7 +33,7 @@ ifeq ($(OS_FLAG),Darwin)
 	@#--- Homebrew
 	brew bundle dump -f
 	@#--- iterm2
-	cp ~/Library/Application\ Support/iTerm2/DynamicProfiles/* iterm2/
+	[ -d ~/Library/Application\ Support/iTerm2/DynamicProfiles ] && cp ~/Library/Application\ Support/iTerm2/DynamicProfiles/* iterm2/ || echo "--> Note! iTerm dynamic profiles are not enabled."
 endif
 
 # Installs the dotfiles setup on the local instance
