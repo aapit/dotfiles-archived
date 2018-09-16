@@ -33,7 +33,7 @@ alias cpd='cap production deploy'
 
 # Git
 alias gs='git status'
-alias gc='git ci -m'
+alias gc='git commit -m'
 alias gl='git pull'
 alias gp='git push'
 alias ga='git add .'
