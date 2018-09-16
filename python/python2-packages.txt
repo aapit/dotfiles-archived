@@ -28,14 +28,14 @@ peewee==2.8.1
 pip==18.0
 port-for==0.3.1
 powerline-status==2.6
-protobuf==2.6.1
+protobuf==3.6.1
 protobuf-to-dict==0.1.0
 psutil==5.4.6
 pycryptodomex==3.4.2
 Pygments==2.2.0
 pyparsing==2.2.0
 pytz==2018.4
-PyYAML==4.1
+PyYAML==3.13
 recommonmark==0.4.0
 requests==2.10.0
 s2sphere==0.2.4
