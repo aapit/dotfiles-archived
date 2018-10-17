@@ -7,6 +7,7 @@ set clipboard=unnamed
 set incsearch
 set hlsearch
 
+source ~/.config/vim/config/color.vim
 source ~/.config/vim/config/folding.vim
 source ~/.config/vim/config/sessions.vim
 source ~/.config/vim/config/temp-swap.vim
@@ -23,6 +24,8 @@ source ~/.config/vim/config/nerdtree.vim
 source ~/.config/vim/config/templates.vim
 source ~/.config/vim/config/buffers.vim
 source ~/.config/vim/config/macvim.vim
+source ~/.config/vim/config/notational.vim
+source ~/.config/vim/config/markdown.vim
 
 " Language specific configuration
 source ~/.config/vim/config/python.vim
