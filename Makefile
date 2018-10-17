@@ -17,7 +17,7 @@ build: upgrade_package_managers build_mac
 	cp -R ~/.config/vim/config ./vim/.config/vim/
 	@#--- Bash
 	cp ~/.bashrc ./bash
-	cp ~/.bash_profile ./bash
+	cp ~/.profile ./bash
 	cp -R ${SCRIPTS_DIR}/bash_env ./bash/scripts/
 	cp -R ${SCRIPTS_DIR}/interface ./bash/scripts/
 	cp ~/.inputrc .
@@ -44,15 +44,15 @@ install: upgrade_package_managers install_mac
 	@#--- Bash
 	test -f ~/.bashrc && cp ~/.bashrc ~/.bashrc_${TIMESTAMP} || true
 	cp ./bash/.bashrc ~
-	test -f ~/.bash_profile && cp ~/.bash_profile ~/.bash_profile_${TIMESTAMP} || true
-	cp ./bash/.bash_profile ~
+	test -f ~/.profile && cp ~/.profile ~/.profile_${TIMESTAMP} || true
+	cp ./bash/.profile ~
 	test -d ${SCRIPTS_DIR}/bash_env || mkdir -p ${SCRIPTS_DIR}/bash_env
 	cp -R ./bash/scripts/* ${SCRIPTS_DIR}
 	test -f ~/.inputrc && cp ~/.inputrc ~/.inputrc_${TIMESTAMP} || true
 	cp ./.inputrc ~
 	@#--- Python
-	pip3 install --trusted-host=pypi.python.org -r ./python/python3-packages.txt
-	pip2 install --trusted-host=pypi.python.org -r ./python/python2-packages.txt
+	pip3 install --user --trusted-host=pypi.python.org -r ./python/python3-packages.txt
+	pip2 install --user --trusted-host=pypi.python.org -r ./python/python2-packages.txt
 	@#--- Ruby
 	while read gem; do gem install `echo $$gem | sed 's/.(.*)//g'`; done < ./ruby/gem-list.txt
 	@#--- Vim 
@@ -77,5 +77,5 @@ ifeq ($(OS_FLAG),Darwin)
 	brew update && brew upgrade
 endif
 	# Upgrade pip for TLS issues, without pip
-	curl https://bootstrap.pypa.io/get-pip.py | python2
-	curl https://bootstrap.pypa.io/get-pip.py | python3
+	-curl https://bootstrap.pypa.io/get-pip.py | python2
+	-curl https://bootstrap.pypa.io/get-pip.py | python3
