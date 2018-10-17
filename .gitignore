@@ -1,3 +1,4 @@
 ssh_keys.sh
 aliases_sensitive.sh
 tokens.sh
+*.log
