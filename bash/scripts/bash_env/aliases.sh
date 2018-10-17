@@ -1,5 +1,6 @@
 # Various
 alias top='sudo htop'
+alias luxafor='~/Scripts/luxafor.sh'
 
 # Tasks
 alias t='task'
@@ -11,14 +12,18 @@ alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
 alias lsl='exa --long --tree --level=2 --all --group-directories-first --group --modified --git --header'
 
 # Sourcing
-alias src='. ~/.bash_profile'
+alias src='. ~/.profile'
 alias alias-edit="vim ~/Scripts/bash_env/aliases.sh && . ~/Scripts/bash_env/aliases.sh"
 
 # Editing and reading
 alias v="nvim"
 alias vim="nvim"
-alias a="atom ."
 alias cat='bat'
+alias n='nvim -c "NV"'
+alias vim-color-edit='nvim ~/.vim/colors/spacemonkey_dark.vim'
+
+# Clipboard
+alias c="xclip -selection c"
 
 # Dirs
 alias ..="cd .."
@@ -59,7 +64,12 @@ alias dss='docker-sync-stack start'
 
 # tmux
 alias tmux='TERM=screen-256color tmux'
+alias rn='tmux movew -r && tmux rename-window'
 
 # icons
 alias icons-replace='sudo sh ~/Scripts/replace-custom-icons.sh'
 alias icons-edit="$EDITOR ~/Scripts/replace-custom-icons.sh"
+
+# Packages
+alias apt-edit-pkgs="vim $HOME/Scripts/dotfiles/package-managers/apt/apt-packages.txt"
+alias apt-install-pkgs=". $HOME/Scripts/dotfiles/package-managers/apt/apt-install.sh"
