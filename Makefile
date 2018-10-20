@@ -21,6 +21,8 @@ build: upgrade_package_managers build_mac
 	cp -R ${SCRIPTS_DIR}/bash_env ./bash/scripts/
 	cp -R ${SCRIPTS_DIR}/interface ./bash/scripts/
 	cp ~/.inputrc .
+	@#--- git
+	cp ~/.gitconfig ./git/
 	@#--- tmux
 	cp ~/.tmux.conf ./tmux
 	@#--- tmuxinator
@@ -59,6 +61,9 @@ install: upgrade_package_managers install_mac
 	test -f ~/.vimrc && cp ~/.vimrc ~/.vimrc_${TIMESTAMP} || true
 	cp ./vim/.vimrc ~
 	cp -R ./vim/.config/* ~/.config/
+	@#--- git
+	test -f ~/.gitconfig && cp ~/.gitconfig ~/.gitconfig_${TIMESTAMP} || true
+	cp ./git/.gitconfig ~
 	@#--- tmux
 	test -f ~/.tmux.conf && cp ~/.tmux.conf ~/.tmux.conf_${TIMESTAMP} || true
 	cp ./tmux/.tmux.conf ~/.tmux.conf
