@@ -44,3 +44,5 @@ virtualbox
 virtualbox-ext-pack
 postfix
 mutt
+openvpn
+openvpn-systemd-resolved
