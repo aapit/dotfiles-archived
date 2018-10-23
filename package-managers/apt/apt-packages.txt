@@ -46,3 +46,4 @@ postfix
 mutt
 openvpn
 openvpn-systemd-resolved
+docker-composer
