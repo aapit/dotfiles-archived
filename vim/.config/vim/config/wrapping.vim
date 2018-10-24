@@ -1,9 +1,8 @@
-" [WRAPPING] ___________________________________
 " Line wrapping and max width
 set wrap
 set linebreak
 set nolist  " list disables linebreak
-set textwidth=100
+set textwidth=90
 
 augroup textwidth
     autocmd!
