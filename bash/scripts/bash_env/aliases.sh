@@ -56,10 +56,10 @@ alias fn-on='osascript ~/Scripts/interface/function-keys-on.applescript'
 alias fn-toggle='osascript ~/Scripts/interface/function-keys-on.applescript'
 
 # Docker
-alias dco='sudo docker-compose'
-alias dce='sudo docker-compose exec'
-alias dcr='sudo docker-compose run'
-alias dcup='sudo docker-compose up'
+alias dco='docker-compose'
+alias dce='docker-compose exec'
+alias dcr='docker-compose run'
+alias dcup='docker-compose up'
 
 # tmux
 alias tmux='TERM=screen-256color tmux'
