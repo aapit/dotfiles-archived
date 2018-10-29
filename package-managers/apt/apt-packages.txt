@@ -46,4 +46,7 @@ postfix
 mutt
 openvpn
 openvpn-systemd-resolved
-docker-composer
+docker-compose
+nfs-kernel-server
+exfat-fuse
+exfat-utils
