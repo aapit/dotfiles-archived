@@ -50,3 +50,5 @@ docker-compose
 nfs-kernel-server
 exfat-fuse
 exfat-utils
+lynx
+gnome-pomodoro
