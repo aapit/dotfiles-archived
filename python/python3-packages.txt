@@ -69,7 +69,7 @@ pyOpenSSL==17.5.0
 pyquery==1.4.0
 pyRFC3339==1.0
 pyscard==1.9.6
-python-apt==1.6.2
+python-apt==1.6.3
 python-dateutil==2.7.3
 python-debian==0.1.32
 python-xlib==0.20
