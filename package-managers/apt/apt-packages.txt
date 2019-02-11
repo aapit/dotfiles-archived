@@ -52,3 +52,9 @@ exfat-fuse
 exfat-utils
 lynx
 gnome-pomodoro
+dhcpcd5
+unetbootin
+dde
+dde-file-manager
+deepin-gtk-theme
+golang-go

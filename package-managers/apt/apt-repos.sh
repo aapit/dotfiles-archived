@@ -19,4 +19,10 @@ fi;
 # Polo file manager
 sudo apt-add-repository -y ppa:teejee2008/ppa
 
+# UNetbootin (for usb boot disks)
+sudo add-apt-repository ppa:gezakovacs/ppa
+
+# Deepin window manager
+sudo add-apt-repository ppa:leaeasy/dde 
+
 sudo apt update
