@@ -1,6 +1,7 @@
 PATH=$PATH:\
 ./vendor/bin:\
 ./node_modules/.bin:\
+$HOME/.yarn/bin:\
 $HOME/bin:\
 $HOME/.local/bin:\
 /usr/local/opt/coreutils/libexec/gnubin/:\
