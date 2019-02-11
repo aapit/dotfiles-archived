@@ -58,3 +58,5 @@ dde
 dde-file-manager
 deepin-gtk-theme
 golang-go
+linux-image-generic-hwe-18.04
+linux-headers-generic-hwe-18.04
