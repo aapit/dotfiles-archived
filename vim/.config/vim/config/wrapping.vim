@@ -2,10 +2,12 @@
 set wrap
 set linebreak
 set nolist  " list disables linebreak
-set textwidth=90
+set textwidth=80
 
 augroup textwidth
     autocmd!
     autocmd FileType gitcommit setlocal textwidth=72
-    autocmd BufRead *.phtml,*.html setlocal textwidth=0
+    autocmd FileType markdown setlocal textwidth=0
+    autocmd FileType html.twig setlocal textwidth=0
+    autocmd BufRead *.phtml,*.html,*.csv setlocal textwidth=0
 augroup END
