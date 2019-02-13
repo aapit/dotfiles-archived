@@ -1,7 +1,7 @@
 let g:vim_markdown_json_frontmatter = 1
 
 fun! EnableFocusMode()
-    silent execute 'Goyo 90'
+    silent execute 'Goyo 80'
 endfun
 fun! DisableFocusMode()
     silent execute 'Goyo!'

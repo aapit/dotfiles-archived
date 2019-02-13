@@ -2,7 +2,7 @@
 set wrap
 set linebreak
 set nolist  " list disables linebreak
-set textwidth=80
+set textwidth=100
 
 augroup textwidth
     autocmd!
