@@ -45,5 +45,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'Valloric/YouCompleteMe'
 " For centering / soft wrapping Markdown files:
 Plug 'junegunn/goyo.vim'
+" For tables in Markdown:
+Plug 'godlygeek/tabular'
 
 call plug#end()
