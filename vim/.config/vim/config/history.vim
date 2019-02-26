@@ -1,4 +1,7 @@
 " [HISTORY] ____________________________________
+" enable hidden files for undo files containing spaces
+set hid
+
 " persistent history
 set history=1000
 if exists("&undodir")
