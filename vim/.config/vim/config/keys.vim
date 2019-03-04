@@ -20,9 +20,11 @@ imap <right> <nop>
 " onoremap ' i'
 " onoremap " i"
 
+
+
 " Frontmatter / date macros
 nnoremap <A-D> :exec 'normal i'.system("~/Scripts/bash_env/datestamp.sh \| tr '\r' ' '")<cr>i 
-inoremap <A-D> <esc> :exec 'normal i'.system("~/Scripts/bash_env/datestamp.sh \| tr '\r' ' '")<cr>i 
+inoremap <A-D>=strftime("%Y%m%d")<CR> 
 nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 

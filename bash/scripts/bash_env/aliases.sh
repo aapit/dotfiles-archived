@@ -75,3 +75,6 @@ alias apt-install-pkgs=". $HOME/Scripts/dotfiles/package-managers/apt/apt-instal
 
 # Spotify
 alias spotify="$(which spotify) --force-device-scale-factor=2"
+
+# Todoist
+alias todoist="~/Scripts/app-from-source/todoist-linux/dist/todoist-0.5.0-linux-x64/todoist 2> /dev/null &"
