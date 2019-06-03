@@ -4,6 +4,11 @@ OS_FLAG:=$(shell uname -s)
 SCRIPTS_DIR=~/Scripts
 TIMESTAMP:=$(shell date "+%Y%m%d%H%M%S")
 
+info:
+	@echo "Choose one of the following actions:"
+	@echo "- build"
+	@echo "- install"
+
 # Builds a 'snapshot' of the local configuration'
 build: upgrade_package_managers build_mac
 	@#--- Python packages
