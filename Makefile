@@ -86,6 +86,8 @@ upgrade_package_managers:
 ifeq ($(OS_FLAG),Darwin)
 	brew update && brew upgrade
 endif
-	# Upgrade pip for TLS issues, without pip
-	-curl https://bootstrap.pypa.io/get-pip.py | python2
-	-curl https://bootstrap.pypa.io/get-pip.py | python3
+	pip2 install --upgrade --user pip
+	pip3 install --upgrade --user pip
+	@# Upgrade pip for TLS issues, without pip
+	@#-curl https://bootstrap.pypa.io/get-pip.py | python2
+	@#-curl https://bootstrap.pypa.io/get-pip.py | python3
