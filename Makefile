@@ -10,12 +10,7 @@ info:
 	@echo "- install"
 
 # Builds a 'snapshot' of the local configuration'
-build: upgrade_package_managers build_mac
-	@#--- Python packages
-	pip3 list --format=freeze > ./python/python3-packages.txt
-	pip2 list --format=freeze > ./python/python2-packages.txt
-	@#--- RubyGems
-	gem list > ./ruby/gem-list.txt
+build: build_mac
 	@#--- Vim 
 	cp ~/.vimrc ./vim/
 	cp -R ~/.config/nvim ./vim/.config/
@@ -37,8 +32,6 @@ build: upgrade_package_managers build_mac
 
 build_mac:
 ifeq ($(OS_FLAG),Darwin)
-	@#--- Homebrew
-	brew bundle dump -f
 	@#--- iterm2
 	[ -d ~/Library/Application\ Support/iTerm2/DynamicProfiles ] \
 	&& cp ~/Library/Application\ Support/iTerm2/DynamicProfiles/* iterm2/ \
@@ -47,7 +40,7 @@ endif
 
 # Installs the dotfiles setup on the local instance
 # Note! Potentially destructive
-install: upgrade_package_managers install_mac
+install:
 	@#--- Bash
 	test -f ~/.bashrc && cp ~/.bashrc ~/.bashrc_${TIMESTAMP} || true
 	cp ./bash/.bashrc ~
@@ -57,11 +50,6 @@ install: upgrade_package_managers install_mac
 	cp -R ./bash/scripts/* ${SCRIPTS_DIR}
 	test -f ~/.inputrc && cp ~/.inputrc ~/.inputrc_${TIMESTAMP} || true
 	cp ./.inputrc ~
-	@#--- Python
-	pip3 install --user --trusted-host=pypi.python.org -r ./python/python3-packages.txt
-	pip2 install --user --trusted-host=pypi.python.org -r ./python/python2-packages.txt
-	@#--- Ruby
-	while read gem; do gem install `echo $$gem | sed 's/.(.*)//g'`; done < ./ruby/gem-list.txt
 	@#--- Vim 
 	test -f ~/.vimrc && cp ~/.vimrc ~/.vimrc_${TIMESTAMP} || true
 	cp ./vim/.vimrc ~
@@ -76,18 +64,3 @@ install: upgrade_package_managers install_mac
 	cp -r ./tmux/tmuxinator ~/.config/
 	@#--- Powerline
 	cp -r ./powerline ~/.config/
-
-install_mac: 
-ifeq ($(OS_FLAG),Darwin)
-	-brew bundle
-endif
-
-upgrade_package_managers:
-ifeq ($(OS_FLAG),Darwin)
-	brew update && brew upgrade
-endif
-	pip2 install --upgrade --user pip
-	pip3 install --upgrade --user pip
-	@# Upgrade pip for TLS issues, without pip
-	@#-curl https://bootstrap.pypa.io/get-pip.py | python2
-	@#-curl https://bootstrap.pypa.io/get-pip.py | python3
