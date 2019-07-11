@@ -55,6 +55,7 @@ install:
 	test -f ~/.vimrc && cp ~/.vimrc ~/.vimrc_${TIMESTAMP} || true
 	cp ./vim/.vimrc ~
 	cp -R ./vim/.config/* ~/.config/
+	[ -d ~/.vim/colors ] || mkdir -p ~/.vim/colors
 	cp ./vim/colors/* ~/.vim/colors/
 	@#--- git
 	test -f ~/.gitconfig && cp ~/.gitconfig ~/.gitconfig_${TIMESTAMP} || true
