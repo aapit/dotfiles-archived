@@ -15,6 +15,7 @@ build: build_mac
 	cp ~/.vimrc ./vim/
 	cp -R ~/.config/nvim ./vim/.config/
 	cp -R ~/.config/vim/config ./vim/.config/vim/
+	cp ~/.vim/colors/spacemonkey*.vim ./vim/colors/
 	@#--- Bash
 	cp ~/.bashrc ./bash
 	cp ~/.profile ./bash
@@ -54,6 +55,7 @@ install:
 	test -f ~/.vimrc && cp ~/.vimrc ~/.vimrc_${TIMESTAMP} || true
 	cp ./vim/.vimrc ~
 	cp -R ./vim/.config/* ~/.config/
+	cp ./vim/colors/* ~/.vim/colors/
 	@#--- git
 	test -f ~/.gitconfig && cp ~/.gitconfig ~/.gitconfig_${TIMESTAMP} || true
 	cp ./git/.gitconfig ~
