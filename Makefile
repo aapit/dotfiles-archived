@@ -15,7 +15,7 @@ build: build_mac
 	cp ~/.vimrc ./vim/
 	cp -R ~/.config/nvim ./vim/.config/
 	cp -R ~/.config/vim/config ./vim/.config/vim/
-	cp ~/.vim/colors/spacemonkey*.vim ./vim/colors/
+	cp ~/.vim/colors/*.vim ./vim/colors/
 	@#--- Bash
 	cp ~/.bashrc ./bash
 	cp ~/.profile ./bash
