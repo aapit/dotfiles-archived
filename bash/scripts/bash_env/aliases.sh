@@ -74,7 +74,7 @@ alias apt-edit-pkgs="vim $HOME/Scripts/dotfiles/package-managers/apt/apt-package
 alias apt-install-pkgs=". $HOME/Scripts/dotfiles/package-managers/apt/apt-install.sh"
 
 # Spotify
-alias spotify="$(which spotify) --force-device-scale-factor=2"
+alias spotify="$(which spotify) --force-device-scale-factor=2 > /dev/null &"
 
 # Todoist
 alias todoist="~/Scripts/app-from-source/todoist-linux/dist/todoist-0.5.0-linux-x64/todoist 2> /dev/null &"
