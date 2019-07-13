@@ -15,6 +15,7 @@ source ~/Scripts/bash_env/aliases.sh
 if [[ $- == *i* ]]; then
     source ~/Scripts/bash_env/colors.sh
     source ~/Scripts/bash_env/powerline.sh
+    source ~/Scripts/bash_env/prompt.sh
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
     source ~/Scripts/bash_env/tmux.sh
     source ~/Scripts/bash_env/autojump.sh
