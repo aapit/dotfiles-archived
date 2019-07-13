@@ -28,7 +28,7 @@ root: ~/
 # tmux_options: -f ~/.tmux.mac.conf
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
-tmux_command: byobu
+# tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
 # startup_window: editor
@@ -47,5 +47,5 @@ windows:
       panes:
         - vim
         - guard
-  - server: bundle exec rails s
   - logs: tail -f log/development.log
+# - server: bundle exec rails s
