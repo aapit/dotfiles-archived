@@ -18,18 +18,6 @@ VIM_COLORS ?= ~/.vim/colors
 ITERM_PROFS_DIR ?= ~/Library/Application\ Support/iTerm2/DynamicProfiles
 ITERM_PROFS ?= iterm.dynamic_profiles.json
 
-info:
-	@echo "Use 'make install' if you'd like to replace local config files"
-	@echo "with symlinks to their equivalents in this repository."
-
-install_mac:
-ifeq ($(OS_FLAG),Darwin)
-	@#--- iterm2
-	[ -d ${ITERM_PROFS_DIR} ] && \
-		{ ${LINKCMD} $(realpath ./iterm/${ITERM_PROFS}) \
-		${ITERM_PROFS_DIR)/${ITERM_PROFS} ;} || \
-		echo "--> Note! iTerm dynamic profiles are not enabled."
-endif
 
 # Installs the dotfiles setup on the local instance
 install: install_mac
@@ -54,3 +42,12 @@ install: install_mac
 	${LINKCMD} $(realpath ./tmux/tmuxinator) ${TMUXINATOR}
 	@echo ___ Powerline && true
 	${LINKCMD} $(realpath ./powerline) ${POWERLINE}
+
+install_mac:
+ifeq ($(OS_FLAG),Darwin)
+	@#--- iterm2
+	[ -d ${ITERM_PROFS_DIR} ] && \
+		{ ${LINKCMD} $(realpath ./iterm/${ITERM_PROFS}) \
+		${ITERM_PROFS_DIR)/${ITERM_PROFS} ;} || \
+		echo "--> Note! iTerm dynamic profiles are not enabled."
+endif
