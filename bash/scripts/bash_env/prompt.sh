@@ -5,13 +5,10 @@ RED=$'\[\033[0;31m\]'
 GREY=$'\[\033[0;37m\]'
 DARKGREY=$'\[\033[0;30m\]'
 CYAN=$'\033[0;36m'
-BLACK=$'\033[0;30m'
-YELLOW=$'\033[0;33m'
-MAGENTA=$'\033[0;35m'
 NONE=$'\[\033[m\]'
 
 source ~/Scripts/bash_env/prompt_helpers/nonzero_return.sh
 source ~/Scripts/bash_env/prompt_helpers/parse_git_branch.sh
 source ~/Scripts/bash_env/prompt_helpers/parse_git_dirty.sh
 
-export PS1="${MAGENTA}C:\\${CYAN}\W${RED}\`nonzero_return\`${GREY}\`parse_git_branch '1;34'\`  ${NONE}\n> "
+export PS1="${DARKGREY}C:\\${CYAN}\W${RED}\`nonzero_return\`${GREY}\`parse_git_branch '1;34'\`  ${NONE}\n> "
