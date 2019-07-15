@@ -10,8 +10,9 @@ endif
 
 let g:colors_name = "spacemonkey_dark"
 
-highlight Normal     term=none ctermfg=249          cterm=none  guifg=gray       gui=none 
-highlight Normal               ctermbg=235                      guibg=black
+" For Vim to adhere to the tmux color scheme, `guibg` and `ctermbg` have to be `none`.
+highlight Normal     term=none ctermfg=249          cterm=none  guifg=gray       gui=none
+highlight Normal               ctermbg=none                     guibg=none
 highlight Comment    term=none ctermfg=darkgrey     cterm=none  guifg=darkgrey   gui=none
 highlight Constant   term=none ctermfg=darkyellow   cterm=none  guifg=blue       gui=none
 highlight Special    term=none ctermfg=50           cterm=none  guifg=red        gui=bold
