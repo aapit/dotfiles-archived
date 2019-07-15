@@ -16,7 +16,4 @@ $HOME/.composer/vendor/bin:\
 $GOPATH/bin:\
 $GOROOT/bin:\
 $HOME/Library/Python/3.7/bin:\
-$HOME/.rvm/bin:\
-/home/linuxbrew/.linuxbrew/bin:\
-/home/linuxbrew/.linuxbrew/sbin:\
-/snap/bin/travis
+$HOME/.rvm/bin
