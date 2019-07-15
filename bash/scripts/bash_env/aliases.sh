@@ -47,8 +47,8 @@ alias master='git co master'
 alias git-push-upstream='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 
 # iTerm profile switching, tmux proof
-alias light='osascript ~/Scripts/interface/switch-to-light.applescript'
-alias dark='osascript ~/Scripts/interface/switch-to-dark.applescript'
+alias light='. ~/Scripts/interface/switch-to-light.sh'
+alias dark='. ~/Scripts/interface/switch-to-dark.sh'
 
 # Toggle function keys / Apple functions
 alias fn-off='osascript ~/Scripts/interface/function-keys-off.applescript'
