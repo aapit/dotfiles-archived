@@ -38,7 +38,7 @@ install: install_mac
 	${LINKCMD} $$(realpath ${BASHRC_S}) ${BASHRC_T}
 	${LINKCMD} $$(realpath ${PROFILE_S}) ${PROFILE_T}
 	for d in $$(/bin/ls ${SCRIPTS_DIR_S}/); \
-			do ${LINKCMD} $$(realpath ${SCRIPTS_DIR_S}/$$d/) ${SCRIPTS_DIR_T}/$$d; done
+		do ${LINKCMD} $$(realpath ${SCRIPTS_DIR_S}/$$d/) ${SCRIPTS_DIR_T}/$$d; done
 	${LINKCMD} $$(realpath ${INPUTRC_S}) ${INPUTRC_T}
 	@echo ___ Vim
 	${LINKCMD} $$(realpath ${VIMRC_S}) ${VIMRC_T}
@@ -51,7 +51,7 @@ install: install_mac
 	${LINKCMD} $$(realpath ${GITCONFIG_S}) ${GITCONFIG_T}
 	@echo ___ tmux
 	${LINKCMD} $$(realpath ${TMUXCONF_S}) ${TMUXCONF_T}
-	${LINKCMD} $$(realpath ${TMUXTHEMES_S}) ${TMUXTHEMES_T}
+	${LINKCMD} $$(realpath ${TMUXTHEMES_S}/) ${TMUXTHEMES_T}
 	@echo ___ tmuxinator
 	${LINKCMD} $$(realpath ${TMUXINATOR_S}) ${TMUXINATOR_T}
 	@echo ___ Powerline
