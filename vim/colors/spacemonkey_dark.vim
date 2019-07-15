@@ -1,5 +1,5 @@
 " Vim color file
-" Maintainer:   David Spreekmeester <david@scoville.tech>
+" Maintainer:   David Spreekmeester @aapit
 " Last Change:  20180929
 
 set background=dark
