@@ -19,6 +19,8 @@ VIMCONFIG_S ?= ./vim/.config
 VIMCONFIG_T ?= ~/.config
 TMUXCONF_S ?= ./tmux/.tmux.conf
 TMUXCONF_T ?= ~/.tmux.conf
+TMUXTHEMES_S ?= ./tmux/themes
+TMUXTHEMES_T ?= ~/.config/tmux/themes
 TMUXINATOR_S ?= ./tmux/tmuxinator
 TMUXINATOR_T ?= ~/.config/tmuxinator
 POWERLINE_S ?= ./powerline
@@ -47,11 +49,12 @@ install: install_mac
 		do ${LINKCMD} $$(realpath ${VIM_COLORS_S}/$$d) ${VIM_COLORS_T}/$$d; done
 	@echo ___ git
 	${LINKCMD} $$(realpath ${GITCONFIG_S}) ${GITCONFIG_T}
-	@echo ___ tmux && true
+	@echo ___ tmux
 	${LINKCMD} $$(realpath ${TMUXCONF_S}) ${TMUXCONF_T}
-	@echo ___ tmuxinator && true
+	${LINKCMD} $$(realpath ${TMUXTHEMES_S}) ${TMUXTHEMES_T}
+	@echo ___ tmuxinator
 	${LINKCMD} $$(realpath ${TMUXINATOR_S}) ${TMUXINATOR_T}
-	@echo ___ Powerline && true
+	@echo ___ Powerline
 	${LINKCMD} $$(realpath ${POWERLINE_S}) ${POWERLINE_T}
 
 install_mac:
