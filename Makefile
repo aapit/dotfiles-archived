@@ -6,62 +6,60 @@ LINKCMD ::= ln -s -f --backup=existing --suffix=.bkp
 SCRIPTS_DIR_S ?= ./bash/scripts
 SCRIPTS_DIR_T ?= ~/Scripts
 BASHRC_S ?= ./bash/.bashrc
-BASHRC_T ?= ~/.bashrc
+BASHRC_T ?= ~
 PROFILE_S ?= ./bash/.profile
-PROFILE_T ?= ~/.profile
+PROFILE_T ?= ~
 INPUTRC_S ?= ./.inputrc
-INPUTRC_T ?= ~/.inputrc
+INPUTRC_T ?= ~
 VIMRC_S ?= ./vim/.vimrc
-VIMRC_T ?= ~/.vimrc
-GITCONFIG_S ?= ./git/.gitconfig
-GITCONFIG_T ?= ~/.gitconfig
+VIMRC_T ?= ~
 VIMCONFIG_S ?= ./vim/.config
 VIMCONFIG_T ?= ~/.config
-TMUXCONF_S ?= ./tmux/.tmux.conf
-TMUXCONF_T ?= ~/.tmux.conf
-TMUXTHEMES_S ?= ./tmux/themes
-TMUXTHEMES_T ?= ~/.config/tmux/themes
-TMUXINATOR_S ?= ./tmux/tmuxinator
-TMUXINATOR_T ?= ~/.config/tmuxinator
-POWERLINE_S ?= ./powerline
-POWERLINE_T ?= ~/.config/powerline
 VIM_COLORS_S ?= ./vim/colors
 VIM_COLORS_T ?= ~/.vim/colors
-ITERM_PROFS_DIR_S ?= ./iterm2
-ITERM_PROFS_DIR_T ?= ~/Library/Application\ Support/iTerm2/DynamicProfiles
-ITERM_PROFS ?= iterm.dynamic_profiles.json
-
+GITCONFIG_S ?= ./git/.gitconfig
+GITCONFIG_T ?= ~
+TMUXCONF_S ?= ./tmux/.tmux.conf
+TMUXCONF_T ?= ~
+TMUXTHEMES_S ?= ./tmux/themes
+TMUXTHEMES_T ?= ~/.config/tmux
+TMUXINATOR_S ?= ./tmux/tmuxinator
+TMUXINATOR_T ?= ~/.config
+POWERLINE_S ?= ./powerline
+POWERLINE_T ?= ~/.config
+ITERM_PROFS_S ?= ./iterm2/iterm.dynamic_profiles.json
+ITERM_PROFS_T ?= ~/Library/Application\ Support/iTerm2/DynamicProfiles
 
 # Installs the dotfiles setup on the local instance
 install: install_mac
 	@echo ___ Bash
-	${LINKCMD} $$(realpath ${BASHRC_S}) ${BASHRC_T}
-	${LINKCMD} $$(realpath ${PROFILE_S}) ${PROFILE_T}
+	${LINKCMD} -t ${BASHRC_T} $$(realpath ${BASHRC_S})
+	${LINKCMD} -t ${PROFILE_T} $$(realpath ${PROFILE_S})
 	for d in $$(/bin/ls ${SCRIPTS_DIR_S}/); \
-		do ${LINKCMD} $$(realpath ${SCRIPTS_DIR_S}/$$d/) ${SCRIPTS_DIR_T}/$$d; done
-	${LINKCMD} $$(realpath ${INPUTRC_S}) ${INPUTRC_T}
+		do ${LINKCMD} -t ${SCRIPTS_DIR_T} $$(realpath ${SCRIPTS_DIR_S}/$$d); done
+	${LINKCMD} -t ${INPUTRC_T} $$(realpath ${INPUTRC_S})
 	@echo ___ Vim
-	${LINKCMD} $$(realpath ${VIMRC_S}) ${VIMRC_T}
+	${LINKCMD} -t ${VIMRC_T} $$(realpath ${VIMRC_S})
 	for d in $$(/bin/ls ${VIMCONFIG_S}/); \
-		do ${LINKCMD} $$(realpath ${VIMCONFIG_S}/$$d) ${VIMCONFIG_T}/$$d; done
+		do ${LINKCMD} -t ${VIMCONFIG_T} $$(realpath ${VIMCONFIG_S}/$$d); done
 	[ -d ${VIM_COLORS_T} ] || mkdir -p ${VIM_COLORS_T}
 	for d in $$(/bin/ls ${VIM_COLORS_S}/); \
-		do ${LINKCMD} $$(realpath ${VIM_COLORS_S}/$$d) ${VIM_COLORS_T}/$$d; done
+		do ${LINKCMD} -t ${VIM_COLORS_T} $$(realpath ${VIM_COLORS_S}/$$d); done
 	@echo ___ git
-	${LINKCMD} $$(realpath ${GITCONFIG_S}) ${GITCONFIG_T}
+	${LINKCMD} -t ${GITCONFIG_T} $$(realpath ${GITCONFIG_S})
 	@echo ___ tmux
-	${LINKCMD} $$(realpath ${TMUXCONF_S}) ${TMUXCONF_T}
-	${LINKCMD} $$(realpath ${TMUXTHEMES_S}/) ${TMUXTHEMES_T}
+	${LINKCMD} -t ${TMUXCONF_T} $$(realpath ${TMUXCONF_S})
+	${LINKCMD} -t ${TMUXTHEMES_T} $$(realpath ${TMUXTHEMES_S}/)
 	@echo ___ tmuxinator
-	${LINKCMD} $$(realpath ${TMUXINATOR_S}) ${TMUXINATOR_T}
+	${LINKCMD} -t ${TMUXINATOR_T} $$(realpath ${TMUXINATOR_S})
 	@echo ___ Powerline
-	${LINKCMD} $$(realpath ${POWERLINE_S}) ${POWERLINE_T}
+	${LINKCMD} -t ${POWERLINE_T} $$(realpath ${POWERLINE_S})
 
 install_mac:
 ifeq ($(OS_FLAG),Darwin)
 	@#--- iterm2
 	[ -d ${ITERM_PROFS_DIR_T} ] && \
-		{ ${LINKCMD} $(realpath ${ITERM_PROFS_DIR_S}/${ITERM_PROFS}) \
-		${ITERM_PROFS_DIR_T)/${ITERM_PROFS} ;} || \
+		{ ${LINKCMD} -t ${ITERM_PROFS_T} $(realpath ${ITERM_PROFS_S}) \
+		;} || \
 		echo "--> Note! iTerm dynamic profiles are not enabled."
 endif
