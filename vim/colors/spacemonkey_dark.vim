@@ -31,4 +31,4 @@ highlight LineNr     term=none ctermfg=60
 hi NonText           term=none ctermbg=235
 hi ColorColumn       term=none ctermbg=234
 
-let &colorcolumn=join(range(101,1000),",")
+let &colorcolumn=join(range(100,1000),",")
