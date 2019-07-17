@@ -2,16 +2,16 @@
 " Maintainer:   David Spreekmeester @aapit
 " Last Change:  20180929
 
-set background=dark
+set background=light
 highlight clear
 if exists("syntax on")
   syntax reset
 endif
 
-let g:colors_name = "spacemonkey_dark"
+let g:colors_name = "spacemonkey_light"
 
 " For Vim to adhere to the tmux color scheme, `guibg` and `ctermbg` have to be `none`.
-highlight Normal     term=none ctermfg=249          cterm=none  guifg=gray       gui=none
+highlight Normal     term=none ctermfg=black          cterm=none  guifg=gray       gui=none
 highlight Normal               ctermbg=none                     guibg=none
 highlight Comment    term=none ctermfg=darkgrey     cterm=none  guifg=darkgrey   gui=none
 highlight Constant   term=none ctermfg=darkyellow   cterm=none  guifg=blue       gui=none
@@ -29,7 +29,7 @@ highlight Title      term=none ctermfg=105          cterm=none  guifg=darkblue  
 highlight LineNr     term=none ctermfg=60
 
 "hi NonText           term=none ctermbg=none
-hi NonText           term=none ctermbg=235
+hi NonText           term=none ctermbg=12
 hi ColorColumn       term=none ctermbg=none
 "hi ColorColumn       term=none ctermbg=234
 

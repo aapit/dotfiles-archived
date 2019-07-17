@@ -1,7 +1,19 @@
 " [APPEARANCE] ________________________________
-set guifont=Roboto\ Mono\ Light\ for\ Powerline:h15
+"set guifont=Roboto\ Mono\ Light\ for\ Powerline:h15
 " true colors
 set t_Co=256
 
-ca light !osascript ~/Scripts/interface/switch-to-light.applescript
-ca dark !osascript ~/Scripts/interface/switch-to-dark.applescript
+fun! Light()
+    "let oldcmdheight = &cmdheight
+    "let &cmdheight = 1
+    silent !. ~/Scripts/interface/switch-to-light.sh
+    colorscheme spacemonkey_light
+    "let &cmdheight = oldcmdheight
+endfun
+fun! Dark()
+    silent !. ~/Scripts/interface/switch-to-dark.sh
+    colorscheme spacemonkey_dark
+endfun
+
+ca light call Light()
+ca dark call Dark()
