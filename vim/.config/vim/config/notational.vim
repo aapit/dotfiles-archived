@@ -1,4 +1,4 @@
-nnoremap <C-n> :Goyo!<cr>:<C-u>NV<cr>
+nnoremap <C-n> :Goyo!<cr>:<C-u>NV!<cr>
 let g:nv_search_paths = ['~/Documents/notes', '~/Dropbox/notes']
 let g:nv_preview_direction = 'right'
 let g:nv_create_note_window = 'edit'

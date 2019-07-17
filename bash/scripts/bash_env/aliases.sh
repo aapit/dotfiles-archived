@@ -19,7 +19,7 @@ alias alias-edit="vim ~/Scripts/bash_env/aliases.sh && . ~/Scripts/bash_env/alia
 alias v="nvim"
 alias vim="nvim"
 alias cat='bat'
-alias n='nvim -c "NV"'
+alias n='nvim -c "NV!"'
 alias vim-color-edit='nvim ~/.vim/colors/spacemonkey_dark.vim'
 
 # Clipboard
