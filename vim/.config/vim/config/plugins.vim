@@ -46,5 +46,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/goyo.vim'
 " For tables in Markdown:
 Plug 'godlygeek/tabular'
+" For icons next to code files in file list mode
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
