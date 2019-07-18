@@ -14,4 +14,4 @@ source ~/Scripts/bash_env/prompt_helpers/nonzero_return.sh
 source ~/Scripts/bash_env/prompt_helpers/parse_git_branch.sh
 source ~/Scripts/bash_env/prompt_helpers/parse_git_dirty.sh
 
-export PS1="${MAGENTA}C:\\${CYAN}\W${RED}\`nonzero_return\`${GREY}\`parse_git_branch '1;34'\`  ${NONE}\n> "
+export PS1="${MAGENTA}C:\\${CYAN}\W${RED}\`nonzero_return\`${GREY}\`parse_git_branch '1;34'\`  ${CYAN}\nᐈ ${NONE}"
