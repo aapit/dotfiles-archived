@@ -61,6 +61,9 @@ alias dce='docker-compose exec'
 alias dcr='docker-compose run'
 alias dcup='docker-compose up'
 
+# Kubernetes
+alias k='kubectl'
+
 # tmux
 alias tmux='TERM=screen-256color tmux'
 alias rn='tmux movew -r && tmux rename-window'
