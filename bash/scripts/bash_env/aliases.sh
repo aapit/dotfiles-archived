@@ -1,6 +1,7 @@
 # Various
 alias top='sudo htop'
 alias luxafor='~/Scripts/luxafor.sh'
+alias bla='~/Scripts/generate-loremipsum.sh'
 
 # Tasks
 alias t='task'
