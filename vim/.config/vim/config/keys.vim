@@ -22,10 +22,13 @@ imap <right> <nop>
 
 
 " Frontmatter / date macros
+" Todo: in paste mode, this should first :set nopaste
 nnoremap <A-D> :exec 'normal i'.system("~/Scripts/bash_env/datestamp.sh \| tr '\r' ' '")<cr>i 
 inoremap <A-D> <C-R>=strftime("%Y%m%d")<cr> 
 nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
+
+nnoremap <leader>- o___________________________________________________<cr><esc>
 
 " Open current file in external editor (GhostWriter)
 nnoremap <A-o> :!/snap/bin/ghostwriter-casept.ghostwriter "%" 2>/dev/null &<cr><cr>
