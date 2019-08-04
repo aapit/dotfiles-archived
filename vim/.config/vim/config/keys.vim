@@ -29,7 +29,7 @@ nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr 
 inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 
 " Horizontal ruler
-nnoremap <leader>- 80i_<esc>o<cr><esc>
+nnoremap <leader>- o<esc>80i_<esc>o<cr><esc>
 
 " Open current file in external editor (GhostWriter)
 nnoremap <A-o> :!/snap/bin/ghostwriter-casept.ghostwriter "%" 2>/dev/null &<cr><cr>
