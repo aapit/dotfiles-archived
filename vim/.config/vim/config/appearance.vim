@@ -17,3 +17,7 @@ endfun
 
 ca light call Light()
 ca dark call Dark()
+
+"________________________________________________________________________________
+
+set guicursor+=n-v-c:blinkon1
