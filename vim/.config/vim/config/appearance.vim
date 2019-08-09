@@ -1,5 +1,9 @@
 " [APPEARANCE] ________________________________
 "set guifont=Roboto\ Mono\ Light\ for\ Powerline:h15
+set formatoptions-=t
+set colorcolumn=+1
+colorscheme spacemonkey_dark
+
 " true colors
 set t_Co=256
 

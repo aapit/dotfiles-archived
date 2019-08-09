@@ -7,12 +7,11 @@ set clipboard=unnamed
 set incsearch
 set hlsearch
 
-source ~/.config/vim/config/color.vim
+source ~/.config/vim/config/appearance.vim
 source ~/.config/vim/config/folding.vim
 source ~/.config/vim/config/sessions.vim
 source ~/.config/vim/config/temp-swap.vim
 source ~/.config/vim/config/keys.vim
-source ~/.config/vim/config/appearance.vim
 source ~/.config/vim/config/statusbar.vim
 source ~/.config/vim/config/plugins.vim
 source ~/.config/vim/config/history.vim
