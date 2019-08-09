@@ -77,6 +77,9 @@ alias icons-edit="$EDITOR ~/Scripts/replace-custom-icons.sh"
 alias apt-edit-pkgs="vim $HOME/Scripts/dotfiles/package-managers/apt/apt-packages.txt"
 alias apt-install-pkgs=". $HOME/Scripts/dotfiles/package-managers/apt/apt-install.sh"
 
+# Vim
+alias vimcfg="cd ~/.config/vim/config && vim . && cd -"
+
 # Spotify
 alias spotify="$(which spotify) --force-device-scale-factor=2 > /dev/null &"
 
