@@ -1,9 +1,7 @@
 source ~/Scripts/bash_env/language.sh
 source ~/Scripts/bash_env/paths.sh
-source ~/Scripts/bash_env/platform.sh
 
 export EDITOR=/usr/bin/nvim
-export XDG_CONFIG_HOME="$HOME/.config"
 
 source ~/Scripts/bash_env/ssh_keys.sh
 source ~/Scripts/bash_env/ssh_connect_multiplexer.sh
