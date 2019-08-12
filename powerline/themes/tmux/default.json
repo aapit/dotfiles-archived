@@ -9,17 +9,21 @@
                 }
             },
             {
-                "name": "weather",
-                "function": "powerline.segments.common.wthr.weather"
-            },
-            {
                 "name": "cpu",
                 "function": "powerline.segments.common.sys.cpu_load_percent",
                 "priority": 50,
                 "args": {
                     "interval": 3,
-                    "format": "{0:.0f}%"
+                    "format": "☢ {0:.0f}%"
                 }
+            },
+            {
+                "name": "mem_percent",
+                "function": "powerlinemem.mem_usage.mem_usage_percent",
+                "priority": 40,
+	            "args": {
+	                "format": "▤ %d%%"
+	            }
             },
 			{
 				"function": "powerline.segments.common.net.hostname",
