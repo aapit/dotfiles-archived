@@ -29,6 +29,8 @@ POWERLINE_S ?= ./powerline
 POWERLINE_T ?= ~/.config
 ITERM_PROFS_S ?= ./iterm2/iterm.dynamic_profiles.json
 ITERM_PROFS_T ?= ~/Library/Application\ Support/iTerm2/DynamicProfiles
+LYNX_CFG_S ?= ./lynx/lynx.cfg
+LYNX_CFG_T ?= ~/.config
 
 # Installs the dotfiles setup on the local instance
 install: install_mac
@@ -54,6 +56,9 @@ install: install_mac
 	${LINKCMD} -t ${TMUXINATOR_T} $$(realpath ${TMUXINATOR_S})
 	@echo ___ Powerline
 	${LINKCMD} -t ${POWERLINE_T} $$(realpath ${POWERLINE_S})
+	@echo ___ Lynx
+	${LINKCMD} -t ${LYNX_CFG_T} $$(realpath ${LYNX_CFG_S})
+	#sudo chown -h ${USER} ${LYNX_CFG_T}/lynx.cfg
 
 install_mac:
 ifeq ($(OS_FLAG),Darwin)
