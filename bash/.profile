@@ -18,4 +18,5 @@ if [[ $- == *i* ]]; then
     source ~/Scripts/bash_env/tmux.sh
     source ~/Scripts/bash_env/autojump.sh
     source ~/Scripts/bash_env/travis.sh
+    source ~/Scripts/bash_env/lynx.sh
 fi
