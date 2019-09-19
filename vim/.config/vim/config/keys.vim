@@ -1,5 +1,5 @@
 " [KEY MAPPING] _______________________________
-let mapleader = ","
+let mapleader = " "
 
 " Semicolon leader instead of colon
 nnoremap ; :
