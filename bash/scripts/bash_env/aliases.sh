@@ -33,11 +33,16 @@ alias desk="cd ~/Desktop"
 alias s=". ~/Scripts/bash_env/site-dir-change.sh"
 alias ~="cd ~"
 
+# Editing configurations
+alias config-edit-tmux="(cd $HOME/.config/tmux && vim $HOME/.tmux.conf && cd -)"
+alias config-edit-vim="(cd $HOME/.config/vim/config && vim -c 'FZF!' && cd -)"
+
 # Capistrano
 alias csd='cap staging deploy'
 alias cpd='cap production deploy'
 
 # Git
+alias g='git'
 alias gs='git status'
 alias gc='git commit -m'
 alias gl='git pull'
@@ -84,4 +89,6 @@ alias vimcfg="cd ~/.config/vim/config && vim . && cd -"
 alias spotify="$(which spotify) --force-device-scale-factor=2 > /dev/null &"
 
 # Todoist
-alias todoist="~/Scripts/app-from-source/todoist-linux/dist/todoist-0.5.0-linux-x64/todoist 2> /dev/null &"
+alias todoist="~/Scripts/kill-todoist.sh; ~/Scripts/app-from-source/todoist-linux/dist/todoist-0.5.0-linux-x64/todoist 2> /dev/null &"
+alias todoist-kill="~/Scripts/kill-todoist.sh"
+alias kill-todoist="~/Scripts/kill-todoist.sh"
