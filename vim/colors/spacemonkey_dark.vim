@@ -27,6 +27,7 @@ highlight mkdHeading term=none ctermfg=31           cterm=none  guifg=darkblue  
 highlight Title      term=none ctermfg=105          cterm=none  guifg=darkblue   gui=none
 
 highlight LineNr     term=none ctermfg=60
+highlight OverLength ctermfg=magenta ctermbg=none guibg=none
 
 "hi NonText           term=none ctermbg=none
 hi NonText           term=none ctermbg=235
