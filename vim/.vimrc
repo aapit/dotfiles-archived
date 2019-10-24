@@ -18,13 +18,14 @@ source ~/.config/vim/config/history.vim
 source ~/.config/vim/config/tabs-spaces.vim
 source ~/.config/vim/config/wrapping.vim
 source ~/.config/vim/config/search.vim
-"source ~/.config/vim/config/ctrlp.vim
 source ~/.config/vim/config/nerdtree.vim
 source ~/.config/vim/config/templates.vim
 source ~/.config/vim/config/buffers.vim
 source ~/.config/vim/config/macvim.vim
 source ~/.config/vim/config/notational.vim
 source ~/.config/vim/config/markdown.vim
+source ~/.config/vim/config/indent.vim
+source ~/.config/vim/config/autosave.vim
 
 " Language specific configuration
 source ~/.config/vim/config/python.vim

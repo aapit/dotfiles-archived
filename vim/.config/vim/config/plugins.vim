@@ -48,5 +48,9 @@ Plug 'junegunn/goyo.vim'
 Plug 'godlygeek/tabular'
 " For icons next to code files in file list mode
 Plug 'ryanoasis/vim-devicons'
+" For auto-saving Markdown files
+Plug 'vim-scripts/vim-auto-save'
+" Shows visual guidelines for indentation levels
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
