@@ -31,6 +31,9 @@ inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh
 " Horizontal ruler
 nnoremap <leader>- o<esc>80i_<esc>o<cr><esc>
 
+" Close buffer shortcut
+nnoremap <leader>x :bw<cr>
+
 " Open current file in external editor (GhostWriter)
 nnoremap <A-o> :!/snap/bin/ghostwriter-casept.ghostwriter "%" 2>/dev/null &<cr><cr>
 
