@@ -1,15 +1,60 @@
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_toc_autofit = 1
 
-fun! EnableFocusMode()
-    silent execute 'Goyo 81'
-endfun
-fun! DisableFocusMode()
-    silent execute 'Goyo!'
-endfun
+" > Conceal level settings are set in indent.vim.
 
-augroup focusmode
+" _______________________________
+" Auto-Save Markdown files
+augroup autosave_md
     autocmd!
-    autocmd BufEnter *.md call EnableFocusMode()
-    autocmd BufLeave *.md call DisableFocusMode()
+    autocmd BufEnter * silent let g:auto_save = 0
+    autocmd BufEnter *.md silent let g:auto_save = 1
 augroup end
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufEnter *.md highlight clear OverLength
+
+"_______________________________________________________________________________
+
+" Auto switch goyo
+function! s:switch_goyo()
+    if &ft == 'markdown' && winnr('$') == 1
+        Goyo
+        "Goyo 80
+        "set colorcolumn=
+    elseif exists('#goyo')
+        Goyo!
+"        "set colorcolumn=+1
+    endif
+endfunction
+nnoremap <Leader>g :call <SID>switch_goyo()<cr>
+" ___________________________________________
+"
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  highlight clear OverLength
+  let g:indentLine_concealcursor = "nv"
+  let g:indentLine_conceallevel = 2
+endfunction
+
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+nnoremap <Leader>t :Toch<cr>
