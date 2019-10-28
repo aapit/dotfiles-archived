@@ -28,8 +28,10 @@ inoremap <A-D> <C-R>=strftime("%Y%m%d")<cr>
 nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 
-" Horizontal ruler
-nnoremap <leader>- o<esc>80i_<esc>o<cr><esc>
+" Horizontal ruler: underscores for H1 markdown headers
+nnoremap <leader>_ o<esc>80i_<esc>o<cr><esc>
+" Horizontal ruler: dashes for H2+ markdown headers
+nnoremap <leader>- o<esc>80i-<esc>o<cr><esc>
 
 " Close buffer shortcut
 nnoremap <leader>x :bw<cr>
