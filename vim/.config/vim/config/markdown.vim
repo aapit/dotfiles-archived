@@ -52,6 +52,7 @@ function! s:goyo_leave()
   set showmode
   set showcmd
   set scrolloff=5
+  highlight clear OverLength
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
