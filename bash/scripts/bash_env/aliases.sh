@@ -66,6 +66,7 @@ alias dco='docker-compose'
 alias dce='docker-compose exec'
 alias dcr='docker-compose run'
 alias dcup='docker-compose up'
+alias docker-snafu='~/Scripts/docker/docker-snafu.sh'
 
 # Kubernetes
 alias k='kubectl'
