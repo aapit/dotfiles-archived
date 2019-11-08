@@ -29,9 +29,9 @@ nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr 
 inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
 
 " Horizontal ruler: underscores for H1 markdown headers
-nnoremap <leader>_ o<esc>80i_<esc>o<cr><esc>
+nnoremap <leader>_ o<esc>80i_<esc>o<esc>
 " Horizontal ruler: dashes for H2+ markdown headers
-nnoremap <leader>- o<esc>80i-<esc>o<cr><esc>
+nnoremap <leader>- o<esc>80i-<esc>o<esc>
 
 " Close buffer shortcut
 nnoremap <leader>x :bw<cr>
