@@ -13,7 +13,8 @@ augroup autosave_md
 augroup end
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufEnter *.md highlight clear OverLength
+autocmd BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufEnter,BufNewFile,BufWinEnter *.md hi clear OverLength
 
 "_______________________________________________________________________________
 
@@ -39,7 +40,7 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
-  highlight clear OverLength
+  hi clear OverLength
   let g:indentLine_concealcursor = "nv"
   let g:indentLine_conceallevel = 2
 endfunction
