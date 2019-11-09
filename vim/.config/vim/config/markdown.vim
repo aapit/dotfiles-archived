@@ -59,4 +59,17 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+" Toggle table of contents
 nnoremap <Leader>t :Toch<cr>
+
+" Toggle conceallevel for links
+function! ToggleConcealLevel()
+    if &l:conceallevel == 0
+        set conceallevel=2
+        echom 'Concealed Markdown.'
+    elseif &l:conceallevel == 2
+        set conceallevel=0
+        echom 'Revealed Markdown.'
+    endif
+endfunction
+nnoremap <Leader>a :call ToggleConcealLevel()<cr>
