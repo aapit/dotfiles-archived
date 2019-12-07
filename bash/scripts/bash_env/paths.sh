@@ -4,6 +4,7 @@ export GEM_HOME=$HOME/.gem
 export PYTHONPATH=$HOME/.local/lib/python3/site-packages:/usr/lib/python3/dist-packages
 export XDG_CONFIG_HOME="$HOME/.config"
 export BASH_SCRIPTS_DIR=$HOME/Scripts/bash_env
+export KUBECONFIG="$HOME/.kube/config"
 
 PATH=$PATH:\
 ./vendor/bin:\
