@@ -51,6 +51,7 @@ install: install_mac
 	${LINKCMD} -t ${GITCONFIG_T} $$(realpath ${GITCONFIG_S})
 	@echo ___ tmux
 	${LINKCMD} -t ${TMUXCONF_T} $$(realpath ${TMUXCONF_S})
+	[ -d ${TMUXTHEMES_T} ] || mkdir -p ${TMUXTHEMES_T}
 	${LINKCMD} -t ${TMUXTHEMES_T} $$(realpath ${TMUXTHEMES_S}/)
 	@echo ___ tmuxinator
 	${LINKCMD} -t ${TMUXINATOR_T} $$(realpath ${TMUXINATOR_S})
