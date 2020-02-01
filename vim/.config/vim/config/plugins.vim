@@ -42,6 +42,7 @@ Plug 'Alok/notational-fzf-vim'
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 Plug 'Valloric/YouCompleteMe'
+let g:ycm_python_binary_path = 'python'
 " For centering / soft wrapping Markdown files:
 Plug 'junegunn/goyo.vim'
 " For tables in Markdown:
