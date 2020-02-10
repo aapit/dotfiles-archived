@@ -2,6 +2,7 @@
 alias top='sudo htop'
 alias luxafor='~/Scripts/luxafor.sh'
 alias bla='~/Scripts/generate-loremipsum.sh'
+alias copy='xclip -selection c'
 
 # Tasks
 alias t='task'
@@ -72,7 +73,8 @@ alias docker-snafu='~/Scripts/docker/docker-snafu.sh'
 alias k='kubectl'
 
 # tmux
-alias tmux='TERM=screen-256color tmux'
+alias tmux='tmux -2'
+#alias tmux='TERM=screen-256color-bce tmux -2'
 alias rn='tmux movew -r && tmux rename-window'
 
 # icons
