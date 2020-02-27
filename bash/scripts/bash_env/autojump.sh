@@ -1,5 +1,2 @@
-#!/bin/bash
-[ -f /usr/local/etc/profile.d/autojump.bash ] \
-    && . /usr/local/etc/profile.d/autojump.bash \
-    || [ -f /usr/share/autojump/autojump.bash ] \
-    && . /usr/share/autojump/autojump.bash
+[ ! -z "$BASH_VERSION" ] && source ~/Scripts/bash_env/autojump.bash
+[ ! -z "$ZSH_VERSION" ] && source ~/Scripts/bash_env/autojump.zsh
