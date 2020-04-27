@@ -14,7 +14,7 @@ augroup end
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufEnter,BufNewFile,BufWinEnter *.md hi clear OverLength
+"autocmd BufRead,BufEnter,BufNewFile,BufWinEnter *.md hi clear OverLength
 
 "_______________________________________________________________________________
 
@@ -40,7 +40,7 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
-  hi clear OverLength
+  "hi clear OverLength
   let g:indentLine_concealcursor = "nv"
   let g:indentLine_conceallevel = 2
 endfunction
@@ -53,7 +53,7 @@ function! s:goyo_leave()
   set showmode
   set showcmd
   set scrolloff=5
-  highlight clear OverLength
+  "highlight clear OverLength
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
