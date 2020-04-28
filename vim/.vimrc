@@ -30,7 +30,7 @@ source ~/.config/vim/config/autosave.vim
 " Language specific configuration
 source ~/.config/vim/config/python.vim
 source ~/.config/vim/config/php.vim
-source ~/.config/vim/config/garp.vim
+source ~/.config/vim/config/home-assistant.vim
 source ~/.config/vim/config/ruby.vim
 source ~/.config/vim/config/markdown.vim
 
