@@ -37,6 +37,10 @@ alias ~="cd ~"
 # Editing configurations
 alias config-edit-tmux="(cd $HOME/.config/tmux && vim $HOME/.tmux.conf && cd -)"
 alias config-edit-vim="(cd $HOME/.config/vim/config && vim -c 'FZF!' && cd -)"
+alias config-edit-cloudkey="(cd $HOME/Remotes/unifi-cloudkey && vim config.gateway.json && make && echo 'Now adjust a setting in the Cloudkey UI, like Local Network dhcp range, to trigger provisioning to the Security Gateway.' && xdg-open "https://cloudkey.floase.zone:8443/manage/site/default/v2/settings/networks/manage/edit/5d45683ee5c66d0dee9b68d1" && cd -)"
+alias config-edit-ha="(cd $HOME/Remotes/domo && make mount-and-symlink && nvim ./mount/configuration.yaml)"
+alias config-edit-alias="alias-edit"
+alias config-edit-path="vim ~/Scripts/bash_env/paths.sh && . ~/Scripts/bash_env/paths.sh"
 
 # Capistrano
 alias csd='cap staging deploy'
@@ -47,6 +51,7 @@ alias g='git'
 alias gs='git status'
 alias gc='git commit -m'
 alias gl='git pull'
+alias gd='git diff'
 alias gp='git push'
 alias ga='git add .'
 alias dev='git co develop'
