@@ -18,6 +18,39 @@ autocmd BufNewFile *.md set filetype=markdown
 
 "_______________________________________________________________________________
 
+" Frontmatter / date macros
+" Todo: in paste mode, this should first :set nopaste
+nnoremap <A-D> :exec 'normal i'.system("~/Scripts/string/datestamp.sh \| tr '\r' ' '")<cr>i
+inoremap <A-D> <C-R>=strftime("%Y%m%d")<cr>
+nnoremap <A-F> :exec 'normal i'.system("~/Scripts/string/frontmatter.sh \| tr '\r' ' '")<cr>i
+inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/string/frontmatter.sh \| tr '\r' ' '")<cr>i
+
+"_______________________________________________________________________________
+
+" Horizontal ruler: underscores for H1 markdown headers
+"   Trigger:    leader - (dash)
+nnoremap <leader>- o<esc>80i_<esc>0<esc>
+
+" Horizontal ruler: dashes for H2+ markdown headers
+"   Trigger:    leader = (equals sign)
+nnoremap <leader>= o<esc>80i-<esc>0<esc>
+
+"_______________________________________________________________________________
+
+" Code flag: 3 backticks
+"   Trigger:    Alt c (for 'code') in insert mode
+inoremap <M-c> ```
+"   Trigger:    Alt c (for 'code') in normal mode
+nnoremap <M-c> i```<esc>o<esc>
+
+" Bash code flag: (```bash)
+"   Trigger:    Alt b (for 'bash') in insert mode
+inoremap <M-b> ```bash
+"   Trigger:    Alt b (for 'bash') in normal mode
+nnoremap <M-b> i```bash<esc>o<esc>
+
+"_______________________________________________________________________________
+
 " Auto switch goyo
 function! s:switch_goyo()
     if &ft == 'markdown' && winnr('$') == 1

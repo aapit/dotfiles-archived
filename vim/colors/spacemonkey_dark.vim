@@ -12,7 +12,7 @@ let g:colors_name = "spacemonkey_dark"
 
 " For Vim to adhere to the tmux color scheme, `guibg` and `ctermbg` have to be `none`.
 highlight Normal     term=none ctermfg=249          cterm=none  guifg=gray       gui=none
-highlight Normal               ctermbg=none                     guibg=none
+highlight Normal     ctermfg=none          ctermbg=none                     guibg=none
 highlight Comment    term=none ctermfg=darkgrey     cterm=none  guifg=darkgrey   gui=none
 highlight Constant   term=none ctermfg=darkyellow   cterm=none  guifg=blue       gui=none
 highlight Special    term=none ctermfg=magenta           cterm=none  guifg=red        gui=bold
@@ -28,12 +28,14 @@ highlight mkdHeading term=none ctermfg=31           cterm=none  guifg=darkblue  
 highlight Title      term=none ctermfg=105          cterm=none  guifg=darkblue   gui=none
 
 highlight LineNr     term=none ctermfg=60
-highlight OverLength term=none ctermfg=red ctermbg=red guibg=none
-augroup OverLength
-  autocmd BufEnter *.md hi OverLength ctermfg=none ctermbg=none guibg=none
-  autocmd BufEnter *.rb,*.py,*.py3,*.php,*.js,Makefile hi OverLength ctermfg=magenta ctermbg=none guibg=none
-  autocmd BufEnter *.rb,*.py,*.py3,*.php,*.js,Makefile match OverLength /\%80v.*/
-augroup END
+"highlight clear OverLength
+"highlight OverLength term=none ctermfg=15 ctermbg=none guibg=none
+"highlight OverLength term=none ctermfg=15 ctermbg=none guibg=none
+"augroup OverLength
+"  autocmd BufEnter *.md hi OverLength ctermfg=none ctermbg=none guibg=none
+"  autocmd BufEnter *.rb,*.py,*.py3,*.php,*.js,Makefile hi OverLength ctermfg=magenta ctermbg=none guibg=none
+"  autocmd BufEnter *.rb,*.py,*.py3,*.php,*.js,Makefile match OverLength /\%80v.*/
+"augroup END
 
 hi NonText           term=none ctermbg=none guibg=none
 "hi NonText           term=none ctermbg=235
@@ -41,3 +43,11 @@ hi ColorColumn       term=none ctermbg=none guibg=none
 "hi ColorColumn       term=none ctermbg=234
 
 let &colorcolumn=join(range(100,1000),",")
+
+
+hi GitGutterAddInvisible ctermfg=242 ctermbg=13
+hi GitGutterChangeInvisible ctermfg=242 ctermbg=13
+hi GitGutterDeleteInvisible ctermfg=242 ctermbg=13
+"hi GitGutterAddInvisible xxx ctermfg=242 ctermbg=242 guifg=bg guibg=Grey
+"hi GitGutterChangeInvisible xxx ctermfg=242 ctermbg=242 guifg=bg guibg=Grey
+"hi GitGutterDeleteInvisible xxx ctermfg=242 ctermbg=242 guifg=bg guibg=Grey

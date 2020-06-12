@@ -21,20 +21,6 @@ imap <right> <nop>
 " onoremap " i"
 
 
-" Frontmatter / date macros
-" Todo: in paste mode, this should first :set nopaste
-nnoremap <A-D> :exec 'normal i'.system("~/Scripts/bash_env/datestamp.sh \| tr '\r' ' '")<cr>i
-inoremap <A-D> <C-R>=strftime("%Y%m%d")<cr>
-nnoremap <A-F> :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
-inoremap <A-F> <esc>$ :exec 'normal i'.system("~/Scripts/bash_env/frontmatter.sh \| tr '\r' ' '")<cr>i
-
-" Horizontal ruler: underscores for H1 markdown headers
-"   Trigger: dash, because h1 should be easier to reach than h2.
-nnoremap <leader>- o<esc>80i_<esc>o<esc>
-" Horizontal ruler: dashes for H2+ markdown headers
-"   Trigger: underscore, because h1 should be easier to reach than h2.
-nnoremap <leader>_ o<esc>80i-<esc>o<esc>
-
 " Close buffer shortcut
 nnoremap <leader>x :bw<cr>
 

@@ -1,1 +1,1 @@
-nnoremap <leader>pp :%!python -m json.tool<cr>
+nnoremap <leader>pp :%!python3 -m json.tool<cr>

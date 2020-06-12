@@ -1,0 +1,1 @@
+/home/david/Scripts/dotfiles/vim/colors/spacemonkey_dark.vim

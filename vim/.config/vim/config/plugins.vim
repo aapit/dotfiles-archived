@@ -35,8 +35,8 @@ Plug 'trevordmiller/nova-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'whatyouhide/vim-lengthmatters'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Alok/notational-fzf-vim'
 Plug 'elzr/vim-json'
@@ -53,5 +53,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-scripts/vim-auto-save'
 " Shows visual guidelines for indentation levels
 Plug 'Yggdroot/indentLine'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
