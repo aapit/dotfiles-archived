@@ -4,18 +4,13 @@ alias luxafor='~/Scripts/luxafor.sh'
 alias bla='~/Scripts/generate-loremipsum.sh'
 alias copy='xclip -selection c'
 
-# Tasks
-alias t='task'
-alias tl='task list'
-alias ta='task add'
-
 # Using exa (in Rust) instead of ls
 alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
 alias lsl='exa --long --tree --level=2 --all --group-directories-first --group --modified --git --header'
 
 # Sourcing
 alias src='. ~/.profile'
-alias alias-edit="vim ~/Scripts/bash_env/aliases.sh && . ~/Scripts/bash_env/aliases.sh"
+alias alias-edit="vim ~/Scripts/dotfiles/shell/env/aliases.sh && . ~/Scripts/dotfiles/shell/env/aliases.sh"
 
 # Editing and reading
 alias v="nvim"
@@ -28,19 +23,25 @@ alias vim-color-edit='nvim ~/.vim/colors/spacemonkey_dark.vim'
 alias c="xclip -selection c"
 
 # Dirs
-alias ..="cd .."
-alias ...="cd ../.."
+#alias ..="cd .."
+#alias ...="cd ../.."
 alias desk="cd ~/Desktop"
-alias s=". ~/Scripts/bash_env/site-dir-change.sh"
 alias ~="cd ~"
 
 # Editing configurations
 alias config-edit-tmux="(cd $HOME/.config/tmux && vim $HOME/.tmux.conf && cd -)"
+alias config-edit-tmux-theme="(cd $HOME/.config/tmux/themes && vim default.conf && cd -)"
 alias config-edit-vim="(cd $HOME/.config/vim/config && vim -c 'FZF!' && cd -)"
+alias config-edit-vim-theme="(cd $HOME/.config/vim/colors && vim spacemonkey_dark.vim && cd -)"
 alias config-edit-cloudkey="(cd $HOME/Remotes/unifi-cloudkey && vim config.gateway.json && make && echo 'Now adjust a setting in the Cloudkey UI, like Local Network dhcp range, to trigger provisioning to the Security Gateway.' && xdg-open "https://cloudkey.floase.zone:8443/manage/site/default/v2/settings/networks/manage/edit/5d45683ee5c66d0dee9b68d1" && cd -)"
 alias config-edit-ha="(cd $HOME/Remotes/domo && make mount-and-symlink && nvim ./mount/configuration.yaml)"
 alias config-edit-alias="alias-edit"
-alias config-edit-path="vim ~/Scripts/bash_env/paths.sh && . ~/Scripts/bash_env/paths.sh"
+alias config-edit-path="vim ~/Scripts/dotfiles/shell/env/paths.sh && . ~/Scripts/dotfiles/shell/env/paths.sh"
+alias config-edit-zsh="vim ~/.zshrc"
+alias config-edit-profile="vim ~/Scripts/dotfiles/shell/.profile && . ~/.profile"
+
+# Python
+alias py='python'
 
 # Capistrano
 alias csd='cap staging deploy'
@@ -59,13 +60,8 @@ alias master='git co master'
 alias git-push-upstream='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 
 # iTerm profile switching, tmux proof
-alias light='. ~/Scripts/interface/switch-to-light.sh'
-alias dark='. ~/Scripts/interface/switch-to-dark.sh'
-
-# Toggle function keys / Apple functions
-alias fn-off='osascript ~/Scripts/interface/function-keys-off.applescript'
-alias fn-on='osascript ~/Scripts/interface/function-keys-on.applescript'
-alias fn-toggle='osascript ~/Scripts/interface/function-keys-on.applescript'
+#alias light='. ~/Scripts/interface/switch-to-light.sh'
+#alias dark='. ~/Scripts/interface/switch-to-dark.sh'
 
 # Docker
 alias dco='docker-compose'
@@ -77,26 +73,26 @@ alias docker-snafu='~/Scripts/docker/docker-snafu.sh'
 # Kubernetes
 alias k='kubectl'
 
+# Todoist CLI
+alias t='todoist'
+alias to='todoist l -f "(overdue | today)"'
+
 # tmux
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
 #alias tmux='TERM=screen-256color-bce tmux -2'
 alias rn='tmux movew -r && tmux rename-window'
-
-# icons
-alias icons-replace='sudo sh ~/Scripts/replace-custom-icons.sh'
-alias icons-edit="$EDITOR ~/Scripts/replace-custom-icons.sh"
 
 # Packages
 alias apt-edit-pkgs="vim $HOME/Scripts/dotfiles/package-managers/apt/apt-packages.txt"
 alias apt-install-pkgs=". $HOME/Scripts/dotfiles/package-managers/apt/apt-install.sh"
 
-# Vim
-alias vimcfg="cd ~/.config/vim/config && vim . && cd -"
-
 # Spotify
 alias spotify="$(which spotify) --force-device-scale-factor=2 > /dev/null &"
 
-# Todoist
-alias todoist="~/Scripts/kill-todoist.sh; ~/Scripts/app-from-source/todoist-linux/dist/todoist-0.5.0-linux-x64/todoist 2> /dev/null &"
-alias todoist-kill="~/Scripts/kill-todoist.sh"
-alias kill-todoist="~/Scripts/kill-todoist.sh"
+# Temp disabled / up for archival
+# _______________________________
+
+# Tasks
+#alias t='task'
+#alias tl='task list'
+#alias ta='task add'
