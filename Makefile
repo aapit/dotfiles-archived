@@ -1,4 +1,4 @@
-# @author David Spreekmeester <david@spreekmeester.nl> @aapit
+# @author David Spreekmeester @aapit
 .PHONY: all
 OS_FLAG ::= $(shell uname -s)
 TSTAMP ::= $(shell date "+%Y%m%d%H%M%S")
@@ -25,6 +25,10 @@ TMUXTHEMES_S ?= ./tmux/themes
 TMUXTHEMES_T ?= ~/.config/tmux
 TMUXINATOR_S ?= ./tmux/tmuxinator
 TMUXINATOR_T ?= ~/.config
+EMACS_DIR_S ?= ./emacs/emacs.d
+EMACS_DIR_T ?= ~
+EMACS_DOTFILE_S ?= ./emacs/.emacs
+EMACS_DOTFILE_T ?= ~
 
 # Installs the dotfiles setup on the local instance
 install:
