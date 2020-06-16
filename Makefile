@@ -25,8 +25,6 @@ TMUXTHEMES_S ?= ./tmux/themes
 TMUXTHEMES_T ?= ~/.config/tmux
 TMUXINATOR_S ?= ./tmux/tmuxinator
 TMUXINATOR_T ?= ~/.config
-POWERLINE_S ?= ./powerline
-POWERLINE_T ?= ~/.config
 
 # Installs the dotfiles setup on the local instance
 install:
@@ -51,5 +49,3 @@ install:
 	${LINKCMD} -t ${TMUXTHEMES_T} $$(realpath ${TMUXTHEMES_S}/)
 #	@echo ___ tmuxinator
 #	${LINKCMD} -t ${TMUXINATOR_T} $$(realpath ${TMUXINATOR_S})
-#	@echo ___ Powerline
-#	${LINKCMD} -t ${POWERLINE_T} $$(realpath ${POWERLINE_S})
