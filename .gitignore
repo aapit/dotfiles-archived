@@ -3,3 +3,4 @@ aliases_sensitive.sh
 tokens.sh
 *.log
 .netrwhist
+tmux/plugins/*
