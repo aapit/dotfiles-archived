@@ -15,7 +15,7 @@
  '(org-agenda-files (quote ("~/Nextcloud/org-mode/todo-thuis.org")))
  '(package-selected-packages
    (quote
-    (evil-leader org-roam evil-org org-bullets markdown-mode use-package evil))))
+    (org-roam-protocol evil-leader org-roam evil-org org-bullets markdown-mode use-package evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -38,17 +38,25 @@
 
 ;; Evil Mode
 ;; evil-leader-mode needs to be enabled before enabling evil.
+(setq evil-leader/in-all-states 1) ;; This enables C-leader key in system states.
 (use-package evil-leader
   :ensure t)
   (evil-leader/set-key
   "f" 'find-file
   "b" 'switch-to-buffer
   "x" 'kill-buffer
-  "l" 'load-file
+  "r" 'load-file ;; run
   "-" 'split-window-vertically
   "\\" 'split-window-horizontally
+  "h" 'windmove-left
+  "l" 'windmove-right
+  "j" 'windmove-down
+  "k" 'windmove-up
+  "n" 'org-roam-find-file
+  "c" 'org-roam-insert ;; To link to other notes
+  "g" 'org-roam-graph
   "a" 'org-agenda)
-  (evil-leader/set-leader "SPC")
+  (evil-leader/set-leader "<SPC>")
   (global-evil-leader-mode)
 
 (use-package evil
@@ -116,3 +124,9 @@
   :ensure t)
 (setq org-roam-directory "~/Nextcloud/org-roam")
 (add-hook 'after-init-hook 'org-roam-mode)
+
+(use-package org-roam-protocol
+  :ensure t)
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "brave-browser")
