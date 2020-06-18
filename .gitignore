@@ -4,3 +4,5 @@ tokens.sh
 *.log
 .netrwhist
 tmux/plugins/*
+emacs/.emacs.d/
+emacs/.emacs~
