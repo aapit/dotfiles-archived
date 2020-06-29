@@ -19,6 +19,7 @@ $HOME/.local/bin:\
 /sbin:\
 $HOME/Scripts:\
 $HOME/.composer/vendor/bin:\
+$HOME/.emacs.d/bin:\
 /home/linuxbrew/.linuxbrew/bin
 
 #$GEM_HOME/bin:\

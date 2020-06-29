@@ -1,8 +1,8 @@
 (require 'package)
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -52,6 +52,7 @@
   "l" 'windmove-right
   "j" 'windmove-down
   "k" 'windmove-up
+  "," 'org-roam
   "n" 'org-roam-find-file
   "c" 'org-roam-insert ;; To link to other notes
   "g" 'org-roam-graph
@@ -130,3 +131,19 @@
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
+
+(use-package company-org-roam
+  :straight (:host github :repo "org-roam/company-org-roam")
+  :config
+  (push 'company-org-roam company-backends))
+
+(use-package org-roam-server
+  :ensure t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8080
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20))
