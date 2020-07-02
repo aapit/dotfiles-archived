@@ -109,3 +109,5 @@ source $HOME/Scripts/dotfiles/shell/.profile
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=4'
+
+source /home/david/.config/broot/launcher/bash/br

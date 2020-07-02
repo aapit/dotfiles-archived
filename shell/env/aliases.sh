@@ -4,8 +4,13 @@ alias luxafor='~/Scripts/luxafor.sh'
 alias bla='~/Scripts/generate-loremipsum.sh'
 alias copy='xclip -selection c'
 
+# Using broot (Rust) instead of ls
+alias ls='br --sizes --show-git-info --hidden --show-gitignored'
+alias ls-spot-large='br --sizes --show-git-info --hidden --show-gitignored --whale-spotting'
+# To spot large files or dirs, use: --whale-spotting
+
 # Using exa (in Rust) instead of ls
-alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
+#alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
 alias lsl='exa --long --tree --level=2 --all --group-directories-first --group --modified --git --header'
 
 # Sourcing
@@ -27,6 +32,7 @@ alias c="xclip -selection c"
 #alias ...="cd ../.."
 alias desk="cd ~/Desktop"
 alias ~="cd ~"
+alias dotfiles="cd ~/Scripts/dotfiles/"
 
 # Editing configurations
 alias config-edit-tmux="(cd $HOME/.config/tmux && vim $HOME/.tmux.conf && cd -)"
