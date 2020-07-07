@@ -39,21 +39,21 @@
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       ;;pretty-code       ; ligatures or substitute text with pretty symbols
+       pretty-code       ; ligatures or substitute text with pretty symbols
        ;;tabs              ; an tab bar for Emacs
-       ;;treemacs          ; a project drawer, like neotree but cooler
+       ;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       ;;(format +onsave)  ; automated prettiness
+       (format +onsave)    ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -71,7 +71,7 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
+       ;eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
        ;;vterm             ; the best terminal emulation in Emacs
@@ -82,10 +82,10 @@
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
-       ;;ansible
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       ansible
+       debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
-       ;;docker
+       docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
@@ -94,9 +94,9 @@
        ;;lsp
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
+       make                ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       ;;pdf                 ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
@@ -124,7 +124,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       ;;(haskell +dante)  ; a language that's lazier than I am
+       (haskell +dante)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        json              ; At least it ain't XML
@@ -178,4 +178,59 @@
        ;;literate
        (default +bindings +smartparens))
 
-;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(defvar my-init-el-start-time (current-time) "Time when init.el was started")
+
+(defun my-tangle-config-org (orgfile elfile)
+  "This function will write all source blocks from =config.org= into
+=config.el= that are ...
+
+- not marked as :tangle no
+- have a source-code of =emacs-lisp="
+  (let* ((body-list ())
+		 (gc-cons-threshold most-positive-fixnum)
+         (org-babel-src-block-regexp   (concat
+                                        ;; (1) indentation                 (2) lang
+                                        "^\\([ \t]*\\)#\\+begin_src[ \t]+\\([^ \f\t\n\r\v]+\\)[ \t]*"
+                                        ;; (3) switches
+                                        "\\([^\":\n]*\"[^\"\n*]*\"[^\":\n]*\\|[^\":\n]*\\)"
+                                        ;; (4) header arguments
+                                        "\\([^\n]*\\)\n"
+                                        ;; (5) body
+                                        "\\([^\000]*?\n\\)??[ \t]*#\\+end_src")))
+    (with-temp-buffer
+      (insert-file-contents orgfile)
+      (goto-char (point-min))
+      (while (re-search-forward org-babel-src-block-regexp nil t)
+        (let ((lang (match-string 2))
+              (args (match-string 4))
+              (body (match-string 5)))
+          (when (and (or (string= lang "emacs-lisp")
+                         (string= lang "elisp"))
+                     (not (string-match-p ":tangle\\s-+no" args)))
+              (push body body-list)))))
+    (with-temp-file elfile
+      (insert (format ";; WARNING: This file is generated. Edits are done in %s\n\n" orgfile))
+      (apply 'insert (reverse body-list)))
+    (message "Wrote %s ..." elfile)))
+
+(let (
+      (orgfile (concat doom-private-dir "config.org"))
+      (elfile (concat doom-private-dir "config.el"))
+     )
+  ;; build new config.el if necessary
+  (when (or (not (file-exists-p elfile))
+            (file-newer-than-file-p orgfile elfile))
+    (message "'config.org' changed, generating new 'config.el'.")
+;    (my-tangle-config-org orgfile elfile)
+    )
+;  (load! elfile)
+)
+;
+
+; Trying alternative org-babel strategy: loading instantly.
+; TODO: If this proves to be functional for a while, remove custom function above.
+(org-babel-load-file (concat doom-private-dir "config.org"))
+
+(setq custom-file (concat doom-private-dir "custom_system.el"))
+(load! custom-file)

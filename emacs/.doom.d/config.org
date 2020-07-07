@@ -1,18 +1,42 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+# -*- mode: org; coding: utf-8; -*-
+ #+TODO: ACTIVE | DISABLED
+ #+STARTUP: indent
 
+* Warnings
+Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
+Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
+
+* Initialization
+ #+BEGIN_SRC emacs-lisp
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+ #+END_SRC
+* General
+** Packages
+#+BEGIN_SRC emacs-lisp
 ;;(require 'use-package-ensure)
 ;(setq use-package-always-ensure t)
+#+END_SRC
+** Locale
+In my geographic area, the week starts on Monday (=1=).
+Default is Sunday (=0=).
 
+ #+BEGIN_SRC emacs-lisp
 (setq calendar-week-start-day 1)
 (setq
  display-time-format "%H:%M"
  display-time-24hr-format t)
-
+ #+END_SRC
+** Secrets
+#+BEGIN_SRC emacs-lisp
 (load! "secrets.el" doom-private-dir)
-
+#+END_SRC
+** Browser
+#+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
-
+#+END_SRC
+** Mouse
+#+BEGIN_SRC emacs-lisp
 ;; Disable mouse completely in Emacs
 ;(use-package! disable-mouse
 ;  :config
@@ -23,7 +47,9 @@
 ;      evil-insert-state-map))
 ;  (global-disable-mouse-mode)
 ;)
-
+#+END_SRC
+* Appearance
+ #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-dracula)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
@@ -32,7 +58,16 @@
     (toggle-frame-fullscreen)
     (display-battery-mode)
 ))
+ #+END_SRC
 
+* Keys
+I use one of the /standard hooks/ to delay setting the key maps,
+since the =map= function isn't available at the point of loading.
+This is because of the tangled Org-mode config,
+which effectively runs the generated =config.el= from the =init.el= context.
+
+** General functions
+#+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Open
     (map! :leader
@@ -48,7 +83,10 @@
         :desc "Split Vert" "\\" #'evil-window-vsplit
     )
 ))
+#+END_SRC
 
+** Org-mode related
+#+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
@@ -60,6 +98,9 @@
         :prefix "e"
         :desc "html export" "h" #'org-html-export-to-html)
 ))
+#+END_SRC
+** Org-roam related
+#+BEGIN_SRC emacs-lisp
 
 ;; Insert
 (add-hook 'emacs-startup-hook (lambda ()
@@ -83,14 +124,21 @@
       :desc "helm-org-rifle" "." #'helm-org-rifle
 )
 ))
-
+#+END_SRC
+* Evil mode
+#+BEGIN_SRC emacs-lisp
 ;(with-eval-after-load 'evil-maps
 ;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
 ;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
-
+#+END_SRC
+* Org
+** General
+#+BEGIN_SRC emacs-lisp
 ;; `org-directory' must be set before org loads.
 (setq org-directory "~/Nextcloud/org-mode/notes/")
-
+#+END_SRC
+** UI
+#+BEGIN_SRC emacs-lisp
 (setq org-agenda-span 'week)
 
 ;; Hide /emphasis markers for italics/ in org-mode
@@ -103,14 +151,21 @@
 
 ;; Follow output
 (setq compilation-scroll-output t)
-
+#+END_SRC
+** Todo
+#+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
   '((sequence "TODO" "NEXT" "DONE" "PROJ")))
-
+#+END_SRC
+* Org-roam
+** General
+#+BEGIN_SRC emacs-lisp
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")
-
+#+END_SRC
+** Journal
+#+BEGIN_SRC emacs-lisp
 (use-package org-journal
   :after org
   :defer
@@ -122,14 +177,17 @@
   :config
   (setq org-journal-enable-agenda-integration t)
 )
-
+#+END_SRC
+*** TODO moet deze niet in =packages.el=?
+** Capture templates
+#+BEGIN_SRC emacs-lisp
 (after! org-roam
       (setq org-roam-ref-capture-templates
             '(("r" "ref" plain (function org-roam-capture--get-point)
                "%?"
                :file-name "websites/${slug}"
                :head "#+TITLE: ${title}
-    #+ROAM_KEY: ${ref}
+    ,#+ROAM_KEY: ${ref}
     - source :: ${ref}"
                :unnarrowed t)))
       (setq org-roam-capture-templates
@@ -139,7 +197,10 @@
                :unnarrowed t))
       )
 )
+#+END_SRC
 
+** Graph / Server
+#+BEGIN_SRC emacs-lisp
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
 
 (use-package simple-httpd
@@ -156,7 +217,9 @@
   :defer t
   :after org
   :load-path "~/Scripts/note/org-roam-server")
-
+#+END_SRC
+** Search
+#+BEGIN_SRC emacs-lisp
 ;; org-ql for queries
 ;(use-package org-ql)
 
@@ -164,7 +227,9 @@
 ;(use-package helm-org-rifle
 ;  :after org
 ;)
-
+#+END_SRC
+* Deft
+#+BEGIN_SRC emacs-lisp
 ;(after! 'deft
 ;  (deft-recursive t)
 ;  (deft-use-filter-string-for-filename t)
@@ -183,7 +248,9 @@
 ;  :config
 ;  (setq deft-file-limit 200)
 ;)
-
+#+END_SRC
+* PHP
+#+BEGIN_SRC emacs-lisp
 ;; php
 (use-package phpactor
   :mode "\\.php\\'"
@@ -203,9 +270,14 @@
          company-phpactor
          company-files
          ))))))
-
+#+END_SRC
+* Projectile
+#+BEGIN_SRC emacs-lisp
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
+#+END_SRC
 
+* Undo
+#+BEGIN_SRC emacs-lisp
 ;; When using evil-mode be sure to run (global-undo-tree-mode -1) to avoid problems.
 ;; https://github.com/emacsmirror/undo-fu-session
 (add-hook 'emacs-startup-hook (lambda ()
@@ -213,3 +285,103 @@
 ))
 
 (setq undo-fu-session-file-limit 150)
+#+END_SRC
+
+
+* Gegenereerd
+[2020-07-07 Tue]
+Nu uitgezet.
+Dat lijkt goed te gaan, vooralsnog.
+
+Je kunt ze wel [[https://stackoverflow.com/a/5058752][naar een apart bestand verplaatsen (StackOverflow)]] blijkbaar.
+Dat heb ik nu gedaan, naar =~/.doom.d/custom_system.el=
+* Disabled
+#+begin_example elisp
+(defadvice text-scale-decrease (around all-buffers (arg) activate)
+    (dolist (buffer ("Org-roam Sidebar"))
+      (with-current-buffer buffer
+        ad-do-it)))
+
+
+(after! org-roam
+  (setq org-roam-graph-viewer "/usr/bin/opener"))
+
+;; Om de svgs van GraphViz te openen:
+;; (setq org-roam-graph-viewer "/usr/bin/eog")
+;; Alleen dus niet met eye of gnome, dat doet alleen bitmaps.
+
+;;(setq org-bullets-bullet-list '("✙" "♱" "♰" "☥" "✞" "✟" "✝" "†" "✠" "✚" "✜" "✛" "✢" "✣" "✤" "✥"))
+
+
+;; For Org-roam:
+;; Replacing region with link to new note
+;; To move fleeting notes to their own note.
+;; Spoiler alert: it sucks so needs to be improved.
+(defun mmr/org-roam-insert-replace-region-with-link-and-follow ()
+(interactive )
+(let ((title (buffer-substring (mark) (point)) )
+        (top (current-buffer)))
+    (org-roam-find-file title)
+    (let ((target-file (buffer-file-name (buffer-base-buffer)))
+        (note-buffer (current-buffer)))
+    (switch-to-buffer top nil t)
+    (kill-region (mark) (point))
+    (insert (concat "[[" target-file "][" title "]]"))
+    (switch-to-buffer note-buffer nil t)
+    (save-buffer))))
+;; To delete a linked note
+(defun mmr/remove-linked-org-roam-note ()
+(interactive)
+(let ((buffer (current-buffer)))
+    (org-open-maybe)
+    (if (not (eq (current-buffer) buffer))
+        (progn
+        (crux-delete-file-and-buffer)
+        (er/expand-region 1)
+        (kill-region (mark) (point))))))
+#+end_example
+
+** Bullets
+#+begin_example elisp
+;(after! 'org
+;    (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+;)
+;(use-package org-bullets
+;  :hook (org-mode . org-bullets-mode)
+;  :config
+;  (setq org-bullets-bullet-list '("◉" "⁑" "⁂" "❖" "✮" "✱" "✸")))
+
+;(straight-use-package 'org-bullets)
+;(use-package org-bullets
+;  :preface
+;  (defun nasy/org-bullets-mode ()
+;    (org-bullets-mode 1))
+;  :hook ((org-mode . nasy/org-bullets-mode))
+;  :init (gsetq org-bullets-bullet-list
+;               '(;;; Large
+;                 "♥"
+;                 "✿"
+;                 "❀"
+;                 "◉"
+;                 "✸"
+;                 "•")))
+                 ;; ♥ ● ○ ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+                 ;;; Small
+                 ;; ► • ★ ▸
+
+;(add-hook 'org-mode-hook
+;          (lambda ()
+;            (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+;          )
+;)
+;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+
+
+
+(add-hook 'org-mode-hook
+          (lambda ()
+                 ;; ♥ ● ○ ◇ ✚ ✜  ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖
+            (setq org-bullets-bullet-list '("❀" "☯" "▶" "☲"  "☳" "☴"  "☶"  "☱" ))
+          )
+)
+#+end_example

@@ -6,3 +6,4 @@ tokens.sh
 tmux/plugins/*
 emacs/.emacs.d/
 emacs/.emacs~
+emacs/.doom.d/secrets.el
