@@ -2,7 +2,7 @@
  #+TODO: ACTIVE | DISABLED
  #+STARTUP: indent
 
-* Warnings
+* Caveats
 Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
 Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
 
@@ -11,11 +11,6 @@ Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
  #+END_SRC
 * General
-** Packages
-#+BEGIN_SRC emacs-lisp
-;;(require 'use-package-ensure)
-;(setq use-package-always-ensure t)
-#+END_SRC
 ** Locale
 In my geographic area, the week starts on Monday (=1=).
 Default is Sunday (=0=).
@@ -35,22 +30,16 @@ Default is Sunday (=0=).
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 #+END_SRC
+* UI
 ** Mouse
 #+BEGIN_SRC emacs-lisp
-;; Disable mouse completely in Emacs
-;(use-package! disable-mouse
-;  :config
-;  (mapc #'disable-mouse-in-keymap
-;    (list evil-motion-state-map
-;      evil-normal-state-map
-;      evil-visual-state-map
-;      evil-insert-state-map))
-;  (global-disable-mouse-mode)
-;)
+(add-hook 'emacs-startup-hook (lambda ()
+    (global-disable-mouse-mode)
+))
 #+END_SRC
-* Appearance
+** Appearance
  #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
 
@@ -60,13 +49,13 @@ Default is Sunday (=0=).
 ))
  #+END_SRC
 
-* Keys
-I use one of the /standard hooks/ to delay setting the key maps,
+** Keys
+I use one of the /standard hooks/ =emacs-startup-hook= to delay setting the key maps,
 since the =map= function isn't available at the point of loading.
-This is because of the tangled Org-mode config,
+This is because of the tangled Org-babel config,
 which effectively runs the generated =config.el= from the =init.el= context.
 
-** General functions
+*** General functions
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Open
@@ -85,7 +74,7 @@ which effectively runs the generated =config.el= from the =init.el= context.
 ))
 #+END_SRC
 
-** Org-mode related
+*** Org-mode related
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
   (map! :map org-mode-map
@@ -99,33 +88,33 @@ which effectively runs the generated =config.el= from the =init.el= context.
         :desc "html export" "h" #'org-html-export-to-html)
 ))
 #+END_SRC
-** Org-roam related
+*** Org-roam related
 #+BEGIN_SRC emacs-lisp
 
-;; Insert
 (add-hook 'emacs-startup-hook (lambda ()
-(map! :after org
-      :leader
-      :prefix "i"
-      :desc "timestamp" "T" #'org-time-stamp
-      :desc "timestamp inactive" "t" #'org-time-stamp-inactive
-)
-;; Notes
-(map! :after org
-      :leader
-      :prefix "n"
-      :desc "org-roam" "r" #'org-roam
-      :desc "org-roam-insert" "i" #'org-roam-insert
-      :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-      :desc "org-roam-find-file" "f" #'org-roam-find-file
-      :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-      :desc "org-roam-capture" "c" #'org-roam-capture
-      :desc "org-journal" "j" #'org-journal-new-entry
-      :desc "helm-org-rifle" "." #'helm-org-rifle
-)
+    ;; Insert
+    (map! :after org
+          :leader
+          :prefix "i"
+          :desc "timestamp" "T" #'org-time-stamp
+          :desc "timestamp inactive" "t" #'org-time-stamp-inactive
+          :desc "note" "n" #'org-roam-capture
+    )
+    ;; Notes
+    (map! :after org
+          :leader
+          :prefix "n"
+          :desc "org-roam" "r" #'org-roam
+          :desc "org-roam-insert" "i" #'org-roam-insert
+          :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+          :desc "org-roam-find-file" "f" #'org-roam-find-file
+          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
+          :desc "org-journal" "j" #'org-journal-new-entry
+          :desc "helm-org-rifle" "." #'helm-org-rifle
+    )
 ))
 #+END_SRC
-* Evil mode
+** Evil mode
 #+BEGIN_SRC emacs-lisp
 ;(with-eval-after-load 'evil-maps
 ;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
@@ -288,13 +277,6 @@ which effectively runs the generated =config.el= from the =init.el= context.
 #+END_SRC
 
 
-* Gegenereerd
-[2020-07-07 Tue]
-Nu uitgezet.
-Dat lijkt goed te gaan, vooralsnog.
-
-Je kunt ze wel [[https://stackoverflow.com/a/5058752][naar een apart bestand verplaatsen (StackOverflow)]] blijkbaar.
-Dat heb ik nu gedaan, naar =~/.doom.d/custom_system.el=
 * Disabled
 #+begin_example elisp
 (defadvice text-scale-decrease (around all-buffers (arg) activate)

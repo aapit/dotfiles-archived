@@ -1,8 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;;(require 'use-package-ensure)
-;(setq use-package-always-ensure t)
-
 (setq calendar-week-start-day 1)
 (setq
  display-time-format "%H:%M"
@@ -13,18 +10,11 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 
-;; Disable mouse completely in Emacs
-;(use-package! disable-mouse
-;  :config
-;  (mapc #'disable-mouse-in-keymap
-;    (list evil-motion-state-map
-;      evil-normal-state-map
-;      evil-visual-state-map
-;      evil-insert-state-map))
-;  (global-disable-mouse-mode)
-;)
+(add-hook 'emacs-startup-hook (lambda ()
+    (global-disable-mouse-mode)
+))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
 
@@ -61,27 +51,27 @@
         :desc "html export" "h" #'org-html-export-to-html)
 ))
 
-;; Insert
 (add-hook 'emacs-startup-hook (lambda ()
-(map! :after org
-      :leader
-      :prefix "i"
-      :desc "timestamp" "T" #'org-time-stamp
-      :desc "timestamp inactive" "t" #'org-time-stamp-inactive
-)
-;; Notes
-(map! :after org
-      :leader
-      :prefix "n"
-      :desc "org-roam" "r" #'org-roam
-      :desc "org-roam-insert" "i" #'org-roam-insert
-      :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-      :desc "org-roam-find-file" "f" #'org-roam-find-file
-      :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-      :desc "org-roam-capture" "c" #'org-roam-capture
-      :desc "org-journal" "j" #'org-journal-new-entry
-      :desc "helm-org-rifle" "." #'helm-org-rifle
-)
+    ;; Insert
+    (map! :after org
+          :leader
+          :prefix "i"
+          :desc "timestamp" "T" #'org-time-stamp
+          :desc "timestamp inactive" "t" #'org-time-stamp-inactive
+          :desc "note" "n" #'org-roam-capture
+    )
+    ;; Notes
+    (map! :after org
+          :leader
+          :prefix "n"
+          :desc "org-roam" "r" #'org-roam
+          :desc "org-roam-insert" "i" #'org-roam-insert
+          :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+          :desc "org-roam-find-file" "f" #'org-roam-find-file
+          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
+          :desc "org-journal" "j" #'org-journal-new-entry
+          :desc "helm-org-rifle" "." #'helm-org-rifle
+    )
 ))
 
 ;(with-eval-after-load 'evil-maps

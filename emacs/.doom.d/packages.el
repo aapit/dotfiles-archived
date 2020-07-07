@@ -1,4 +1,6 @@
 (package! evil-escape :disable t)
+(package! disable-mouse)
+(package! helm-org-rifle)
 
 ;; no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
