@@ -10,7 +10,6 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
---import XMonad.Actions.Volume
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -49,8 +48,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#333333"
-myFocusedBorderColor = "#000000"
+myNormalBorderColor  = "#000000"
+myFocusedBorderColor = "#dd2255"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -62,7 +61,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Monofur Nerd Font Mono-40'")
+    -- -fn: font
+    -- -l:  lines
+    -- -nb: normal background color
+    -- -nf: normal foreground color
+    -- -sb: selected background
+    -- -sf: selected foreground
+    
+    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Righteous-48' -l 9 -nb '#101014' -nf '#cccccc' -sb '#0B5748' -sf '#B38019'")
+    --, ((modm,               xK_p     ), spawn "dmenu_run -fn 'Monofur Nerd Font Mono-60' -l 9 -nb '#000000' -nf '#cccccc' -sb '#0B5748' -sf '#B38019'")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -193,12 +200,13 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (
-    ThreeColMid 1 (3/100) (1/2) |||
-    Tall 1 (3/100) (1/2) |||
-    spiral (6/7)) |||
+myLayout = avoidStruts (spiral (6/7)) |||
     noBorders (fullscreenFull Full)
 
+--        layoutHook         = smartBorders Full ||| myLayout,
+--    ThreeColMid 1 (3/100) (1/2) |||
+--    Tall 1 (3/100) (1/2) |||
+    
 tabConfig = defaultTheme {
     activeBorderColor = "#000000",
     activeTextColor = "#CEFFAC",
@@ -313,7 +321,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = smartBorders $ myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
