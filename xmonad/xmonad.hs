@@ -118,12 +118,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Volume control
     -- Set to modmask + (F1 - F3)
     , ((modm, xK_F1), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-    , ((modm, xK_F2), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
-    , ((modm, xK_F3), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+    , ((modm, xK_F2), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    , ((modm, xK_F3), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
 
     -- Screenshots
     -- Set to modmask + S
-    , ((modm, xK_s), spawn "scrot -e 'mv $f ~/Screenshots/'")
+    , ((modm, xK_s), spawn "scrot 'Screenshot_%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Screenshots/'")
     
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
