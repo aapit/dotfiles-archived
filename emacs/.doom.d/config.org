@@ -1,13 +1,18 @@
 # -*- mode: org; coding: utf-8; -*-
  #+TODO: ACTIVE | DISABLED
- #+STARTUP: indent
  #+AUTHOR: David Spreekmeester @aapit
 
 * Initialization
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
  #+BEGIN_SRC emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
  #+END_SRC
 * General
+:PROPERTIES:
+:VISIBILITY: content
+:END:
 ** Locale
 In my geographic area, the week starts on Monday (=1=).
 Default is Sunday (=0=).
@@ -28,6 +33,9 @@ Default is Sunday (=0=).
       browse-url-generic-program "brave-browser")
 #+END_SRC
 * UI
+:PROPERTIES:
+:VISIBILITY: content
+:END:
 ** Mouse
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
@@ -127,6 +135,9 @@ which effectively runs the generated =config.el= from the =init.el= context.
 ;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
 #+END_SRC
 * Org
+:PROPERTIES:
+:VISIBILITY: content
+:END:
 ** General
 #+BEGIN_SRC emacs-lisp
 ;; `org-directory' must be set before org loads.
@@ -159,6 +170,9 @@ which effectively runs the generated =config.el= from the =init.el= context.
          ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))))
 #+END_SRC
 * Org-roam
+:PROPERTIES:
+:VISIBILITY: content
+:END:
 ** General
 #+BEGIN_SRC emacs-lisp
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
@@ -230,6 +244,9 @@ which effectively runs the generated =config.el= from the =init.el= context.
 ;)
 #+END_SRC
 * Deft
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 #+BEGIN_SRC emacs-lisp
 ;(after! 'deft
 ;  (deft-recursive t)
@@ -251,6 +268,9 @@ which effectively runs the generated =config.el= from the =init.el= context.
 ;)
 #+END_SRC
 * PHP
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 #+BEGIN_SRC emacs-lisp
 ;; php
 (use-package phpactor
@@ -273,11 +293,17 @@ which effectively runs the generated =config.el= from the =init.el= context.
          ))))))
 #+END_SRC
 * Projectile
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 #+BEGIN_SRC emacs-lisp
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
 #+END_SRC
 
 * Undo
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 #+BEGIN_SRC emacs-lisp
 ;; When using evil-mode be sure to run (global-undo-tree-mode -1) to avoid problems.
 ;; https://github.com/emacsmirror/undo-fu-session
@@ -291,10 +317,16 @@ which effectively runs the generated =config.el= from the =init.el= context.
 
 * ---
 * Caveats
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
 Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
 
 * Disabled
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
 #+begin_example elisp
 (defadvice text-scale-decrease (around all-buffers (arg) activate)
     (dolist (buffer ("Org-roam Sidebar"))
