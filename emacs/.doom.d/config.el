@@ -23,6 +23,14 @@
     (display-battery-mode)
 ))
 
+;; Unfortunately, at this point [2020-07-08 Wed],
+;; there is no way to style regular non-link text in the Org-roam buffer.
+;; Therefore, the only customizable property that blends in with the rest is link color.
+(custom-set-faces
+ '(org-roam-link ((t (:foreground "#8B61AB"))))
+ '(org-roam-link-current ((t (:foreground "#57287C"))))
+)
+
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Open
     (map! :leader
@@ -53,7 +61,7 @@
 
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Insert
-    (map! :after org
+    (map! :after org-roam
           :leader
           :prefix "i"
           :desc "timestamp" "T" #'org-time-stamp
@@ -61,13 +69,14 @@
           :desc "note" "n" #'org-roam-capture
     )
     ;; Notes
-    (map! :after org
+    (map! :after org-roam
+          :map org-roam-mode-map
           :leader
           :prefix "n"
           :desc "org-roam" "r" #'org-roam
           :desc "org-roam-insert" "i" #'org-roam-insert
           :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-          :desc "org-roam-find-file" "f" #'org-roam-find-file
+          :desc "Quick find Roam file" "q" #'org-roam-find-file
           :desc "org-roam-server-mode" "g" #'org-roam-server-mode
           :desc "org-journal" "j" #'org-journal-new-entry
           :desc "helm-org-rifle" "." #'helm-org-rifle
