@@ -68,7 +68,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- -sb: selected background
     -- -sf: selected foreground
     
-    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Righteous-48' -l 9 -nb '#101014' -nf '#cccccc' -sb '#0B5748' -sf '#B38019'")
+    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Lacquer-48' -l 9 -nb '#101014' -nf '#cccccc' -sb '#0B5748' -sf '#B38019'")
     --, ((modm,               xK_p     ), spawn "dmenu_run -fn 'Monofur Nerd Font Mono-60' -l 9 -nb '#000000' -nf '#cccccc' -sb '#0B5748' -sf '#B38019'")
 
     -- launch gmrun
@@ -128,6 +128,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_F2), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
     , ((modm, xK_F3), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
 
+    -- Standby
+    -- Set to modmask + End
+    , ((modm, xK_End), spawn "sudo pm-suspend")
+    
     -- Screenshots
     -- Set to modmask + S
     , ((modm, xK_s), spawn "scrot 'Screenshot_%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Screenshots/'")
