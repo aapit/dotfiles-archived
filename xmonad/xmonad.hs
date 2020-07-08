@@ -10,6 +10,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
+--import XMonad.Actions.Volume
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -114,6 +115,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
+    -- Volume control
+    -- Set to modmask + (F1 - F3)
+    , ((modm, xK_F1), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((modm, xK_F2), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
+    , ((modm, xK_F3), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+
+    
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
