@@ -121,6 +121,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_F2), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((modm, xK_F3), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
 
+    -- Screenshots
+    -- Set to modmask + S
+    , ((modm, xK_s), spawn "scrot -e 'mv $f ~/Screenshots/'")
     
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
