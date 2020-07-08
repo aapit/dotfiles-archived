@@ -97,6 +97,10 @@
 (setq org-todo-keywords
   '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 
+(setq org-agenda-custom-commands
+      '(("d" "Today" agenda "Stuff for today"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))))
+
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")

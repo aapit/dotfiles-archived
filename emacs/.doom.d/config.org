@@ -1,10 +1,7 @@
 # -*- mode: org; coding: utf-8; -*-
  #+TODO: ACTIVE | DISABLED
  #+STARTUP: indent
-
-* Caveats
-Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
-Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
+ #+AUTHOR: David Spreekmeester @aapit
 
 * Initialization
  #+BEGIN_SRC emacs-lisp
@@ -146,6 +143,12 @@ which effectively runs the generated =config.el= from the =init.el= context.
 (setq org-todo-keywords
   '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 #+END_SRC
+** Performance
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+      '(("d" "Today" agenda "Stuff for today"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))))
+#+END_SRC
 * Org-roam
 ** General
 #+BEGIN_SRC emacs-lisp
@@ -276,6 +279,11 @@ which effectively runs the generated =config.el= from the =init.el= context.
 (setq undo-fu-session-file-limit 150)
 #+END_SRC
 
+
+* ---
+* Caveats
+Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
+Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
 
 * Disabled
 #+begin_example elisp
