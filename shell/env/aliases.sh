@@ -13,6 +13,9 @@ alias tree-whales='br --sizes --show-git-info --hidden --show-gitignored --whale
 alias ls='exa --long --level=2 --all --group-directories-first --modified --git'
 alias lsl='exa --long --tree --level=2 --all --group-directories-first --group --modified --git --header'
 
+# Fd-find
+alias f='fdfind'
+
 # Sourcing
 alias src='. ~/.profile'
 alias alias-edit="vim ~/Scripts/dotfiles/shell/env/aliases.sh && . ~/Scripts/dotfiles/shell/env/aliases.sh"
