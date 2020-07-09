@@ -99,7 +99,9 @@ which effectively runs the generated =config.el= from the =init.el= context.
   (map! :map org-mode-map
         :leader
         :prefix "e"
-        :desc "html export" "h" #'org-html-export-to-html
+        :desc "html export (buffer)" "h" #'org-html-export-to-html
+        :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
+        :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
   )
   (map!
         :leader
@@ -135,20 +137,52 @@ which effectively runs the generated =config.el= from the =init.el= context.
     )
 ))
 #+END_SRC
-** Evil mode
-#+BEGIN_SRC emacs-lisp
-;(with-eval-after-load 'evil-maps
-;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
-;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
-#+END_SRC
 * Org
 :PROPERTIES:
 :VISIBILITY: content
 :END:
+** Agenda
+*** Custom Agenda views
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+    '(
+        ("b" "Both" agenda "Universeel"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+        ("z" "Zelf" agenda "Persoonlijk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
+        ("g" "GRRR" agenda "Werk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+    )
+)
+#+END_SRC
+** Export
+Setting some non-insane defaults for PDF export and such.
+#+BEGIN_SRC emacs-lisp :results silent
+(after! org
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+)
+#+END_SRC
+From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
+
 ** General
 #+BEGIN_SRC emacs-lisp
 ;; `org-directory' must be set before org loads.
 (setq org-directory "~/Nextcloud/org-mode/notes/")
+#+END_SRC
+** Performance
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-dim-blocked-tasks nil)
+(setq org-agenda-inhibit-startup nil)
+(setq org-agenda-use-tag-inheritance nil)
+(setq org-agenda-ignore-drawer-properties '(visibility category))
+(setq org-agenda-sticky t)
+#+END_SRC
+** Todo
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords
+  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 #+END_SRC
 ** UI
 #+BEGIN_SRC emacs-lisp
@@ -164,32 +198,6 @@ which effectively runs the generated =config.el= from the =init.el= context.
 
 ;; Follow output
 (setq compilation-scroll-output t)
-#+END_SRC
-** Todo
-#+BEGIN_SRC emacs-lisp
-(setq org-todo-keywords
-  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
-#+END_SRC
-** Custom Agenda views
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-    '(
-        ("b" "Both" agenda "Universeel"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-        ("z" "Zelf" agenda "Persoonlijk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
-        ("g" "GRRR" agenda "Werk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-    )
-)
-#+END_SRC
-** Performance
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-dim-blocked-tasks nil)
-(setq org-agenda-inhibit-startup nil)
-(setq org-agenda-use-tag-inheritance nil)
-(setq org-agenda-ignore-drawer-properties '(visibility category))
-(setq org-agenda-sticky t)
 #+END_SRC
 * Org-roam
 :PROPERTIES:
@@ -230,7 +238,7 @@ which effectively runs the generated =config.el= from the =init.el= context.
       (setq org-roam-capture-templates
             `(("d" "default" plain #'org-roam-capture--get-point "%?"
                :file-name "${slug}"
-               :head "%(concat \"#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+               :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
                :unnarrowed t))
       )
 )
@@ -349,6 +357,13 @@ Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
+** Evil mode
+#+BEGIN_example emacs-lisp
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
+  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
+#+END_example
+** Various
 #+begin_example elisp
 (defadvice text-scale-decrease (around all-buffers (arg) activate)
     (dolist (buffer ("Org-roam Sidebar"))

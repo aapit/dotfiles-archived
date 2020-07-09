@@ -58,6 +58,8 @@
         :leader
         :prefix "e"
         :desc "html export" "h" #'org-html-export-to-html
+        :desc "export others (pdf, etc)" "o" #'org-export-dispatch
+        :desc "pdf" "p" #'org-latex-export-to-pdf
   )
   (map!
         :leader
@@ -95,8 +97,34 @@
 ;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
 ;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
 
+(setq org-agenda-custom-commands
+    '(
+        ("b" "Both" agenda "Universeel"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+        ("z" "Zelf" agenda "Persoonlijk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
+        ("g" "GRRR" agenda "Werk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+    )
+)
+
+(after! org
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+)
+
 ;; `org-directory' must be set before org loads.
 (setq org-directory "~/Nextcloud/org-mode/notes/")
+
+(setq org-agenda-dim-blocked-tasks nil)
+(setq org-agenda-inhibit-startup nil)
+(setq org-agenda-use-tag-inheritance nil)
+(setq org-agenda-ignore-drawer-properties '(visibility category))
+(setq org-agenda-sticky t)
+
+(setq org-todo-keywords
+  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 
 (setq org-agenda-span 'week)
 
@@ -110,26 +138,6 @@
 
 ;; Follow output
 (setq compilation-scroll-output t)
-
-(setq org-todo-keywords
-  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
-
-(setq org-agenda-custom-commands
-    '(
-        ("b" "Both" agenda "Universeel"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-        ("z" "Zelf" agenda "Persoonlijk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
-        ("g" "GRRR" agenda "Werk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-    )
-)
-
-(setq org-agenda-dim-blocked-tasks nil)
-(setq org-agenda-inhibit-startup nil)
-(setq org-agenda-use-tag-inheritance nil)
-(setq org-agenda-ignore-drawer-properties '(visibility category))
-(setq org-agenda-sticky t)
 
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
@@ -159,7 +167,7 @@
       (setq org-roam-capture-templates
             `(("d" "default" plain #'org-roam-capture--get-point "%?"
                :file-name "${slug}"
-               :head "%(concat \"#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+               :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
                :unnarrowed t))
       )
 )
