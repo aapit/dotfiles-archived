@@ -37,6 +37,7 @@
         :prefix "o"
         :desc "Shell" "z" #'shell
         :desc "Term" "t" #'term
+        :desc "Agenda" "a" #'org-agenda
     )
 
     ;; Quick window split shortcuts
@@ -50,36 +51,43 @@
 (add-hook 'emacs-startup-hook (lambda ()
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup)
-
+        :n "M-k" #'org-metaup
+  )
   ;; Export
   (map! :map org-mode-map
         :leader
         :prefix "e"
-        :desc "html export" "h" #'org-html-export-to-html)
+        :desc "html export" "h" #'org-html-export-to-html
+  )
+  (map!
+        :leader
+        :desc "Agenda" "a" #'org-agenda
+  )
 ))
 
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Insert
     (map! :after org-roam
+          :map org-mode-map
           :leader
           :prefix "i"
-          :desc "timestamp" "T" #'org-time-stamp
-          :desc "timestamp inactive" "t" #'org-time-stamp-inactive
-          :desc "note" "n" #'org-roam-capture
+          :desc "Timestamp" "T" #'org-time-stamp
+          :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
     )
     ;; Notes
     (map! :after org-roam
           :map org-roam-mode-map
           :leader
           :prefix "n"
-          :desc "org-roam" "r" #'org-roam
-          :desc "org-roam-insert" "i" #'org-roam-insert
-          :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-          :desc "Quick find Roam file" "q" #'org-roam-find-file
+          :desc "Roam sidebar" "r" #'org-roam
+          :desc "Find / insert note" "q" #'org-roam-find-file
           :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-          :desc "org-journal" "j" #'org-journal-new-entry
           :desc "helm-org-rifle" "." #'helm-org-rifle
+    )
+    (map! :after org-roam
+          :map org-roam-mode-map
+          :leader
+          :desc "Journal" "j" #'org-journal-new-entry
     )
 ))
 
@@ -107,8 +115,21 @@
   '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 
 (setq org-agenda-custom-commands
-      '(("d" "Today" agenda "Stuff for today"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))))
+    '(
+        ("b" "Both" agenda "Universeel"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+        ("z" "Zelf" agenda "Persoonlijk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
+        ("g" "GRRR" agenda "Werk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+    )
+)
+
+(setq org-agenda-dim-blocked-tasks nil)
+(setq org-agenda-inhibit-startup nil)
+(setq org-agenda-use-tag-inheritance nil)
+(setq org-agenda-ignore-drawer-properties '(visibility category))
+(setq org-agenda-sticky t)
 
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
