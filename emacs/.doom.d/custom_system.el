@@ -22,10 +22,10 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#1E2029" "#50fa7b"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1E2029" "#565761"))
  '(objed-cursor-color "#ff5555")
- '(org-journal-date-format "%Y-%m-%d, %A" t)
- '(org-journal-date-prefix "#+title: " t)
- '(org-journal-dir "~/Nextcloud/org-mode/journal/" t)
- '(org-journal-file-format "%Y-%m-%d.org" t)
+ '(org-journal-date-format "%Y-%m-%d, %A")
+ '(org-journal-date-prefix "#+title: ")
+ '(org-journal-dir "~/Nextcloud/org-mode/journal/")
+ '(org-journal-file-format "%Y-%m-%d.org")
  '(package-selected-packages
    (quote
     (counsel-fd drag-stuff yaml-mode emmet-mode web-mode fish-mode company-shell flycheck-cython cython-mode lsp-python-ms poetry conda pyenv-mode pipenv python-pytest nose py-isort pyimport anaconda-mode hack-mode php-extras php-refactor-mode ox-pandoc ox-hugo org-attach company-org-roam org-roam-protocol evil-org-agenda evil-org org-pdftools org-clock org-crypt org-superstar toc-org evil-markdown npm-mode js2-refactor xref-js2 tide typescript-mode rjsx-mode js2-mode counsel-jq json-mode dante buttercup elisp-demos flycheck-cask elisp-mode evil-magit magit-gitflow magit-todos github-review forge define-word dash-docs helm-xref ivy-xref dumb-jump eros dap-ui-mode dap-mode realgud-trepan-ni realgud jinja2-mode ansible flycheck-posframe flycheck-popup-tip flycheck undo-fu-session undo-fu fd-dired dired-x all-the-icons-dired ranger diff-hl diredfl dired-rsync dired auto-yasnippet yasnippet evil-vimish-fold exato evil-visualstar evil-traces evil-snipe evil-nerd-commenter evil-quick-diff evil-exchange evil-embrace evil-easymotion mixed-pitch git-gutter treemacs-persp treemacs-magit treemacs-projectile treemacs-evil treemacs volatile-highlights evil-goggles evil-anzu anzu doom-modeline hl-todo solaire-mode doom-themes ivy-prescient flx ivy-posframe wgrep counsel-projectile counsel all-the-icons-ivy ivy-rich ivy company-dict company-box company-prescient company-tng php-mode disable-mouse linum-relative org-rifle helm-org-rifle org-ql multiple-cursors-core smart-mode-line org-journal deft org-roam-server)))
@@ -34,7 +34,13 @@
    ["#282a36" "#ff5555" "#50fa7b" "#f1fa8c" "#61bfff" "#ff79c6" "#8be9fd" "#f8f8f2"])
  '(safe-local-variable-values
    (quote
-    ((eval add-hook
+    ((org-pm-perc . 1.25)
+     (org-testing-perc . 1.15)
+     (org-pm-perc2 . 1.15)
+     (org-pm-perc2 . 1\.15N)
+     (bla . hoi)
+     (org-pm-perc . 1.15)
+     (eval add-hook
            (quote after-save-hook)
            (lambda nil
              (org-babel-tangle))

@@ -102,7 +102,7 @@ Default is Sunday (=0=).
   )
 ))
 #+END_SRC
-*** Org-roam related
+*** Org-roam related :needy:
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
     ;; Insert
@@ -270,24 +270,24 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 :VISIBILITY: folded
 :END:
 #+BEGIN_SRC emacs-lisp
-;(after! 'deft
-;  (deft-recursive t)
-;  (deft-use-filter-string-for-filename t)
-;  (deft-default-extension "org")
-;  (deft-directory "~/Nextcloud/org-mode/")
-;)
-;(use-package deft
-;  :after org
-  ;:bind
-  ;("C-c n d" . deft)
-;  :custom
-;  (deft-recursive t)
-;  (deft-use-filter-string-for-filename t)
-;  (deft-default-extension "org")
-;  (deft-directory "~/Nextcloud/org-mode/")
-;  :config
-;  (setq deft-file-limit 200)
-;)
+(after! 'deft
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory "~/Nextcloud/org-mode/")
+)
+(use-package deft
+  :after org
+ ;:bind
+ ;("C-c n d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory "~/Nextcloud/org-mode/")
+  :config
+  (setq deft-file-limit 200)
+)
 #+END_SRC
 * PHP
 :PROPERTIES:
