@@ -1,5 +1,21 @@
-;;; init.el -*- lexical-binding: t; -*-
+#+AUTHOR: David Spreekmeester @aapit
+#+DESCRIPTION: =init.org= generates =init.el= on save.
+* Documentation
+Run =doom sync= after modifications
 
+NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
+     documentation. There you'll find a "Module Index" link where you'll find
+     a comprehensive list of Doom's modules and what flags they support.
+
+NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
+     'C-c c k' for non-vim users) to view its documentation. This works on
+     flags as well (those symbols that start with a plus).
+* Init
+#+BEGIN_SRC emacs-lisp :tangle init.el :results silent
+;;; init.el -*- lexical-binding: t; -*-
+#+END_SRC
+* Doom modules
+#+BEGIN_SRC emacs-lisp :tangle yes :results silent
 (doom! :input
        ;;chinese
        ;;japanese
@@ -164,5 +180,13 @@
        ;;literate
        (default +bindings +smartparens))
 
+#+END_SRC
+* 'Customize' (Emacs custom system)
+#+BEGIN_SRC emacs-lisp :tangle yes :results silent
 (setq custom-file (concat doom-private-dir "custom_system.el"))
 (load! custom-file)
+#+END_SRC
+* Local Variables
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+# End:

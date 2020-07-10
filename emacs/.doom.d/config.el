@@ -41,11 +41,11 @@
     )
 
     ;; Quick window split shortcuts
-    (map! :leader
-        :prefix "w"
-        :desc "Split Hori" "-" #'evil-window-split
-        :desc "Split Vert" "\\" #'evil-window-vsplit
-    )
+;    (map! :leader
+;        :prefix "w"
+;        :desc "Split Hori" "-" #'evil-window-split
+;        :desc "Split Vert" "\\" #'evil-window-vsplit
+;    )
 ))
 
 (add-hook 'emacs-startup-hook (lambda ()
@@ -57,9 +57,9 @@
   (map! :map org-mode-map
         :leader
         :prefix "e"
-        :desc "html export" "h" #'org-html-export-to-html
-        :desc "export others (pdf, etc)" "o" #'org-export-dispatch
-        :desc "pdf" "p" #'org-latex-export-to-pdf
+        :desc "html export (buffer)" "h" #'org-html-export-to-html
+        :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
+        :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
   )
   (map!
         :leader
@@ -92,10 +92,6 @@
           :desc "Journal" "j" #'org-journal-new-entry
     )
 ))
-
-;(with-eval-after-load 'evil-maps
-;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
-;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
 
 (setq org-agenda-custom-commands
     '(

@@ -32,6 +32,13 @@
  '(pdf-view-midnight-colors (cons "#f8f8f2" "#282a36"))
  '(rustic-ansi-faces
    ["#282a36" "#ff5555" "#50fa7b" "#f1fa8c" "#61bfff" "#ff79c6" "#8be9fd" "#f8f8f2"])
+ '(safe-local-variable-values
+   (quote
+    ((eval add-hook
+           (quote after-save-hook)
+           (lambda nil
+             (org-babel-tangle))
+           nil t))))
  '(vc-annotate-background "#282a36")
  '(vc-annotate-color-map
    (list
@@ -68,5 +75,7 @@
  '(org-level-8 ((t (:weight regular :foreground "#AE66B6"))))
  '(org-link ((t (:underline nil))))
  '(org-roam-backlink ((t (:size 0.8))))
+ '(org-roam-link ((t (:foreground "#8B61AB"))))
+ '(org-roam-link-current ((t (:foreground "#57287C"))))
  '(org-table ((t (:weight regular :foreground "#dddddd"))))
  '(org-verbatim ((t (:foreground "cyan")))))

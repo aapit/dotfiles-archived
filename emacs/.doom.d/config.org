@@ -1,5 +1,4 @@
 # -*- mode: org; coding: utf-8; -*-
- #+TODO: ACTIVE | DISABLED
  #+AUTHOR: David Spreekmeester @aapit
 
 * Initialization
@@ -63,11 +62,6 @@ Default is Sunday (=0=).
  #+END_SRC
 
 ** Keys
-I use one of the /standard hooks/ =emacs-startup-hook= to delay setting the key maps,
-since the =map= function isn't available at the point of loading.
-This is because of the tangled Org-babel config,
-which effectively runs the generated =config.el= from the =init.el= context.
-
 *** General functions
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
@@ -87,7 +81,6 @@ which effectively runs the generated =config.el= from the =init.el= context.
     )
 ))
 #+END_SRC
-
 *** Org-mode related
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
@@ -121,15 +114,15 @@ which effectively runs the generated =config.el= from the =init.el= context.
           :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
     )
     ;; Notes
-    (map! :after org-roam
-          :map org-roam-mode-map
-          :leader
-          :prefix "n"
-          :desc "Roam sidebar" "r" #'org-roam
-          :desc "Find / insert note" "q" #'org-roam-find-file
-          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-          :desc "helm-org-rifle" "." #'helm-org-rifle
-    )
+;    (map! :after org-roam
+;          :map org-roam-mode-map
+;          :leader
+;          :prefix "n"
+;          :desc "Roam sidebar" "r" #'org-roam
+;          :desc "Find / insert note" "q" #'org-roam-find-file
+;          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
+;          :desc "helm-org-rifle" "." #'helm-org-rifle
+;    )
     (map! :after org-roam
           :map org-roam-mode-map
           :leader
@@ -223,7 +216,6 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
   (setq org-journal-enable-agenda-integration t)
 )
 #+END_SRC
-*** TODO moet deze niet in =packages.el=?
 ** Capture templates
 #+BEGIN_SRC emacs-lisp
 (after! org-roam
@@ -329,7 +321,6 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 #+BEGIN_SRC emacs-lisp
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
 #+END_SRC
-
 * Undo
 :PROPERTIES:
 :VISIBILITY: folded
@@ -352,16 +343,16 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 :END:
 Apparently, =org-babel= interprets source blocks with type =emacs-lisp=, but not with =elisp=.
 Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt-tangle-correctly][blog post on org-babel incorrect tangling]].
-
 * Disabled
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
 ** Evil mode
-#+BEGIN_example emacs-lisp
 (with-eval-after-load 'evil-maps
-  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
-  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
+#+BEGIN_example emacs-lisp
+;;(with-eval-after-load 'evil
+;;  (define-key evil-motion-state-map (kbd ":") 'evil-repeat-find-char)
+;;  (define-key evil-motion-state-map (kbd ";") 'evil-ex))
 #+END_example
 ** Various
 #+begin_example elisp
@@ -453,3 +444,7 @@ Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt
           )
 )
 #+end_example
+* Local Variables
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+# End:

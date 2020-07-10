@@ -2,6 +2,8 @@
 (package! org-journal)
 (package! disable-mouse)
 (package! helm-org-rifle)
+(package! simple-httpd)
+(package! org-roam-server)
 
 ;; no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
