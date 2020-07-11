@@ -12,7 +12,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
-import XMonad.Layout.Spiral
+import XMonad.Layout.Spacing
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -20,11 +20,11 @@ import qualified Data.Map        as M
 myTerminal      = "st"
 
 -- Width of the window border in pixels.
-myBorderWidth   = 2
+myBorderWidth   = 18
 
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#dd2255"
+myFocusedBorderColor = "#550733"
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -189,22 +189,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
--- Layouts:
-
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = avoidStruts (spiral (6/7)) |||
-    noBorders (fullscreenFull Full)
-
---        layoutHook         = smartBorders Full ||| myLayout,
---    ThreeColMid 1 (3/100) (1/2) |||
---    Tall 1 (3/100) (1/2) |||
+myLayout =
+  avoidStruts (smartBorders $ smartSpacing 10 $ ThreeColMid 1 (3/100) (1/2)) |||
+  noBorders (fullscreenFull Full)
+  --avoidStruts (spacing 20 $ Mirror(Grid)) |||
 
 tabConfig = defaultTheme {
     activeBorderColor = "#000000",
@@ -215,35 +203,7 @@ tabConfig = defaultTheme {
     inactiveColor = "#000000"
 }
 
---myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
---  where
-     -- default tiling algorithm partitions the screen into two panes
---     tiled   = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
---     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
---     ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
---     delta   = 3/100
-
 ------------------------------------------------------------------------
--- Window rules:
-
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
@@ -318,7 +278,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = smartBorders $ myLayout,
+        layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
