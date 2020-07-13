@@ -20,10 +20,8 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                                           "--normal","#cccccc",
                                           "--high","#dd4444",
                                           "--low","lightblue"] 36000
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","#44dd66","--high","#dd4444"] 10
                     , Run Memory
-                        [ "-t", "RAM <icon=memory-icon_24.xpm/> <usedratio>%"] 10
+                        [ "-t", "RAM <usedratio>%"] 10
                     , Run DynNetwork
                             [ "-t", "<icon=network-icon_24.xpm/> <icon=actions-arrow-down-icon_24.xpm/><rx>K <icon=actions-arrow-up-icon_24.xpm/><tx>K"
                             ] 10
@@ -39,24 +37,24 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                                     , "-o", "<icon=battery-full-icon_24.xpm/>"
                                     ] 5
                     , Run CoreTemp
-                            [ "-t", "<icon=thermometer-icon_24.xpm/> <core0>°C"
+                            [ "-t", "<core0>°C"
                             , "-H", "60", "-h", "red"
                             , "-L", "40", "-l", "lightblue"
                             , "-n", "white"
                             ] 50
                     , Run Cpu
-                        [ "-t", "<icon=gnome_cpu_24.xpm/> <total>%"
+                        [ "-t", "<total>%"
                         , "-p", "3"
-                        , "-H", "50", "-h", "red"
+                        , "-H", "50", "-h", "dd4444"
                         , "-L", "3"
                         , "-n", "#55bb99"
                         ] 10
                     , Run DiskU
-                        [ ("/", "<icon=harddisk-icon_24.xpm/> -<freep>%") ]
+                        [ ("/", "-<freep>%") ]
                         [] 20
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%dynnetwork% | Batt %battery% | HD %disku% | %memory% | CPU %cpu% | Core %coretemp% }\
+       , template = "%dynnetwork% | Batt %battery% | HD %disku% | CPU %cpu% %coretemp% | %memory% }\
                     \{ <icon=sun-rain-icon_24.xpm/> %EHAM% | <fc=#dd88dd>%date%</fc> "
        }
