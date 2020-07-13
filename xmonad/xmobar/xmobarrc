@@ -23,7 +23,7 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                     , Run Memory
                         [ "-t", "RAM <usedratio>%"] 10
                     , Run DynNetwork
-                            [ "-t", "<icon=network-icon_24.xpm/> <icon=actions-arrow-down-icon_24.xpm/><rx>K <icon=actions-arrow-up-icon_24.xpm/><tx>K"
+                            [ "-t", "<icon=actions-arrow-down-icon_24.xpm/><rx>K <icon=actions-arrow-up-icon_24.xpm/><tx>K"
                             ] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %_d %b %k:%M" "date" 10
@@ -31,7 +31,7 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                                     ["-t", "<acstatus>"
                                     , "-L", "10", "-H", "80"
                                     , "-l", "red", "-h", "#55bb99"
-                                    , "--", "-O", "Ch", "-o", "<left>%"
+                                    , "--", "-O", "Plug", "-o", "<left>%"
                                     , "-O", "<icon=battery-plug-icon_24.xpm/>"
                                     , "-i", "<icon=battery-plug-icon_24.xpm/>"
                                     , "-o", "<icon=battery-full-icon_24.xpm/>"
@@ -55,6 +55,6 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%dynnetwork% | Batt %battery% | HD %disku% | CPU %cpu% %coretemp% | %memory% }\
+       , template = " Batt %battery% | HD %disku% | CPU %cpu% %coretemp% | %memory% | %dynnetwork% }\
                     \{ <icon=sun-rain-icon_24.xpm/> %EHAM% | <fc=#dd88dd>%date%</fc> "
        }
