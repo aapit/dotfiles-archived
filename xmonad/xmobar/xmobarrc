@@ -32,7 +32,7 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                     , Run BatteryP ["BAT0"]
                                     ["-t", "<acstatus>"
                                     , "-L", "10", "-H", "80"
-                                    , "-l", "red", "-h", "#228844"
+                                    , "-l", "red", "-h", "#55bb99"
                                     , "--", "-O", "Ch", "-o", "<left>%"
                                     , "-O", "<icon=battery-plug-icon_24.xpm/>"
                                     , "-i", "<icon=battery-plug-icon_24.xpm/>"
@@ -49,7 +49,7 @@ Config { font = "xft:Roboto Mono:style=Thin:pixelsize=40:antialias=true:hinting=
                         , "-p", "3"
                         , "-H", "50", "-h", "red"
                         , "-L", "3"
-                        , "-n", "green"
+                        , "-n", "#55bb99"
                         ] 10
                     , Run DiskU
                         [ ("/", "<icon=harddisk-icon_24.xpm/> -<freep>%") ]
