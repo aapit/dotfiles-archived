@@ -21,6 +21,7 @@ alias src='. ~/.profile'
 alias alias-edit="vim ~/Scripts/dotfiles/shell/env/aliases.sh && . ~/Scripts/dotfiles/shell/env/aliases.sh"
 
 # Editing and reading
+alias e="emacsclient -c -n"
 alias v="nvim"
 alias vim="nvim"
 alias cat='bat'
