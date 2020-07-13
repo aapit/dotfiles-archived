@@ -222,7 +222,6 @@ myLogHook = return ()
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
         spawnOnce "compton &"
---        spawnOnce "killall xmobar"
         spawnOnce "killall trayer; trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 15 --height 57 --transparent true --alpha 0 --tint 0x101010 --padding 10 &"
         spawnOnce "blueman-applet &"
         spawnOnce "nextcloud --background &"
