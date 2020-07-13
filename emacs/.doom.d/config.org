@@ -5,7 +5,7 @@
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
- #+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
  #+END_SRC
 * General
@@ -16,18 +16,18 @@
 In my geographic area, the week starts on Monday (=1=).
 Default is Sunday (=0=).
 
- #+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq calendar-week-start-day 1)
 (setq
  display-time-format "%H:%M"
  display-time-24hr-format t)
  #+END_SRC
 ** Secrets
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (load! "secrets.el" doom-private-dir)
 #+END_SRC
 ** Browser
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 #+END_SRC
@@ -36,13 +36,13 @@ Default is Sunday (=0=).
 :VISIBILITY: content
 :END:
 ** Mouse
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (add-hook 'emacs-startup-hook (lambda ()
     (global-disable-mouse-mode)
 ))
 #+END_SRC
 ** Appearance
- #+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
@@ -61,124 +61,8 @@ Default is Sunday (=0=).
 )
  #+END_SRC
 
-** Keys
-*** General functions
-#+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-startup-hook (lambda ()
-    ;; Open
-    (map! :leader
-        :prefix "o"
-        :desc "Shell" "z" #'shell
-        :desc "Term" "t" #'term
-        :desc "Agenda" "a" #'org-agenda
-    )
-
-    ;; Quick window split shortcuts
-    (map! :leader
-        :prefix "w"
-        :desc "Split Hori" "-" #'evil-window-split
-        :desc "Split Vert" "\\" #'evil-window-vsplit
-    )
-))
-#+END_SRC
-*** Org-mode related
-#+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-startup-hook (lambda ()
-  (map! :map org-mode-map
-        :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup
-  )
-  ;; Export
-  (map! :map org-mode-map
-        :leader
-        :prefix "e"
-        :desc "html export (buffer)" "h" #'org-html-export-to-html
-        :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
-        :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
-  )
-  (map!
-        :leader
-        :desc "Agenda" "a" #'org-agenda
-  )
-))
-#+END_SRC
-*** Org-roam related :needy:
-#+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-startup-hook (lambda ()
-    ;; Insert
-    (map! :after org-roam
-          :map org-mode-map
-          :leader
-          :prefix "i"
-          :desc "Timestamp" "T" #'org-time-stamp
-          :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
-    )
-    ;; Notes
-;    (map! :after org-roam
-;          :map org-roam-mode-map
-;          :leader
-;          :prefix "n"
-;          :desc "Roam sidebar" "r" #'org-roam
-;          :desc "Find / insert note" "q" #'org-roam-find-file
-;          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-;          :desc "helm-org-rifle" "." #'helm-org-rifle
-;    )
-    (map! :after org-roam
-          :map org-roam-mode-map
-          :leader
-          :desc "Journal" "j" #'org-journal-new-entry
-    )
-))
-#+END_SRC
-* Org
-:PROPERTIES:
-:VISIBILITY: content
-:END:
-** Agenda
-*** Custom Agenda views
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-    '(
-        ("b" "Both" agenda "Universeel"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-        ("z" "Zelf" agenda "Persoonlijk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
-        ("g" "GRRR" agenda "Werk"
-         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
-    )
-)
-#+END_SRC
-** Export
-Setting some non-insane defaults for PDF export and such.
-#+BEGIN_SRC emacs-lisp :results silent
-(after! org
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
-    (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
-)
-#+END_SRC
-From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
-
-** General
-#+BEGIN_SRC emacs-lisp
-;; `org-directory' must be set before org loads.
-(setq org-directory "~/Nextcloud/org-mode/notes/")
-#+END_SRC
-** Performance
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-dim-blocked-tasks nil)
-(setq org-agenda-inhibit-startup nil)
-(setq org-agenda-use-tag-inheritance nil)
-(setq org-agenda-ignore-drawer-properties '(visibility category))
-(setq org-agenda-sticky t)
-#+END_SRC
-** Todo
-#+BEGIN_SRC emacs-lisp
-(setq org-todo-keywords
-  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
-#+END_SRC
-** UI
-#+BEGIN_SRC emacs-lisp
+*** Org-related
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq org-agenda-span 'week)
 
 ;; Hide /emphasis markers for italics/ in org-mode
@@ -192,21 +76,133 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 ;; Follow output
 (setq compilation-scroll-output t)
 #+END_SRC
+** Keys
+*** General functions
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+;; Open
+(map! :leader
+    :prefix "o"
+    :desc "Shell" "z" #'shell
+    :desc "Term" "t" #'term
+)
+
+;; Quick window split shortcuts
+(map! :leader
+    :prefix "w"
+    :desc "Split Hori" "-" #'evil-window-split
+    :desc "Split Vert" "\\" #'evil-window-vsplit
+)
+#+END_SRC
+*** Org-mode related
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(map! :after evil-org
+    :map evil-org-mode-map
+    :n "M-j" #'org-metadown
+    :n "M-k" #'org-metaup
+)
+;; Export
+(map! :after evil-org
+    :map org-mode-map
+    :leader
+    :prefix "e"
+    :desc "html export (buffer)" "h" #'org-html-export-to-html
+    :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
+    :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
+)
+(map! :after evil-org-agenda
+    :leader
+    :desc "Agenda" "a" #'org-agenda
+)
+#+END_SRC
+*** Org-roam related
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+;; Insert
+(map! :after org-roam
+        :map org-roam-mode-map
+        :leader
+        :prefix "i"
+        :desc "Timestamp" "T" #'org-time-stamp
+        :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
+        :desc "P O E P" "P" #'org-time-stamp-inactive
+)
+;; Notes
+(map! :after org-roam
+        :map org-mode-map
+        :leader
+        :prefix "n"
+        :desc "Find, Insert note" "q" #'org-roam-find-file
+        :desc "Graph server" "g" #'org-roam-server-mode
+        :desc "Rifle" "." #'helm-org-rifle
+)
+(map! :after org-roam
+        :leader
+        :desc "Journal" "j" #'org-journal-new-entry
+)
+#+END_SRC
+* Org
+:PROPERTIES:
+:VISIBILITY: content
+:END:
+** Agenda
+*** Custom Agenda views
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(setq org-agenda-custom-commands
+    '(
+        ("b" "Both" agenda "Universeel"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org" "~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+        ("z" "Zelf" agenda "Persoonlijk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-thuis.org"))))
+        ("g" "GRRR" agenda "Werk"
+         ((org-agenda-files '("~/Nextcloud/org-mode/notes/todo-grrr.org"))))
+    )
+)
+#+END_SRC
+** Export
+Setting some non-insane defaults for PDF export and such.
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(after! org
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
+    (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+)
+#+END_SRC
+From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
+
+** General
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+;; `org-directory' must be set before org loads.
+(setq org-directory "~/Nextcloud/org-mode/notes/")
+#+END_SRC
+** Performance
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(after! org
+    (setq org-agenda-dim-blocked-tasks nil)
+    (setq org-agenda-inhibit-startup nil)
+    (setq org-agenda-use-tag-inheritance nil)
+    (setq org-agenda-ignore-drawer-properties '(visibility category))
+    (setq org-agenda-sticky t)
+)
+#+END_SRC
+** Todo
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(setq org-todo-keywords
+    '((sequence "TODO" "NEXT" "DONE" "PROJ")))
+#+END_SRC
 * Org-roam
 :PROPERTIES:
 :VISIBILITY: content
 :END:
 ** General
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")
 #+END_SRC
 ** Journal
-#+BEGIN_SRC emacs-lisp
-(use-package org-journal
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+(use-package! org-journal
   :after org
-  :defer
+  :defer t
   :custom
   (org-journal-dir "~/Nextcloud/org-mode/journal/")
   (org-journal-date-prefix "#+title: ")
@@ -217,7 +213,7 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 )
 #+END_SRC
 ** Capture templates
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (after! org-roam
       (setq org-roam-ref-capture-templates
             '(("r" "ref" plain (function org-roam-capture--get-point)
@@ -237,10 +233,10 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 #+END_SRC
 
 ** Graph / Server
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
 
-(use-package simple-httpd
+(use-package! simple-httpd
   :defer t
   :after org
   :config
@@ -250,13 +246,13 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 ;;(httpd-start)
 
 ;;  :ensure nil
-(use-package org-roam-server
+(use-package! org-roam-server
   :defer t
   :after org
   :load-path "~/Scripts/note/org-roam-server")
 #+END_SRC
 ** Search
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 ;; org-ql for queries
 ;(use-package org-ql)
 
@@ -269,15 +265,16 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (after! 'deft
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
   (deft-default-extension "org")
   (deft-directory "~/Nextcloud/org-mode/")
 )
-(use-package deft
+(use-package! deft
   :after org
+  :defer t
  ;:bind
  ;("C-c n d" . deft)
   :custom
@@ -293,19 +290,19 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 ;; php
-(use-package phpactor
+(use-package! phpactor
   :mode "\\.php\\'"
   :defer t
 )
-(use-package company-phpactor
+(use-package! company-phpactor
   :mode "\\.php\\'"
   :defer t
 )
 ;;(composer-setup-managed-phar)
 ;;(phpactor-install-or-update)
-(use-package php-mode
+(use-package! php-mode
   :mode "\\.php\\'"
   :defer t
   :hook ((php-mode . (lambda () (set (make-local-variable 'company-backends)
@@ -318,7 +315,7 @@ From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
-#+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
 #+END_SRC
 * Undo
@@ -402,38 +399,40 @@ Also see this [[https://blog.thomasheartman.com/posts/org-babel-load-file-doesnt
 
 ** Bullets
 #+begin_example elisp
-;(after! 'org
-;    (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
-;)
-;(use-package org-bullets
-;  :hook (org-mode . org-bullets-mode)
-;  :config
-;  (setq org-bullets-bullet-list '("◉" "⁑" "⁂" "❖" "✮" "✱" "✸")))
+(after! 'org
+    (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+)
+(use-package! org-bullets
+  :defer t
+  :hook (org-mode . org-bullets-mode)
+  :config
+  (setq org-bullets-bullet-list '("◉" "⁑" "⁂" "❖" "✮" "✱" "✸")))
 
-;(straight-use-package 'org-bullets)
-;(use-package org-bullets
-;  :preface
-;  (defun nasy/org-bullets-mode ()
-;    (org-bullets-mode 1))
-;  :hook ((org-mode . nasy/org-bullets-mode))
-;  :init (gsetq org-bullets-bullet-list
-;               '(;;; Large
-;                 "♥"
-;                 "✿"
-;                 "❀"
-;                 "◉"
-;                 "✸"
-;                 "•")))
-                 ;; ♥ ● ○ ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
-                 ;;; Small
-                 ;; ► • ★ ▸
+(straight-use-package 'org-bullets)
+(use-package! org-bullets
+  :defer t
+  :preface
+  (defun nasy/org-bullets-mode ()
+    (org-bullets-mode 1))
+  :hook ((org-mode . nasy/org-bullets-mode))
+  :init (gsetq org-bullets-bullet-list
+               '(;;; Large
+                 "♥"
+                 "✿"
+                 "❀"
+                 "◉"
+                 "✸"
+                 "•")))
+                ;; ♥ ● ○ ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+                ;;; Small
+                ;; ► • ★ ▸
 
-;(add-hook 'org-mode-hook
-;          (lambda ()
-;            (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
-;          )
-;)
-;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+          )
+)
+(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 
 
 

@@ -31,67 +31,74 @@
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
 
-(add-hook 'emacs-startup-hook (lambda ()
-    ;; Open
-    (map! :leader
-        :prefix "o"
-        :desc "Shell" "z" #'shell
-        :desc "Term" "t" #'term
-        :desc "Agenda" "a" #'org-agenda
-    )
+(setq org-agenda-span 'week)
 
-    ;; Quick window split shortcuts
-;    (map! :leader
-;        :prefix "w"
-;        :desc "Split Hori" "-" #'evil-window-split
-;        :desc "Split Vert" "\\" #'evil-window-vsplit
-;    )
-))
+;; Hide /emphasis markers for italics/ in org-mode
+(setq org-hide-emphasis-markers t)
 
-(add-hook 'emacs-startup-hook (lambda ()
-  (map! :map org-mode-map
-        :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup
-  )
-  ;; Export
-  (map! :map org-mode-map
+; Disabling for performance, for now
+;(setq org-startup-with-inline-images t)
+
+(setq-default org-download-image-dir "~/Nextcloud/org-mode/pics")
+
+;; Follow output
+(setq compilation-scroll-output t)
+
+;; Open
+(map! :leader
+    :prefix "o"
+    :desc "Shell" "z" #'shell
+    :desc "Term" "t" #'term
+)
+
+;; Quick window split shortcuts
+(map! :leader
+    :prefix "w"
+    :desc "Split Hori" "-" #'evil-window-split
+    :desc "Split Vert" "\\" #'evil-window-vsplit
+)
+
+(map! :after evil-org
+    :map evil-org-mode-map
+    :n "M-j" #'org-metadown
+    :n "M-k" #'org-metaup
+)
+;; Export
+(map! :after evil-org
+    :map org-mode-map
+    :leader
+    :prefix "e"
+    :desc "html export (buffer)" "h" #'org-html-export-to-html
+    :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
+    :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
+)
+(map! :after evil-org-agenda
+    :leader
+    :desc "Agenda" "a" #'org-agenda
+)
+
+;; Insert
+(map! :after org-roam
+        :map org-roam-mode-map
         :leader
-        :prefix "e"
-        :desc "html export (buffer)" "h" #'org-html-export-to-html
-        :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
-        :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
-  )
-  (map!
+        :prefix "i"
+        :desc "Timestamp" "T" #'org-time-stamp
+        :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
+        :desc "P O E P" "P" #'org-time-stamp-inactive
+)
+;; Notes
+(map! :after org-roam
+        :map org-mode-map
         :leader
-        :desc "Agenda" "a" #'org-agenda
-  )
-))
-
-(add-hook 'emacs-startup-hook (lambda ()
-    ;; Insert
-    (map! :after org-roam
-          :map org-mode-map
-          :leader
-          :prefix "i"
-          :desc "Timestamp" "T" #'org-time-stamp
-          :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
-    )
-    ;; Notes
-    (map! :after org-roam
-          :map org-roam-mode-map
-          :leader
-          :prefix "n"
-          :desc "Roam sidebar" "r" #'org-roam
-          :desc "Find / insert note" "q" #'org-roam-find-file
-          :desc "org-roam-server-mode" "g" #'org-roam-server-mode
-          :desc "helm-org-rifle" "." #'helm-org-rifle
-    )
-    (map! :after org-roam
-          :map org-roam-mode-map
-          :leader
-          :desc "Journal" "j" #'org-journal-new-entry
-    )
-))
+        :prefix "n"
+        :desc "Find, Insert note" "q" #'org-roam-find-file
+        :desc "Graph server" "g" #'org-roam-server-mode
+        :desc "Rifle" "." #'helm-org-rifle
+)
+(map! :after org-roam
+        :leader
+        :desc "Journal" "j" #'org-journal-new-entry
+)
 
 (setq org-agenda-custom-commands
     '(
@@ -113,35 +120,24 @@
 ;; `org-directory' must be set before org loads.
 (setq org-directory "~/Nextcloud/org-mode/notes/")
 
-(setq org-agenda-dim-blocked-tasks nil)
-(setq org-agenda-inhibit-startup nil)
-(setq org-agenda-use-tag-inheritance nil)
-(setq org-agenda-ignore-drawer-properties '(visibility category))
-(setq org-agenda-sticky t)
+(after! org
+    (setq org-agenda-dim-blocked-tasks nil)
+    (setq org-agenda-inhibit-startup nil)
+    (setq org-agenda-use-tag-inheritance nil)
+    (setq org-agenda-ignore-drawer-properties '(visibility category))
+    (setq org-agenda-sticky t)
+)
 
 (setq org-todo-keywords
-  '((sequence "TODO" "NEXT" "DONE" "PROJ")))
-
-(setq org-agenda-span 'week)
-
-;; Hide /emphasis markers for italics/ in org-mode
-(setq org-hide-emphasis-markers t)
-
-; Disabling for performance, for now
-;(setq org-startup-with-inline-images t)
-
-(setq-default org-download-image-dir "~/Nextcloud/org-mode/pics")
-
-;; Follow output
-(setq compilation-scroll-output t)
+    '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")
 
-(use-package org-journal
+(use-package! org-journal
   :after org
-  :defer
+  :defer t
   :custom
   (org-journal-dir "~/Nextcloud/org-mode/journal/")
   (org-journal-date-prefix "#+title: ")
@@ -170,7 +166,7 @@
 
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
 
-(use-package simple-httpd
+(use-package! simple-httpd
   :defer t
   :after org
   :config
@@ -180,7 +176,7 @@
 ;;(httpd-start)
 
 ;;  :ensure nil
-(use-package org-roam-server
+(use-package! org-roam-server
   :defer t
   :after org
   :load-path "~/Scripts/note/org-roam-server")
@@ -193,37 +189,38 @@
 ;  :after org
 ;)
 
-;(after! 'deft
-;  (deft-recursive t)
-;  (deft-use-filter-string-for-filename t)
-;  (deft-default-extension "org")
-;  (deft-directory "~/Nextcloud/org-mode/")
-;)
-;(use-package deft
-;  :after org
-  ;:bind
-  ;("C-c n d" . deft)
-;  :custom
-;  (deft-recursive t)
-;  (deft-use-filter-string-for-filename t)
-;  (deft-default-extension "org")
-;  (deft-directory "~/Nextcloud/org-mode/")
-;  :config
-;  (setq deft-file-limit 200)
-;)
+(after! 'deft
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory "~/Nextcloud/org-mode/")
+)
+(use-package! deft
+  :after org
+  :defer t
+ ;:bind
+ ;("C-c n d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory "~/Nextcloud/org-mode/")
+  :config
+  (setq deft-file-limit 200)
+)
 
 ;; php
-(use-package phpactor
+(use-package! phpactor
   :mode "\\.php\\'"
   :defer t
 )
-(use-package company-phpactor
+(use-package! company-phpactor
   :mode "\\.php\\'"
   :defer t
 )
 ;;(composer-setup-managed-phar)
 ;;(phpactor-install-or-update)
-(use-package php-mode
+(use-package! php-mode
   :mode "\\.php\\'"
   :defer t
   :hook ((php-mode . (lambda () (set (make-local-variable 'company-backends)
@@ -233,11 +230,3 @@
          ))))))
 
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
-
-;; When using evil-mode be sure to run (global-undo-tree-mode -1) to avoid problems.
-;; https://github.com/emacsmirror/undo-fu-session
-(add-hook 'emacs-startup-hook (lambda ()
-    (global-undo-tree-mode -1)
-))
-
-(setq undo-fu-session-file-limit 150)
