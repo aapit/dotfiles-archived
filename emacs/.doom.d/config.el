@@ -72,7 +72,7 @@
     :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
     :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
 )
-(map! :after evil-org-agenda
+(map! :after evil-org
     :leader
     :desc "Agenda" "a" #'org-agenda
 )
@@ -84,7 +84,6 @@
         :prefix "i"
         :desc "Timestamp" "T" #'org-time-stamp
         :desc "Timestamp inactive" "t" #'org-time-stamp-inactive
-        :desc "P O E P" "P" #'org-time-stamp-inactive
 )
 ;; Notes
 (map! :after org-roam
