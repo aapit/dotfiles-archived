@@ -163,9 +163,11 @@ Setting some non-insane defaults for PDF export and such.
     (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
     (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
     (add-to-list 'org-latex-packages-alist "\\hypersetup{linkcolor=blue}" t)
+    (add-to-list 'org-latex-packages-alist "\\setlength\\parindent{0pt}" t)
 )
 #+END_SRC
-From: http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
+Some settings are inspired by:
+http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 
 ** General
  #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
