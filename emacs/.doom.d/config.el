@@ -231,7 +231,6 @@
 
 (setq org-plantuml-jar-path (expand-file-name "~/Apps/PlantUML/plantuml.jar")
       plantuml-default-exec-mode 'jar)
-(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
 (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
 
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
