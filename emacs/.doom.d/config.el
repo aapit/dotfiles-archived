@@ -31,6 +31,19 @@
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
 
+(when (> (display-pixel-width) '3000)
+  (set-popup-rule! "*Org Agenda*" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "CAPTURE-" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Capture*" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Messages*" :side 'left :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*helm*" :side 'left :size .30 :select t :vslot 5 :ttl 3))
+(when (< (display-pixel-width) '2000)
+  (set-popup-rule! "*Org Agenda*" :side 'bottom :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "CAPTURE-" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Capture*" :side 'bottom :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Messages*" :side 'left :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*helm*" :side 'bottom :size .30 :select t :vslot 5 :ttl 3))
+
 (setq org-agenda-span 'week)
 
 ;; Hide /emphasis markers for italics/ in org-mode
@@ -234,3 +247,11 @@
 (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
 
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
+
+;; When using evil-mode be sure to run (global-undo-tree-mode -1) to avoid problems.
+;; https://github.com/emacsmirror/undo-fu-session
+(add-hook 'emacs-startup-hook (lambda ()
+    (global-undo-tree-mode -1)
+))
+
+(setq undo-fu-session-file-limit 150)

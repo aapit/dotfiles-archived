@@ -1,48 +1,52 @@
 # -*- mode: org; coding: utf-8; -*-
  #+AUTHOR: David Spreekmeester @aapit
-
-* Initialization
+* David's Doom Emacs Config
+:PROPERTIES:
+:VISIBILITY: children
+:header-args: :tangle "config.el" :results silent
+:END:
+** Initialization
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
  #+END_SRC
-* General
+** General
 :PROPERTIES:
 :VISIBILITY: content
 :END:
-** Locale
+*** Locale
 In my geographic area, the week starts on Monday (=1=).
 Default is Sunday (=0=).
 
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 (setq calendar-week-start-day 1)
 (setq
  display-time-format "%H:%M"
  display-time-24hr-format t)
  #+END_SRC
-** Secrets
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Secrets
+ #+BEGIN_SRC emacs-lisp
 (load! "secrets.el" doom-private-dir)
 #+END_SRC
-** Browser
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Browser
+ #+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 #+END_SRC
-* UI
+** UI
 :PROPERTIES:
 :VISIBILITY: content
 :END:
-** Mouse
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Mouse
+ #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
     (global-disable-mouse-mode)
 ))
 #+END_SRC
-** Appearance
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Appearance
+ #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
@@ -60,8 +64,22 @@ Default is Sunday (=0=).
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
  #+END_SRC
-
-*** Org-related
+**** Popup Rules
+#+BEGIN_SRC emacs-lisp
+(when (> (display-pixel-width) '3000)
+  (set-popup-rule! "*Org Agenda*" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "CAPTURE-" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Capture*" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Messages*" :side 'left :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*helm*" :side 'left :size .30 :select t :vslot 5 :ttl 3))
+(when (< (display-pixel-width) '2000)
+  (set-popup-rule! "*Org Agenda*" :side 'bottom :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "CAPTURE-" :side 'left :size .40 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Capture*" :side 'bottom :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*Messages*" :side 'left :size .30 :select t :vslot 2 :ttl 3)
+  (set-popup-rule! "*helm*" :side 'bottom :size .30 :select t :vslot 5 :ttl 3))
+#+END_SRC
+**** Org-related
  #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
 (setq org-agenda-span 'week)
 
@@ -76,9 +94,9 @@ Default is Sunday (=0=).
 ;; Follow output
 (setq compilation-scroll-output t)
 #+END_SRC
-** Keys
-*** General functions
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Keys
+**** General functions
+ #+BEGIN_SRC emacs-lisp
 ;; Open
 (map! :leader
     :prefix "o"
@@ -93,8 +111,8 @@ Default is Sunday (=0=).
     :desc "Split Vert" "\\" #'evil-window-vsplit
 )
 #+END_SRC
-*** Org-mode related
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+**** Org-mode related
+ #+BEGIN_SRC emacs-lisp
 (map! :after evil-org
     :map evil-org-mode-map
     :n "M-j" #'org-metadown
@@ -114,8 +132,8 @@ Default is Sunday (=0=).
     :desc "Agenda" "a" #'org-agenda
 )
 #+END_SRC
-*** Org-roam related
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+**** Org-roam related
+ #+BEGIN_SRC emacs-lisp
 ;; Insert
 (map! :after org-roam
         :map org-roam-mode-map
@@ -138,13 +156,13 @@ Default is Sunday (=0=).
         :desc "Journal" "j" #'org-journal-new-entry
 )
 #+END_SRC
-* Org
+** Org
 :PROPERTIES:
 :VISIBILITY: content
 :END:
-** Agenda
-*** Custom Agenda views
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Agenda
+**** Custom Agenda views
+ #+BEGIN_SRC emacs-lisp
 (setq org-agenda-custom-commands
     '(
         ("b" "Both" agenda "Universeel"
@@ -156,9 +174,9 @@ Default is Sunday (=0=).
     )
 )
 #+END_SRC
-** Export
+*** Export
 Setting some non-insane defaults for PDF export and such.
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 (after! org
     (add-to-list 'org-latex-packages-alist "\\hypersetup{setpagesize=false}" t)
     (add-to-list 'org-latex-packages-alist "\\hypersetup{colorlinks=true}" t)
@@ -169,13 +187,13 @@ Setting some non-insane defaults for PDF export and such.
 Some settings are inspired by:
 http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 
-** General
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** General
+ #+BEGIN_SRC emacs-lisp
 ;; `org-directory' must be set before org loads.
 (setq org-directory "~/Nextcloud/org-mode/notes/")
 #+END_SRC
-** Performance
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Performance
+ #+BEGIN_SRC emacs-lisp
 (after! org
     (setq org-agenda-dim-blocked-tasks nil)
     (setq org-agenda-inhibit-startup nil)
@@ -184,23 +202,23 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
     (setq org-agenda-sticky t)
 )
 #+END_SRC
-** Todo
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Todo
+ #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
     '((sequence "TODO" "NEXT" "DONE" "PROJ")))
 #+END_SRC
-* Org-roam
+** Org-roam
 :PROPERTIES:
 :VISIBILITY: content
 :END:
-** General
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** General
+ #+BEGIN_SRC emacs-lisp
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")
 #+END_SRC
-** Journal
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Journal
+ #+BEGIN_SRC emacs-lisp
 (use-package! org-journal
   :after org
   :defer t
@@ -213,8 +231,8 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
   (setq org-journal-enable-agenda-integration t)
 )
 #+END_SRC
-** Capture templates
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Capture templates
+ #+BEGIN_SRC emacs-lisp
 (after! org-roam
       (setq org-roam-ref-capture-templates
             '(("r" "ref" plain (function org-roam-capture--get-point)
@@ -233,8 +251,8 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 )
 #+END_SRC
 
-** Graph / Server
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Graph / Server
+ #+BEGIN_SRC emacs-lisp
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
 
 (use-package! simple-httpd
@@ -252,8 +270,8 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
   :after org
   :load-path "~/Scripts/note/org-roam-server")
 #+END_SRC
-** Search
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+*** Search
+ #+BEGIN_SRC emacs-lisp
 ;; org-ql for queries
 ;(use-package org-ql)
 
@@ -262,11 +280,11 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 ;  :after org
 ;)
 #+END_SRC
-* Deft
+** Deft
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 (after! 'deft
   (deft-recursive t)
   (deft-use-filter-string-for-filename t)
@@ -287,11 +305,11 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
   (setq deft-file-limit 200)
 )
 #+END_SRC
-* PHP
+** PHP
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 ;; php
 (use-package! phpactor
   :mode "\\.php\\'"
@@ -312,21 +330,21 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
          company-files
          ))))))
 #+END_SRC
-* PlantUML
+** PlantUML
 ;;(setq org-plantuml-jar-path (expand-file-name "~/Apps/PlantUML/plantuml.jar"))
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 (setq org-plantuml-jar-path (expand-file-name "~/Apps/PlantUML/plantuml.jar")
       plantuml-default-exec-mode 'jar)
 (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
 #+END_SRC
-* Projectile
+** Projectile
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
- #+BEGIN_SRC emacs-lisp :tangle "config.el" :results silent
+ #+BEGIN_SRC emacs-lisp
 (setq projectile-project-search-path '("~/Scripts/" "~/Sites/" "~/Remotes" "~/Lab"))
 #+END_SRC
-* Undo
+** Undo
 :PROPERTIES:
 :VISIBILITY: folded
 :END:
@@ -341,7 +359,6 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 #+END_SRC
 
 
-* ---
 * Caveats
 :PROPERTIES:
 :VISIBILITY: folded
