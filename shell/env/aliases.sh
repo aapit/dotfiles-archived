@@ -20,6 +20,9 @@ alias f='fdfind'
 alias src='. ~/.profile'
 alias alias-edit="vim ~/Scripts/dotfiles/shell/env/aliases.sh && . ~/Scripts/dotfiles/shell/env/aliases.sh"
 
+# Doom
+alias ds="killall emacs && systemctl --user restart emacs && doom sync"
+
 # Editing and reading
 alias e="emacsclient -c -n"
 alias v="nvim"
