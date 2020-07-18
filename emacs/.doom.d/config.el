@@ -197,6 +197,7 @@
         ("lg" "GRRR log" entry (file+olp+datetree "~/Notes/grrr-log.org")
         "* %U %?\n%i\n"
         :tree-type week
+        :clock-in t
         :prepend t
         :unnarrowed t)
     )

@@ -252,13 +252,12 @@ Default is Sunday (=0=).
         ("lg" "GRRR log" entry (file+olp+datetree "~/Notes/grrr-log.org")
         "* %U %?\n%i\n"
         :tree-type week
+        :clock-in t
         :prepend t
         :unnarrowed t)
     )
 )
 #+END_SRC
-
-        :clock-in t
 *** Docs: Params
 | =%t= | Date, active                      |
 | =%T= | Date + time, active               |
