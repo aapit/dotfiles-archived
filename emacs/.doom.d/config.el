@@ -88,19 +88,28 @@
 (map! :after evil-org
     :map org-mode-map
     :leader
-    :prefix "e"
+    :prefix ("e" . "export")
     :desc "html export (buffer)" "h" #'org-html-export-to-html
     :desc "various (region to pdf, etc)" "v" #'org-export-dispatch
     :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
 )
+;; Agenda
 (map! :after evil-org
     :leader
     :desc "Agenda" "a" #'org-agenda
 )
-
+;; Capture shortcuts: Todos
 (map! :after evil-org
     :leader
-    :prefix "l"
+    :prefix ("d" . "todo")
+    :desc "Thuis" "t" (lambda () (interactive) (org-capture nil "tt"))
+    :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "tg"))
+)
+;; Capture shortcuts: Logs
+(map! :after evil-org
+    :leader
+    :prefix ("l" . "log")
+    :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "lg"))
     :desc "B log" "b" (lambda () (interactive) (org-capture nil "lb"))
     :desc "Health log" "h" (lambda () (interactive) (org-capture nil "lh"))
     :desc "Journal" "j" (lambda () (interactive) (org-capture nil "lj"))
@@ -123,9 +132,74 @@
         :desc "Graph server" "g" #'org-roam-server-mode
         :desc "Rifle" "." #'helm-org-rifle
 )
-(map! :after org-roam
-        :leader
-        :desc "Journal" "j" #'org-journal-new-entry
+
+(setq org-roam-ref-capture-templates
+    '(("r" "ref" plain (function org-roam-capture--get-point)
+        "%?"
+        :file-name "websites/${slug}"
+        :head "#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+- source :: ${ref}"
+        :unnarrowed t)))
+
+(setq org-roam-capture-templates
+    `(
+        ; Default
+        ("d" "Default" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; Software
+        ("s" "Software" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: software tech\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; GRRR Project
+        ("p" "GRRR Project" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: grrr project\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+    )
+)
+
+(setq org-capture-templates
+    `(
+        ; Todo Group
+        ("t" "Todo")
+        ; Inbox home
+        ("tt" "Todo Thuis" entry (file+headline "~/Notes/todo-thuis.org" "Inbox")
+        "* TODO %?\n%i\n"
+        :unnarrowed t)
+        ; Inbox GRRR
+        ("tg" "Todo GRRR" entry (file+headline "~/Notes/todo-grrr.org" "Inbox")
+        "* TODO %?\n%i\n"
+        :unnarrowed t)
+        ; Log Group
+        ("l" "Log")
+        ; B log
+        ("lb" "B log" entry (file+olp+datetree "~/Notes/hashlog.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :prepend t
+        :unnarrowed t)
+        ; Health
+        ("lh" "Health" entry (file+olp+datetree "~/Notes/healthlog.org")
+        "* %U \n|Sys|%?|\n|Dia||\n|Puls||\n|SpO2||\n|[[file:20200626065937-methylfenidaat.org][Ritalin]]||\n|[[file:20200703133924-koffie.org][Koffie]]||\n"
+        :tree-type week
+        :prepend t
+        :unnarrowed t)
+        ("lj" "Journal" entry (file+olp+datetree "~/Notes/journal.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :prepend t
+        :unnarrowed t)
+        ; GRRR log
+        ("lg" "GRRR log" entry (file+olp+datetree "~/Notes/grrr-log.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :prepend t
+        :unnarrowed t)
+    )
 )
 
 (setq org-agenda-custom-commands
@@ -163,67 +237,6 @@
 (setq org-roam-directory "~/Nextcloud/org-mode/notes/")
 (setq org-roam-buffer-width 0.3)
 (setq org-roam-buffer "Org-roam Sidebar")
-
-(use-package! org-journal
-  :after org
-  :defer t
-  :custom
-  (org-journal-dir "~/Nextcloud/org-mode/journal/")
-  (org-journal-date-prefix "#+title: ")
-  (org-journal-file-format "%Y-%m-%d.org")
-  (org-journal-date-format "%Y-%m-%d, %A")
-  :config
-  (setq org-journal-enable-agenda-integration t)
-)
-
-(setq org-roam-ref-capture-templates
-    '(("r" "ref" plain (function org-roam-capture--get-point)
-        "%?"
-        :file-name "websites/${slug}"
-        :head "#+TITLE: ${title}
-#+ROAM_KEY: ${ref}
-- source :: ${ref}"
-        :unnarrowed t)))
-
-(setq org-roam-capture-templates
-    `(
-        ; Default
-        ("d" "Default" plain #'org-roam-capture--get-point "%?"
-        :file-name "${slug}"
-        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
-        :unnarrowed t)
-        ; Software
-        ("s" "Software" plain #'org-roam-capture--get-point "%?"
-        :file-name "${slug}"
-        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: software tech\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
-        :unnarrowed t)
-        ; GRRR Project
-        ("p" "GRRR Project" plain #'org-roam-capture--get-point "%?"
-        :file-name "${slug}"
-        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: grrr project\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
-        :unnarrowed t)
-    )
-)
-
-(setq org-capture-templates
-    `(
-        ("l" "logs")
-        ; B log
-        ("lb" "B log" entry (file+olp+datetree "~/Notes/hashlog.org")
-        "* %U %?\n%i\n"
-        :tree-type week
-        :unnarrowed t)
-        ; Health
-        ("lh" "Health" entry (file+olp+datetree "~/Notes/healthlog.org")
-        "* %U \n|Sys|%?|\n|Dia||\n|Puls||\n|SpO2||\n|[[file:20200626065937-methylfenidaat.org][Ritalin]]||\n|[[file:20200703133924-koffie.org][Koffie]]||\n"
-        :tree-type week
-        :unnarrowed t)
-        ("lj" "Journal" entry (file+olp+datetree "~/Notes/journal.org")
-        "* %U %?\n%i\n"
-        :tree-type week
-        :unnarrowed t)
-    )
-)
 
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
 
