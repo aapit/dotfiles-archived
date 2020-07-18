@@ -64,6 +64,17 @@ Default is Sunday (=0=).
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
  #+END_SRC
+
+**** Org-mode Checkboxes
+#+BEGIN_SRC emacs-lisp
+;; Org-mode checkboxes
+(add-hook 'evil-org-mode-hook (lambda ()
+   "Beautify Org Checkbox Symbol"
+   (push '("[ ]" . "☐") prettify-symbols-alist)
+   (push '("[X]" . "☑" ) prettify-symbols-alist)
+   (push '("[-]" . "⊡" ) prettify-symbols-alist)
+   (prettify-symbols-mode)))
+ #+END_SRC
 **** Popup Rules
 #+BEGIN_SRC emacs-lisp
 (when (> (display-pixel-width) '3000)
@@ -130,6 +141,14 @@ Default is Sunday (=0=).
 (map! :after evil-org
     :leader
     :desc "Agenda" "a" #'org-agenda
+)
+
+(map! :after evil-org
+    :leader
+    :prefix "l"
+    :desc "B log" "b" (lambda () (interactive) (org-capture nil "lb"))
+    :desc "Health log" "h" (lambda () (interactive) (org-capture nil "lh"))
+    :desc "Journal" "j" (lambda () (interactive) (org-capture nil "lj"))
 )
 #+END_SRC
 **** Org-roam related
@@ -232,25 +251,109 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 )
 #+END_SRC
 *** Capture templates
+**** Org Ref templates
  #+BEGIN_SRC emacs-lisp
-(after! org-roam
-      (setq org-roam-ref-capture-templates
-            '(("r" "ref" plain (function org-roam-capture--get-point)
-               "%?"
-               :file-name "websites/${slug}"
-               :head "#+TITLE: ${title}
-    ,#+ROAM_KEY: ${ref}
-    - source :: ${ref}"
-               :unnarrowed t)))
-      (setq org-roam-capture-templates
-            `(("d" "default" plain #'org-roam-capture--get-point "%?"
-               :file-name "${slug}"
-               :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
-               :unnarrowed t))
-      )
+(setq org-roam-ref-capture-templates
+    '(("r" "ref" plain (function org-roam-capture--get-point)
+        "%?"
+        :file-name "websites/${slug}"
+        :head "#+TITLE: ${title}
+,#+ROAM_KEY: ${ref}
+- source :: ${ref}"
+        :unnarrowed t)))
+#+END_SRC
+**** Org-roam capture templates
+#+BEGIN_SRC emacs-lisp
+(setq org-roam-capture-templates
+    `(
+        ; Default
+        ("d" "Default" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; Software
+        ("s" "Software" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: software tech\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; GRRR Project
+        ("p" "GRRR Project" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: grrr project\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+    )
 )
 #+END_SRC
+**** Org regular capture templates
+#+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+    `(
+        ("l" "logs")
+        ; B log
+        ("lb" "B log" entry (file+olp+datetree "~/Notes/hashlog.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :unnarrowed t)
+        ; Health
+        ("lh" "Health" entry (file+olp+datetree "~/Notes/healthlog.org")
+        "* %U \n|Sys|%?|\n|Dia||\n|Puls||\n|SpO2||\n|[[file:20200626065937-methylfenidaat.org][Ritalin]]||\n|[[file:20200703133924-koffie.org][Koffie]]||\n"
+        :tree-type week
+        :unnarrowed t)
+        ("lj" "Journal" entry (file+olp+datetree "~/Notes/journal.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :unnarrowed t)
+    )
+)
+#+END_SRC
+**** Docs: Params
+| =%t= | Date, active                      |
+| =%T= | Date + time, active               |
+| =%u= | Date, inactive                    |
+| =%U= | Date + time, inactive             |
+|    |                                   |
+| =%i= | Initial content                   |
+| =%a= | Annotation, normally the          |
+|    | link created with org-store-link. |
 
+[[https://orgmode.org/manual/Template-expansion.html#Template-expansion][Template params in Org-mode manual]]
+
+"* %?\nEntered on %U\n  %i\n  %a\nHoi %m"
+
+**** Example: Original Org capture templates
+#+begin_example elisp
+(("t" "Personal todo" entry
+  (file+headline +org-capture-todo-file "Inbox")
+  "* [ ] %?\n%i\n%a" :prepend t)
+ ("n" "Personal notes" entry
+  (file+headline +org-capture-notes-file "Inbox")
+  "* %u %?\n%i\n%a" :prepend t)
+ ("j" "Journal" entry
+  (file+olp+datetree +org-capture-journal-file)
+  "* %U %?\n%i\n%a" :prepend t)
+ ("p" "Templates for projects")
+ ("pt" "Project-local todo" entry
+  (file+headline +org-capture-project-todo-file "Inbox")
+  "* TODO %?\n%i\n%a" :prepend t)
+ ("pn" "Project-local notes" entry
+  (file+headline +org-capture-project-notes-file "Inbox")
+  "* %U %?\n%i\n%a" :prepend t)
+ ("pc" "Project-local changelog" entry
+  (file+headline +org-capture-project-changelog-file "Unreleased")
+  "* %U %?\n%i\n%a" :prepend t)
+ ("o" "Centralized templates for projects")
+ ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
+ ("on" "Project notes" entry #'+org-capture-central-project-notes-file "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
+ ("oc" "Project changelog" entry #'+org-capture-central-project-changelog-file "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))
+#+end_example
+**** TODO Implement more capture tpl feats
+- https://orgmode.org/manual/Template-elements.html
+- https://www.gnu.org/software/emacs/manual/html_node/org/Capture-templates.html
+- https://org-roam.readthedocs.io/en/master/templating/
+
+Je kunt =:clock-in= gebruiken om direct een Org timer te starten.
+
+- https://www.zmonster.me/2020/06/27/org-roam-introduction.html
 *** Graph / Server
  #+BEGIN_SRC emacs-lisp
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
@@ -357,8 +460,11 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 
 (setq undo-fu-session-file-limit 150)
 #+END_SRC
-
-
+** Own packages
+#+BEGIN_SRC emacs-lisp
+(use-package goalmap
+  :load-path "~/.doom.d/packages/goalmap")
+#+END_SRC
 * Caveats
 :PROPERTIES:
 :VISIBILITY: folded

@@ -31,6 +31,14 @@
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
 
+;; Org-mode checkboxes
+(add-hook 'evil-org-mode-hook (lambda ()
+   "Beautify Org Checkbox Symbol"
+   (push '("[ ]" . "☐") prettify-symbols-alist)
+   (push '("[X]" . "☑" ) prettify-symbols-alist)
+   (push '("[-]" . "⊡" ) prettify-symbols-alist)
+   (prettify-symbols-mode)))
+
 (when (> (display-pixel-width) '3000)
   (set-popup-rule! "*Org Agenda*" :side 'left :size .40 :select t :vslot 2 :ttl 3)
   (set-popup-rule! "CAPTURE-" :side 'left :size .40 :select t :vslot 2 :ttl 3)
@@ -88,6 +96,14 @@
 (map! :after evil-org
     :leader
     :desc "Agenda" "a" #'org-agenda
+)
+
+(map! :after evil-org
+    :leader
+    :prefix "l"
+    :desc "B log" "b" (lambda () (interactive) (org-capture nil "lb"))
+    :desc "Health log" "h" (lambda () (interactive) (org-capture nil "lh"))
+    :desc "Journal" "j" (lambda () (interactive) (org-capture nil "lj"))
 )
 
 ;; Insert
@@ -160,21 +176,53 @@
   (setq org-journal-enable-agenda-integration t)
 )
 
-(after! org-roam
-      (setq org-roam-ref-capture-templates
-            '(("r" "ref" plain (function org-roam-capture--get-point)
-               "%?"
-               :file-name "websites/${slug}"
-               :head "#+TITLE: ${title}
-    #+ROAM_KEY: ${ref}
-    - source :: ${ref}"
-               :unnarrowed t)))
-      (setq org-roam-capture-templates
-            `(("d" "default" plain #'org-roam-capture--get-point "%?"
-               :file-name "${slug}"
-               :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
-               :unnarrowed t))
-      )
+(setq org-roam-ref-capture-templates
+    '(("r" "ref" plain (function org-roam-capture--get-point)
+        "%?"
+        :file-name "websites/${slug}"
+        :head "#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+- source :: ${ref}"
+        :unnarrowed t)))
+
+(setq org-roam-capture-templates
+    `(
+        ; Default
+        ("d" "Default" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: \n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; Software
+        ("s" "Software" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: software tech\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+        ; GRRR Project
+        ("p" "GRRR Project" plain #'org-roam-capture--get-point "%?"
+        :file-name "${slug}"
+        :head "%(concat \"#+TITLE: ${title}\n#+roam_alias: \n#+roam_tags: grrr project\n#+date: \" (format-time-string \"%Y-%m-%d\" (current-time) t) \"\n* \" (upcase-initials \"${title}\") \"\n\")"
+        :unnarrowed t)
+    )
+)
+
+(setq org-capture-templates
+    `(
+        ("l" "logs")
+        ; B log
+        ("lb" "B log" entry (file+olp+datetree "~/Notes/hashlog.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :unnarrowed t)
+        ; Health
+        ("lh" "Health" entry (file+olp+datetree "~/Notes/healthlog.org")
+        "* %U \n|Sys|%?|\n|Dia||\n|Puls||\n|SpO2||\n|[[file:20200626065937-methylfenidaat.org][Ritalin]]||\n|[[file:20200703133924-koffie.org][Koffie]]||\n"
+        :tree-type week
+        :unnarrowed t)
+        ("lj" "Journal" entry (file+olp+datetree "~/Notes/journal.org")
+        "* %U %?\n%i\n"
+        :tree-type week
+        :unnarrowed t)
+    )
 )
 
 (setq org-roam-graph-exclude-matcher '("private" "dailies"))
@@ -255,3 +303,6 @@
 ))
 
 (setq undo-fu-session-file-limit 150)
+
+(use-package goalmap
+  :load-path "~/.doom.d/packages/goalmap")
