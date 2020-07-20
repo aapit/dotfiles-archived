@@ -24,7 +24,7 @@ alias alias-edit="vim ~/Scripts/dotfiles/shell/env/aliases.sh && . ~/Scripts/dot
 alias ds="killall emacs && systemctl --user restart emacs && doom sync"
 
 # Editing and reading
-alias e="emacsclient -c -n"
+alias e="emacsclient -c -n -s /tmp/emacs1000/aapit"
 alias v="nvim"
 alias vim="nvim"
 alias cat='bat'
