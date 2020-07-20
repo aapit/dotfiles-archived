@@ -55,16 +55,23 @@ Setting default font and /Symbola/ as emoji fallback.
 ))
 #+END_SRC
 *** Appearance
- #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
+(setq org-ellipsis "…")
 
 (add-hook 'emacs-startup-hook (lambda ()
     (toggle-frame-fullscreen)
     (display-battery-mode)
+    (delete-selection-mode 1) ; Replace selection when inserting text
 ))
 
+
+#+END_SRC
+
+**** Org-roam links
+#+BEGIN_SRC emacs-lisp
 ;; Unfortunately, at this point [2020-07-08 Wed],
 ;; there is no way to style regular non-link text in the Org-roam buffer.
 ;; Therefore, the only customizable property that blends in with the rest is link color.
@@ -72,7 +79,7 @@ Setting default font and /Symbola/ as emoji fallback.
  '(org-roam-link ((t (:foreground "#8B61AB"))))
  '(org-roam-link-current ((t (:foreground "#57287C"))))
 )
- #+END_SRC
+#+END_SRC
 
 **** Org-mode Checkboxes
 #+BEGIN_SRC emacs-lisp
@@ -148,19 +155,19 @@ Setting default font and /Symbola/ as emoji fallback.
     :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
 )
 ;; Agenda
-(map! :after evil-org
+(map!
     :leader
     :desc "Agenda" "a" #'org-agenda
 )
 ;; Capture shortcuts: Todos
-(map! :after evil-org
+(map!
     :leader
     :prefix ("d" . "todo")
     :desc "Thuis" "t" (lambda () (interactive) (org-capture nil "tt"))
     :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "tg"))
 )
 ;; Capture shortcuts: Logs
-(map! :after evil-org
+(map!
     :leader
     :prefix ("l" . "log")
     :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "lg"))
@@ -480,6 +487,9 @@ http://clothoid.html.xdomain.jp/2018/org-latex-pdf-with-minted-python.html
 ))
 
 (setq undo-fu-session-file-limit 150)
+
+(setq undo-limit 40000000) ; Set to 40 Mb
+(setq evil-want-fine-undo t) ; Prevent all changes acting like one big blob
 #+END_SRC
 ** Own packages
 #+BEGIN_SRC emacs-lisp

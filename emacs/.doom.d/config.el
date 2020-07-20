@@ -22,10 +22,12 @@
 (setq doom-theme 'doom-horizon)
 (setq display-time-use-mail-icon t)
 (setq display-line-numbers-type 'relative)
+(setq org-ellipsis "…")
 
 (add-hook 'emacs-startup-hook (lambda ()
     (toggle-frame-fullscreen)
     (display-battery-mode)
+    (delete-selection-mode 1) ; Replace selection when inserting text
 ))
 
 ;; Unfortunately, at this point [2020-07-08 Wed],
@@ -99,19 +101,19 @@
     :desc "pdf (buffer)" "p" #'org-latex-export-to-pdf
 )
 ;; Agenda
-(map! :after evil-org
+(map!
     :leader
     :desc "Agenda" "a" #'org-agenda
 )
 ;; Capture shortcuts: Todos
-(map! :after evil-org
+(map!
     :leader
     :prefix ("d" . "todo")
     :desc "Thuis" "t" (lambda () (interactive) (org-capture nil "tt"))
     :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "tg"))
 )
 ;; Capture shortcuts: Logs
-(map! :after evil-org
+(map!
     :leader
     :prefix ("l" . "log")
     :desc "GRRR" "g" (lambda () (interactive) (org-capture nil "lg"))
@@ -322,6 +324,9 @@
 ))
 
 (setq undo-fu-session-file-limit 150)
+
+(setq undo-limit 40000000) ; Set to 40 Mb
+(setq evil-want-fine-undo t) ; Prevent all changes acting like one big blob
 
 (use-package goalmap
   :load-path "~/.doom.d/packages/goalmap")
