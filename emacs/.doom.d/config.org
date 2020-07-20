@@ -36,6 +36,14 @@ Default is Sunday (=0=).
       browse-url-generic-program "brave-browser")
 #+END_SRC
 
+*** Fonts
+Setting default font and /Symbola/ as emoji fallback.
+ #+BEGIN_SRC emacs-lisp
+(setenv "LANG" "en_US.UTF-8")
+
+(setq doom-font (font-spec :family "Liberation Mono" :size 40))
+(setq doom-unicode-font (font-spec :name "Symbola"))
+ #+END_SRC
 ** UI
 :PROPERTIES:
 :VISIBILITY: content

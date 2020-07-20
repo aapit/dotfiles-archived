@@ -10,6 +10,11 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 
+(setenv "LANG" "en_US.UTF-8")
+
+(setq doom-font (font-spec :family "Liberation Mono" :size 40))
+(setq doom-unicode-font (font-spec :name "Symbola"))
+
 (add-hook 'emacs-startup-hook (lambda ()
     (global-disable-mouse-mode)
 ))
