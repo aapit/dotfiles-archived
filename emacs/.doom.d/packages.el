@@ -4,6 +4,7 @@
 (package! helm-org-rifle)
 (package! simple-httpd)
 (package! org-roam-server)
+(package! emojify)
 
 ;; no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el

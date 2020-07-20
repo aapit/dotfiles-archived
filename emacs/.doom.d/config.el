@@ -12,7 +12,7 @@
 
 (setenv "LANG" "en_US.UTF-8")
 
-(setq doom-font (font-spec :family "Liberation Mono" :size 40))
+(setq doom-font (font-spec :family "Liberation Mono" :size 36))
 (setq doom-unicode-font (font-spec :name "Symbola"))
 
 (add-hook 'emacs-startup-hook (lambda ()
@@ -29,6 +29,8 @@
     (display-battery-mode)
     (delete-selection-mode 1) ; Replace selection when inserting text
 ))
+
+(add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; Unfortunately, at this point [2020-07-08 Wed],
 ;; there is no way to style regular non-link text in the Org-roam buffer.

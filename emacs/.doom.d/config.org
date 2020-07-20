@@ -35,19 +35,18 @@ Default is Sunday (=0=).
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "brave-browser")
 #+END_SRC
-
+** UI
+:PROPERTIES:
+:VISIBILITY: content
+:END:
 *** Fonts
 Setting default font and /Symbola/ as emoji fallback.
  #+BEGIN_SRC emacs-lisp
 (setenv "LANG" "en_US.UTF-8")
 
-(setq doom-font (font-spec :family "Liberation Mono" :size 40))
+(setq doom-font (font-spec :family "Liberation Mono" :size 36))
 (setq doom-unicode-font (font-spec :name "Symbola"))
  #+END_SRC
-** UI
-:PROPERTIES:
-:VISIBILITY: content
-:END:
 *** Mouse
  #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook (lambda ()
@@ -69,7 +68,10 @@ Setting default font and /Symbola/ as emoji fallback.
 
 
 #+END_SRC
-
+**** Emojify
+#+BEGIN_SRC emacs-lisp
+(add-hook 'after-init-hook #'global-emojify-mode)
+#+END_SRC
 **** Org-roam links
 #+BEGIN_SRC emacs-lisp
 ;; Unfortunately, at this point [2020-07-08 Wed],
